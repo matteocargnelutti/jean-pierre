@@ -1,0 +1,8 @@
+*.pyc
+*.vscode
+*.scssc
+.vscode/
+.cache/
+.sass_cache/
+.env/
+.experiments/
