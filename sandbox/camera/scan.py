@@ -22,9 +22,8 @@ camera = picamera.PiCamera()
 camera.sharpness = 100
 camera.brightness = 55
 #camera.ISO = 800
-camera.resolution = (1000, 1000)
-camera.capture('image.jpg')
-"""
+camera.resolution = (600, 600)
+
 while True:
     # Get an image
     camera.capture('image.jpg')
@@ -32,4 +31,6 @@ while True:
     # Scan image
     tmp = pyzbar_decode(pyzbar_image.open('image.jpg'))
     print(tmp)
-"""
+
+    # Wait
+    time.sleep(0.25)
