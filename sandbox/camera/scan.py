@@ -17,7 +17,8 @@ import picamera
 # Camera configuration
 camera = picamera.PiCamera()
 camera.sharpness = 100
-camera.brightness = 60
+camera.brightness = 55
+camera.resolution = (1920, 1080)
 camera.ISO = 800
 
 # Get an image
