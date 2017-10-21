@@ -22,7 +22,7 @@ camera = picamera.PiCamera()
 camera.sharpness = 100
 camera.brightness = 55
 #camera.ISO = 800
-camera.resolution = (600, 600)
+camera.resolution = (1000, 1000)
 
 # Get an image
 camera.capture('image.jpg')

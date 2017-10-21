@@ -8,11 +8,12 @@ Sandbox #1
 # Imports
 #-----------------------------------------------------------------------------
 import time
+from io import BytesIO
 
 import picamera
 
 from pyzbar.pyzbar import decode as pyzbar_decode
-from PIL import Image as pyzbar_image
+from PIL import Image as pil_image
 
 #-----------------------------------------------------------------------------
 # Test
@@ -21,16 +22,16 @@ from PIL import Image as pyzbar_image
 camera = picamera.PiCamera()
 camera.sharpness = 100
 camera.brightness = 55
-#camera.ISO = 800
-camera.resolution = (600, 600)
+camera.resolution = (1000, 1000)
 
 while True:
-    # Get an image
-    camera.capture('image.jpg')
+    # Get an image from the camera
+    stream = BytesIO()
+    camera.start_preview()
+    time.sleep(0.15)
+    camera.capture(stream, format='jpeg')
+    stream.seek(0)
 
     # Scan image
-    tmp = pyzbar_decode(pyzbar_image.open('image.jpg'))
+    tmp = pyzbar_decode(pil_image.open(stream))
     print(tmp)
-
-    # Wait
-    time.sleep(0.25)
