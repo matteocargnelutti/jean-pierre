@@ -22,13 +22,12 @@ from PIL import Image as pil_image
 camera = picamera.PiCamera()
 camera.sharpness = 100
 camera.brightness = 55
-camera.resolution = (1000, 1000)
+camera.resolution = (500, 500)
+camera.start_preview()
 
 while True:
     # Get an image from the camera
     stream = BytesIO()
-    camera.start_preview()
-    time.sleep(0.15)
     camera.capture(stream, format='jpeg')
     stream.seek(0)
 
