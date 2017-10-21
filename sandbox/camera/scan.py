@@ -11,16 +11,24 @@ import time
 
 import picamera
 
+from pyzbar.pyzbar import decode as pyzbar_decode
+from PIL import Image as pyzbar_image
+
 #-----------------------------------------------------------------------------
 # Test
 #-----------------------------------------------------------------------------
-# Camera configuration
-camera = picamera.PiCamera()
-camera.sharpness = 100
-#camera.brightness = 55
-#camera.ISO = 800
-camera.resolution = (1500, 1500)
+while True:
+    # Get an image
+    camera = picamera.PiCamera()
+    camera.sharpness = 100
+    camera.brightness = 55
+    camera.ISO = 800
+    camera.resolution = (1000, 1000)
+    camera.capture('image.jpg')
 
-# Get an image
-camera.capture('image.jpg')
-print("image.jpg written")
+    # Scan image
+    tmp = pyzbar_decode(pyzbar_image.open('image.jpg'))
+    print(tmp)
+
+    time.sleep(1)
+
