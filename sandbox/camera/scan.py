@@ -20,10 +20,10 @@ from PIL import Image as pyzbar_image
 while True:
     # Get an image
     camera = picamera.PiCamera()
-    camera.sharpness = 100
-    camera.brightness = 55
-    camera.ISO = 800
-    camera.resolution = (1000, 1000)
+    #camera.sharpness = 100
+    #camera.brightness = 55
+    #camera.ISO = 800
+    #camera.resolution = (1000, 1000)
     camera.capture('image.jpg')
 
     # Scan image
