@@ -14,6 +14,12 @@ import picamera
 #-----------------------------------------------------------------------------
 # Test
 #-----------------------------------------------------------------------------
+# Camera configuration
 camera = picamera.PiCamera()
+camera.sharpness = 100
+camera.brightness = 60
+camera.ISO = 800
+
+# Get an image
 camera.capture('image.jpg')
-print("Image.jpg written")
+print("image.jpg written")
