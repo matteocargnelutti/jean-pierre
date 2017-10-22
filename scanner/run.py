@@ -39,6 +39,8 @@ def main():
     link = sqlite3.connect(database_path)
     print("Connected to SQlite database.")
 
+    # Load parameters
+
 # Execute
 if __name__ == "__main__":
     try:

@@ -43,7 +43,7 @@ class Params:
         self.link.commit()
         return True
 
-    def add_item(self, key, value):
+    def add_item(self, key, value=""):
         """
         Adds a parameter into the database
         :param key: parameter key
