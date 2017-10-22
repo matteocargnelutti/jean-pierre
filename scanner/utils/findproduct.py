@@ -15,15 +15,21 @@ from threading import Thread, RLock
 
 import requests
 
+import database as db
+
 #-----------------------------------------------------------------------------
 # FindProduct class
 #-----------------------------------------------------------------------------
 class FindProduct(Thread):
     """
     This class handles :
-    - Fetch product's from a barcode from the OpenFoodFacts or Ean-Search API
+    - Fetch product's from a barcode from the OpenFoodFacts OR local cache
+    - Add it to the groceries list OR increase the quantity
     Usage :
-    Note : This class creates its own thread
+    - thread = FindProduct(barcode)
+    - thread.start()
+    Note : 
+    - This class creates its own thread
     """
     LOCK = RLock()
     """ Thread lock """
@@ -31,17 +37,11 @@ class FindProduct(Thread):
     def __init__(self, barcode):
         """
         Inits the thread
-        :param barcode: EAN-13 Barcode to search
+        :param barcode: Barcode to search
         :type barcode: str
         :rtype: FindProduct
         """
         Thread.__init__(self)
-
-        # Is the barcode valid ?
-        if not re.findall(r'[0-9]{13}', barcode):
-            raise TypeError('EAN-13 Barcode expected, {}, given.'.format(barcode))
-
-        # Attributes
         self.barcode = barcode
         self.name = ''
 
@@ -50,19 +50,32 @@ class FindProduct(Thread):
         """
         Fetch, gathers, insert product infos.
         Threaded
+        :rtype: bool
         """
         with FindProduct.LOCK:
+            found = False
+            cache = False
+            products = db.ProductsTable()
+
             # Try to find the product in the cache database
+            cache = products.get_item(self.barcode)
+            if cache:
+                found = True
+                self.name = cache['name']
+                print("Found {} from cache".format(self.name))
 
             # Try to find the product in the OpenFoodFacts API
-            if self.__fetch_openfoodfacts():
-                print(self.barcode+' = '+self.name)
-            else:
-                print("Product not found")
-
-            # If not found yet, try to find the product in the EAN-CODE database API
+            if not found:
+                if not self.__fetch_openfoodfacts():
+                    print("Nothing found on OpenFoodFacts for {}".format(self.barcode))
+                    return False
+                else:
+                    print("Found {} from OFFapi".format(self.name))
 
             # Insert into cache
+            if not cache:
+                products.add_item(self.barcode, self.name)
+                print("{} added to cache".format(self.name))
 
             # Insert in the groceries list
                 # If already present, increase quantity by 1
@@ -91,7 +104,7 @@ class FindProduct(Thread):
             name = attempt['product']['product_name']
 
         if 'brands' in attempt['product']:
-            name = name + attempt['product']['brands'].split(',')[0]
+            name = name + ' - ' + attempt['product']['brands'].split(',')[0]
 
         self.name = name
         return True

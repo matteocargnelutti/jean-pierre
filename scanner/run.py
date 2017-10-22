@@ -83,12 +83,12 @@ def main():
 
             # Ignore if the item has just been scanned
             if barcode == last_scan:
-                print("Ignored: {}".format(barcode))
+                print("Scanned but ignored: {}".format(barcode))
                 continue
 
             # Add it to history
             last_scan = barcode
-            print("Added: {}".format(barcode))
+            print("Scanned and added : {}".format(barcode))
 
             # Beep !
 

@@ -20,8 +20,8 @@ class ParamsTable:
     This class handles :
     - Load and read parameters from the Params table as attributes
     Usage :
-    - Params(link)
-    - Params.PARAM_NAME
+    - ParamsTable()
+    - ParamsTable.PARAM_NAME
     """
     def __init__(self):
         """
@@ -54,4 +54,53 @@ class GroceriesTable:
 # Products Table class
 #-----------------------------------------------------------------------------
 class ProductsTable:
-    pass
+    """
+    This class handles :
+    - Add / Get items from the Products table, which is a cache for products info
+    Usage :
+    - products = ProductsTable()
+    - product = products.get_one(barcode)
+    """
+    def __init__(self):
+        """
+        Constructor
+        :rtype: ProductsTable
+        """
+        # Is the database connexion initialized ?
+        if not Connect.is_ready():
+            Connect.on()
+
+    def get_item(self, barcode):
+        """
+        Get a product from its barcode
+        :param barcode: barcode to lookup for
+        :type barcode: string
+        :rtype: tuple
+        """
+        query = "SELECT * FROM Products WHERE barcode = ?;"
+        params = (barcode,)
+
+        Connect.CURSOR.execute(query, params)
+        product = Connect.CURSOR.fetchone()
+
+        if product:
+            return product
+        else:
+            return False
+
+    def add_item(self, barcode, name):
+        """
+        Adds a product
+        :param barcode: barcode to lookup for
+        :type barcode: string
+        :param name: name of the product
+        :type name: string
+        :rtype: bool
+        """
+        query = "INSERT INTO Products (?, ?);"
+        params = (barcode, name)
+
+        Connect.CURSOR.execute(query, params)
+        Connect.LINK.commit()
+
+        return True
