@@ -11,9 +11,8 @@ tests/test_config.py - Units tests for the config module
 # Imports
 #-----------------------------------------------------------------------------
 import os
-import sqlite3
 
-import config.database as database
+import config.database as db
 
 #-----------------------------------------------------------------------------
 # Tests for config.database module
@@ -25,23 +24,20 @@ class TestDatabase:
         Creates a dummy database for tests
         """
         # Creates database
-        database_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.database_path = database_path + "/database_test.db"
-        self.link = sqlite3.connect(self.database_path)
-        self.link.row_factory = sqlite3.Row
-        self.cursor = self.link.cursor()
+        db.Connect(memory_mode=True)
+        self.cursor = db.Connect.CURSOR
 
         # Creates Params table
-        self.params = database.Params(self.link)
-        self.params.create_table()
+        self.params = db.ParamsTable()
+        self.params.create()
 
         # Creates Groceries table
-        self.groceries = database.Groceries(self.link)
-        self.groceries.create_table()
+        self.groceries = db.GroceriesTable()
+        self.groceries.create()
 
         # Creates Products table
-        self.products = database.Products(self.link)
-        self.products.create_table()
+        self.products = db.ProductsTable()
+        self.products.create()
 
     def test_create_tables(self):
         """
@@ -89,11 +85,11 @@ class TestDatabase:
                             WHERE key = 'lorem'
                             """)
         check = self.cursor.fetchone()
-        assert check == None
+        assert not check
 
     def teardown_method(self):
         """
         Deletes the dummy database
         """
-        self.link.close()
-        os.remove(self.database_path)
+        # Disconnect
+        db.Connect().disconnect()

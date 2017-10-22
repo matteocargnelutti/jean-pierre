@@ -7,6 +7,5 @@ Matteo Cargnelutti - github.com/matteocargnelutti
 
 config/database - Initiates the SQlite database
 """
-from .params import Params
-from .groceries import Groceries
-from .products import Products
+from .connect import Connect
+from .tables import ParamsTable, GroceriesTable, ProductsTable

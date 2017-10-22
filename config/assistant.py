@@ -26,11 +26,11 @@ def main():
     """
     Creates database, tables and ask for user parameters.
     Defined parameters :
-    - buzzer_on
-    - buzzer_port
-    - camera_res_x
-    - camera_res_y
-    - user_password
+    - BUZZER_ON
+    - BUZZER_POT
+    - CAMERA_RES_X
+    - CAMERA_RES_Y
+    - USER_PASSWORD
     """
     # Intro
     print("-"*80)
@@ -38,46 +38,50 @@ def main():
     print("-"*80)
 
     # Create / connects to the database
-    database_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    database_path = database_path + "/database.db"
-    link = sqlite3.connect(database_path)
+    db.Connect()
     print("SQlite3 database created.")
 
     # Create table : params
-    paramsdb = db.Params(link)
-    paramsdb.create_table()
+    paramsdb = db.ParamsTable()
+    paramsdb.create()
     print("Params table created if not already set.")
 
     # Create table : groceries
-    groceriesdb = db.Groceries(link)
-    groceriesdb.create_table()
+    groceriesdb = db.GroceriesTable()
+    groceriesdb.create()
     print("Groceries table created if not already set.")
 
     # Create table : products
-    productsdb = db.Products(link)
-    productsdb.create_table()
+    productsdb = db.ProductsTable()
+    productsdb.create()
     print("Products table created if not already set.")
 
     # Ask for : use buzzer / on which port ?
-    paramsdb.delete_item('buzzer_on')
-    paramsdb.delete_item('buzzer_port')
+    paramsdb.delete_item('BUZZER_ON')
+    paramsdb.delete_item('BUZZER_PORT')
 
     buzzer_on = input("Shall we use a buzzer (Y/N) : ")
+
+    # Yes
     if buzzer_on.upper() == "Y":
         buzzer_port = input("On which GPIO port is the buzzer connected : ")
         if re.findall('([0-9]+)', buzzer_port):
-            paramsdb.add_item('buzzer_on', '1')
-            paramsdb.add_item('buzzer_port', buzzer_port)
+            paramsdb.add_item('BUZZER_ON', '1')
+            paramsdb.add_item('BUZZER_PORT', buzzer_port)
         else:
             print("Invalid GPIO port number : moving on.")
+    # No
+    else:
+        paramsdb.add_item('BUZZER_ON', '0')
+        paramsdb.add_item('BUZZER_PORT', '')
 
     # Ask for : camera resolution ?
-    paramsdb.delete_item('camera_res_x')
-    paramsdb.delete_item('camera_res_y')
+    paramsdb.delete_item('CAMERA_RES_X')
+    paramsdb.delete_item('CAMERA_RES_Y')
 
-    for axis in ['x', 'y']:
+    for axis in ['X', 'Y']:
         question = "Camera resolution, {} (500 by default) : "
-        if axis == 'x':
+        if axis == 'X':
             question = question.format('WIDTH')
         else:
             question = question.format('HEIGHT')
@@ -85,17 +89,17 @@ def main():
         resolution = input(question)
         if not re.findall('([0-9]+)', resolution):
             resolution = 500
-        paramsdb.add_item('camera_res_{}'.format(axis), resolution)
+        paramsdb.add_item('CAMERA_RES_{}'.format(axis), resolution)
 
     # Ask for : user password
-    paramsdb.delete_item('user_password')
+    paramsdb.delete_item('USER_PASSWORD')
     user_password = getpass.getpass("Please define a password for Jean-Pierre : ")
     user_password = bytearray(user_password, encoding='utf-8')
     user_password = hashlib.sha1(user_password).hexdigest()
-    paramsdb.add_item('user_password', user_password)
+    paramsdb.add_item('USER_PASSWORD', user_password)
 
     # Close connection to the database
-    link.close()
+    db.Connect().disconnect()
 
     # Bye !
     print("All set ! Enjoy !")

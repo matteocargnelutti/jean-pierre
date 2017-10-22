@@ -32,18 +32,13 @@ def main():
     print("-"*80)
 
     # Database connection
-    database_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    database_path = database_path + "/database.db"
-
-    if not os.path.isfile(database_path):
-        raise Exception("No database found. Please use install.sh to configure this app.")
-
-    link = sqlite3.connect(database_path)
-    link.row_factory = sqlite3.Row
-    print("Connected to SQlite database.")
+    db.Connect()
 
     # Load parameters
-    db.Params(link)
+    db.ParamsTable()
+
+    # Database : end connection
+    db.Connect().disconnect()
 
 # Execute
 if __name__ == "__main__":

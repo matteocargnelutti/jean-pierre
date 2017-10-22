@@ -5,36 +5,37 @@ Jean-Pierre [Prototype]
 A Raspberry Pi robot helping people to build groceries list.
 Matteo Cargnelutti - github.com/matteocargnelutti
 
-scanner/database/params.py
+scanner/database/tables.py
 """
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
+from database import Connect
 
 #-----------------------------------------------------------------------------
-# Params class
+# Params Table class
 #-----------------------------------------------------------------------------
-class Params:
+class ParamsTable:
     """
     This class handles :
-    - Load and read parameters from the Params database
+    - Load and read parameters from the Params table
     - Parameters will be stored as CLASS attributes
     Usage :
-    - Params(link) 
+    - Params(link)
     - Params.PARAM_NAME
     """
-    def __init__(self, link):
+    def __init__(self):
         """
-        Constructor : loads parameters from the database
-        :param link: connector to a SQlite database
-        :rtype: Params
+        Constructor
+        :rtype: ParamsTable
         """
-        self.link = link
-        self.cursor = self.link.cursor()
-
-        self.cursor.execute("SELECT * FROM Params;")
-        items = self.cursor.fetchall()
+        # Is the database connexion initialized ?
+        if not Connect.is_ready():
+            Connect()
+        
+        Connect.CURSOR.execute("SELECT * FROM Params;")
+        items = Connect.CURSOR.fetchall()
 
         # Store parameters as class attributes in CAPS as they are constants
         for item in items:
-            setattr(Params, item['key'].upper(), item['value'])
+            setattr(ParamsTable, item['key'].upper(), item['value'])
