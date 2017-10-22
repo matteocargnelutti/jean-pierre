@@ -4,5 +4,5 @@
 .vscode/
 .cache/
 .sass_cache/
-.env/
-.experiments/
+env/
+database.db
