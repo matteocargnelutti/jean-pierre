@@ -8,7 +8,11 @@
 * Raspberry Pi Camera Module V2
 * A random *buzzer* module
 
-# App parameters
+# 3 apps, 1 database
+* Jean-Pierre is made of three apps : **config**, **scanner** and **web**
+* The three apps share as a SQLite 3 database, stored in `database.db` on the root directory.
+
+# Shared parameters
 Key | Value
 ----| -----
 `buzzer_on` | Should Jean-Pierre try to use a buzzer ?
@@ -18,9 +22,6 @@ Key | Value
 `user_password` | Password for the web interface (cyphered) 
 
 * Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
-
-# Database
-This app uses a SQLite 3 database, stored in `database.db` on the root directory.
 
 # Note 
 * A note about camera focus adjustement (and how it could break the camera)
