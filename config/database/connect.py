@@ -21,20 +21,21 @@ class Connect:
     This class handles :
     - Provides a link and a cursor to the database as class attributes
     Usage :
-    - Connect() # Init
-    - Connect.LINK # Get a link
-    - Connect.CURSOR # Get a cursor
-    - Connect.disconnect()
+    - Connect.on()
+    - Connect.CURSOR.execute(query, params)
+    - ... etc
+    - Connect.off()
     Available class attributes :
     - LINK
     - CURSOR
     - FILE (path to the database file)
     """
-    def __init__(self, memory_mode=False):
+    @classmethod
+    def on(cls, memory_mode=False):
         """
-        Constructor
-        :param memory_mode: use memory as a database ?
-        :rtype: Connect
+        Connect to the database
+        :param memory_mode: If True, creates a temporary database in memory
+        :rtype: bool
         """
         # Path to the database
         Connect.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -53,16 +54,10 @@ class Connect:
         # Cursor
         Connect.CURSOR = Connect.LINK.cursor()
 
-    @classmethod
-    def is_ready(cls):
-        """
-        Is the connection open ?
-        :rtype: bool
-        """
-        return cls.LINK != None
+        return True
 
     @classmethod
-    def disconnect(cls):
+    def off(cls):
         """
         Ends connection with the database.
         :rtype: bool
@@ -70,3 +65,11 @@ class Connect:
         cls.LINK.close()
         cls.CURSOR = None
         return True
+
+    @classmethod
+    def is_ready(cls):
+        """
+        Is the connection open ?
+        :rtype: bool
+        """
+        return cls.LINK != None

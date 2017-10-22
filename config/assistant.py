@@ -38,7 +38,7 @@ def main():
     print("-"*80)
 
     # Create / connects to the database
-    db.Connect()
+    db.Connect.on()
     print("SQlite3 database created.")
 
     # Create table : params
@@ -99,7 +99,7 @@ def main():
     paramsdb.add_item('USER_PASSWORD', user_password)
 
     # Close connection to the database
-    db.Connect().disconnect()
+    db.Connect().off()
 
     # Bye !
     print("All set ! Enjoy !")

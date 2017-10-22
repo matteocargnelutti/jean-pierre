@@ -27,7 +27,7 @@ class ParamsTable:
         """
         # Is the database connexion initialized ?
         if not Connect.is_ready():
-            Connect()
+            Connect.on()
 
     def create(self):
         """

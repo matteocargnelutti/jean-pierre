@@ -18,8 +18,7 @@ from database import Connect
 class ParamsTable:
     """
     This class handles :
-    - Load and read parameters from the Params table
-    - Parameters will be stored as CLASS attributes
+    - Load and read parameters from the Params table as attributes
     Usage :
     - Params(link)
     - Params.PARAM_NAME
@@ -31,11 +30,24 @@ class ParamsTable:
         """
         # Is the database connexion initialized ?
         if not Connect.is_ready():
-            Connect()
-        
+            Connect.on()
+
+        # Get all parameters
         Connect.CURSOR.execute("SELECT * FROM Params;")
         items = Connect.CURSOR.fetchall()
 
-        # Store parameters as class attributes in CAPS as they are constants
+        # Store parameters as attributes in lower caps as they are not constants
         for item in items:
-            setattr(ParamsTable, item['key'].upper(), item['value'])
+            setattr(self, item['key'].lower(), item['value'])
+
+#-----------------------------------------------------------------------------
+# Groceries Table class
+#-----------------------------------------------------------------------------
+class GroceriesTable:
+    pass
+
+#-----------------------------------------------------------------------------
+# Products Table class
+#-----------------------------------------------------------------------------
+class ProductsTable:
+    pass

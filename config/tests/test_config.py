@@ -24,7 +24,7 @@ class TestDatabase:
         Creates a dummy database for tests
         """
         # Creates database
-        db.Connect(memory_mode=True)
+        db.Connect.on(memory_mode=True)
         self.cursor = db.Connect.CURSOR
 
         # Creates Params table
@@ -92,4 +92,4 @@ class TestDatabase:
         Deletes the dummy database
         """
         # Disconnect
-        db.Connect().disconnect()
+        db.Connect.off()
