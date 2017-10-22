@@ -90,8 +90,8 @@ class FindProduct(Thread):
         if 'product_name' in attempt['product']:
             name = attempt['product']['product_name']
 
-        if 'brands' in attempt:
-            name = attempt['product']['brands'].split(',')[0]
+        if 'brands' in attempt['product']:
+            name = name + attempt['product']['brands'].split(',')[0]
 
         self.name = name
         return True
