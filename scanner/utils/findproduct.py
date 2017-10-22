@@ -95,10 +95,3 @@ class FindProduct(Thread):
         self.name = name
         return True    
 
-
-#-----------------------------------------------------------------------------
-# FindProductData class
-#-----------------------------------------------------------------------------
-class FindProductData():
-    
-    def __init__(self, name, )
