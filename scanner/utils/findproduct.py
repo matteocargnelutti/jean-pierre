@@ -86,12 +86,12 @@ class FindProduct(Thread):
             return False
 
         # Treat data
-        if 'product_name' in attempt:
-            name = attempt['product_name']
+        name = ''
+        if 'product_name' in attempt['product']:
+            name = attempt['product']['product_name']
 
         if 'brands' in attempt:
-            name = attempt['brands'].split(',')[0]
+            name = attempt['product']['brands'].split(',')[0]
 
         self.name = name
-        return True    
-
+        return True
