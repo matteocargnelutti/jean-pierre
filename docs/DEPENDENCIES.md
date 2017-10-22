@@ -17,3 +17,4 @@
 * pyzbar
 * pyzbar[scripts]
 * pytest
+* requests

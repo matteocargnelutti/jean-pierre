@@ -90,15 +90,10 @@ def main():
             last_scan = barcode
             print("Added: {}".format(barcode))
 
+            # Beep !
+
             # Treat it in a separate thread
             utils.FindProduct(barcode).start()
-
-            # Try to find it in cache
-
-            # If not in cache, get it from the APIS
-            # ... or should this task be done by another process, in order to avoid clogging this one ?
-
-            # If found : "beep", add it to the groceries list (or increment its quantity)
 
 
 # Execute
