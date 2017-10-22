@@ -54,6 +54,7 @@ def main():
 
     # Capture loop
     last_scan = ''
+    no_scan_nth = 0
     while True:
         # Get an image from the camera
         stream = BytesIO()
@@ -64,11 +65,22 @@ def main():
         barcodes = pyzbar_decode(pil_image.open(stream))[::-1]
         #print(barcodes)
 
+        # If there is no barcode : count to 2 before clearing the last scan history
+        # This allows to add a same item twice
+        if not barcodes:
+            no_scan_nth += 1
+            if no_scan_nth == 2:
+                no_scan_nth = 0
+                last_scan = ''
+
         # If there is a barcode
         if barcodes:
             # Isolate
             barcode = barcodes[0].data.decode()
-            print("Found: {}".format(barcode))
+            #print("Found: {}".format(barcode))
+
+            # Reset the "no barcode" counter
+            no_scan_nth = 0
 
             # Ignore if the item has just been scanned
             if barcode == last_scan:
