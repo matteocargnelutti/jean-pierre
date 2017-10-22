@@ -8,5 +8,5 @@ Matteo Cargnelutti - github.com/matteocargnelutti
 scanner/database - Initiates the SQlite database
 """
 from .params import Params
-from .groceries import Groceries
-from .products import Products
+#from .groceries import Groceries
+#from .products import Products

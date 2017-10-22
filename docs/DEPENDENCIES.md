@@ -16,3 +16,4 @@
 * picamera
 * pyzbar
 * pyzbar[scripts]
+* pytest

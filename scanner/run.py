@@ -16,6 +16,8 @@ import sqlite3
 
 #import picamera
 
+import database as db
+
 #-----------------------------------------------------------------------------
 # Main
 #-----------------------------------------------------------------------------
@@ -37,9 +39,11 @@ def main():
         raise Exception("No database found. Please use install.sh to configure this app.")
 
     link = sqlite3.connect(database_path)
+    link.row_factory = sqlite3.Row
     print("Connected to SQlite database.")
 
     # Load parameters
+    db.Params(link)
 
 # Execute
 if __name__ == "__main__":

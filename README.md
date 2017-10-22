@@ -17,7 +17,7 @@ Key | Value
 `camera_res_y` | Camera's resolution : height
 `user_password` | Password for the web interface (cyphered) 
 
-* Theses parameters are defined using the config assistant, run : `python assistant.py` in the **config** subdirectory.
+* Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
 
 # Note 
 * A note about camera focus adjustement (and how it could break the camera)
