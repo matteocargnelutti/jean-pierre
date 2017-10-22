@@ -12,7 +12,7 @@ tests/test_config.py - Units tests for the config module
 #-----------------------------------------------------------------------------
 import os
 
-import config.database as db
+import database as db
 
 #-----------------------------------------------------------------------------
 # Tests for config.database module

@@ -19,5 +19,8 @@ Key | Value
 
 * Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
 
+# Database
+This app uses a SQLite 3 database, stored in `database.db` on the root directory.
+
 # Note 
 * A note about camera focus adjustement (and how it could break the camera)
