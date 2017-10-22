@@ -15,13 +15,14 @@
 # Shared parameters
 Key | Value
 ----| -----
-`buzzer_on` | Should Jean-Pierre try to use a buzzer ?
-`buzzer_port` | On which GPIO port the buzzer is ? 
-`camera_res_x` | Camera's resolution : width
-`camera_res_y` | Camera's resolution : height
-`user_password` | Password for the web interface (cyphered) 
+`BUZZER_ON` | Should Jean-Pierre try to use a buzzer ?
+`BUZZER_PORT` | On which GPIO port the buzzer is ? 
+`CAMERA_RES_X` | Camera's resolution : width
+`CAMERA_RES_Y` | Camera's resolution : height
+`USER_PASSWORD` | Password for the web interface (cyphered) 
 
 * Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
+* They are stored into the **Params** database.
 
 # Note 
 * A note about camera focus adjustement (and how it could break the camera)
