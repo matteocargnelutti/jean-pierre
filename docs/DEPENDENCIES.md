@@ -15,4 +15,4 @@
 ## pip dependencies (see python_requirements.txt)
 * picamera
 * pyzbar
-* (sudo pip3) pyzbar[scripts]
+* pyzbar[scripts]

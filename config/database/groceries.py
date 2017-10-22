@@ -21,14 +21,19 @@ class Groceries:
     """
     def __init__(self, link):
         """
-        Constructor :
-        Takes a link to a sqlite database as a parameter
+        Constructor : holds the link to the database.
+        :param link: connector to a SQlite database
+        :rtype: Groceries
         """
         self.link = link
 
     def create_table(self):
+        """
+        Creates the Groceries database
+        :rtype: bool
+        """
         query = """
-                CREATE TABLE IF NOT EXISTS groceries (
+                CREATE TABLE IF NOT EXISTS Groceries (
                     barcode  CHAR (13) PRIMARY KEY,
                     quantity INT
                 )

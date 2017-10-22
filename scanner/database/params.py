@@ -5,7 +5,7 @@ Jean-Pierre [Prototype]
 A Raspberry Pi robot helping people to build groceries list.
 Matteo Cargnelutti - github.com/matteocargnelutti
 
-config/database/params.py - Initiates the Params database
+scanner/database/params.py - Access to the params database
 """
 #-----------------------------------------------------------------------------
 # Imports
@@ -17,23 +17,19 @@ config/database/params.py - Initiates the Params database
 class Params:
     """
     This class handles :
-    Creation of a SQlite database for user parameters
+    Access to the params database.
+    Loads parameters in attributes
     """
     def __init__(self, link):
         """
-        Constructor : holds the link to the database.
-        :param link: connector to a SQlite database
-        :rtype: Params
+        Constructor :
+        Takes a link to a sqlite database as a parameter
         """
         self.link = link
 
     def create_table(self):
-        """
-        Creates the Params database
-        :rtype: bool
-        """
         query = """
-                CREATE TABLE IF NOT EXISTS Params (
+                CREATE TABLE IF NOT EXISTS params (
                     [key] TEXT PRIMARY KEY,
                     value TEXT
                 )
@@ -44,14 +40,6 @@ class Params:
         return True
 
     def add_item(self, key, value):
-        """
-        Adds a parameter into the database
-        :param key: parameter key
-        :param value: parameter value
-        :type key: str
-        :type value: str
-        :rtype: bool
-        """
         query = """
                 INSERT INTO params VALUES (?, ?)
                 """
@@ -61,12 +49,6 @@ class Params:
         return True
 
     def delete_item(self, key):
-        """
-        Deletes a parameter from the database
-        :param key: parameter key
-        :type key: str
-        :rtype: bool
-        """
         query = """
                 DELETE FROM params WHERE `key` = ?
                 """

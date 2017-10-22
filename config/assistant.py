@@ -17,7 +17,7 @@ import re
 import hashlib
 import getpass
 
-import database
+import database as db
 
 #-----------------------------------------------------------------------------
 # Main
@@ -38,17 +38,17 @@ def main():
     print("SQlite3 database created.")
 
     # Create table : params
-    paramsdb = database.Params(link)
+    paramsdb = db.Params(link)
     paramsdb.create_table()
     print("Params table created if not already set.")
 
     # Create table : groceries
-    groceriesdb = database.Groceries(link)
+    groceriesdb = db.Groceries(link)
     groceriesdb.create_table()
     print("Groceries table created if not already set.")
 
     # Create table : products
-    productsdb = database.Products(link)
+    productsdb = db.Products(link)
     productsdb.create_table()
     print("Products table created if not already set.")
 
