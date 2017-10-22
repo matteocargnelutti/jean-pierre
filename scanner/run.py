@@ -53,6 +53,7 @@ def main():
     camera.start_preview()
 
     # Capture loop
+    history = [] # Previous scans, to detect if an item must be added twice
     while True:
         # Get an image from the camera
         stream = BytesIO()
@@ -61,7 +62,36 @@ def main():
 
         # Scan image for barcodes
         barcodes = pyzbar_decode(pil_image.open(stream))[::-1]
-        print(barcodes)
+        #print(barcodes)
+
+        # If there is a barcode
+        if barcodes:
+            barcode = barcodes[0].data.decode()
+            print("Found: {}".format(barcode))
+
+            # Has this element been scanned recently ?
+            if barcode in history:
+                # If 5 times in a row : add it a second time
+                if history.count(barcode) >= 4:
+                    print("Add it twice !")
+                # Otherwise, ignore it
+                else:
+                    print("Ignore for now")
+                    continue
+
+            # Add it to history
+            history.append(barcode)
+
+            # Try to find it in cache
+
+            # If not in cache, get it from the APIS
+
+            # If found : "beep" add it to the groceries list (or increment its quantity)
+
+            # Limit history to the 5 last scans
+            if len(history) == 5:
+                history.pop(0)
+
 
 # Execute
 if __name__ == "__main__":
