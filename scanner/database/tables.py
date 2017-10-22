@@ -40,6 +40,10 @@ class ParamsTable:
         for item in items:
             setattr(self, item['key'].lower(), item['value'])
 
+        # Cast some parameters
+        self.camera_res_x = int(self.camera_res_x)
+        self.camera_res_y = int(self.camera_res_y)
+
 #-----------------------------------------------------------------------------
 # Groceries Table class
 #-----------------------------------------------------------------------------

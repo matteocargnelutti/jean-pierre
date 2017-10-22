@@ -13,6 +13,7 @@ scanner/run.py - Scanner embed app.
 import logging
 import os
 import sqlite3
+from io import BytesIO
 
 import picamera
 from pyzbar.pyzbar import decode as pyzbar_decode
@@ -39,7 +40,7 @@ def main():
     # Load parameters
     params = db.ParamsTable()
 
-    # Database : end connection 
+    # Database : end connection
     # (open it only when needed because this program is meant to be shutdown harshly)
     db.Connect.off()
 
