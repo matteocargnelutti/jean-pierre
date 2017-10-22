@@ -66,8 +66,12 @@ def main():
 
         # If there is a barcode
         if barcodes:
+            # Isolate
             barcode = barcodes[0].data.decode()
             print("Found: {}".format(barcode))
+            
+            # Add it to history
+            history.append(barcode)
 
             # Has this element been scanned recently ?
             if barcode in history:
@@ -78,9 +82,6 @@ def main():
                 else:
                     print("Ignore for now")
                     continue
-
-            # Add it to history
-            history.append(barcode)
 
             # Try to find it in cache
 
