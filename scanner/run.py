@@ -68,7 +68,7 @@ def main():
         # If there is no barcode : clean last scan history every 3 empty scans in a row
         if not barcodes:
             empty_scans += 1
-            if empty_scans == 3
+            if empty_scans == 3:
                 last_scan = ''
                 empty_scans = 0
 
@@ -76,7 +76,7 @@ def main():
         if barcodes:
             # Isolate
             barcode = barcodes[0].data.decode()
-            
+
             # Break counter of empty scans in a row
             empty_scans = 0
 
@@ -92,8 +92,9 @@ def main():
             # Try to find it in cache
 
             # If not in cache, get it from the APIS
+            # ... or should this task be done by another process, in order to avoid clogging this one ?
 
-            # If found : "beep" add it to the groceries list (or increment its quantity)
+            # If found : "beep", add it to the groceries list (or increment its quantity)
 
 
 # Execute
