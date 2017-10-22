@@ -20,6 +20,7 @@ from pyzbar.pyzbar import decode as pyzbar_decode
 from PIL import Image as pil_image
 
 import database as db
+import utils
 
 #-----------------------------------------------------------------------------
 # Main
@@ -31,7 +32,7 @@ def main():
     """
     # Intro
     print("-"*80)
-    print("Jean-Pierre Scanner : Running :{o")
+    print("Jean-Pierre's Barcode Scanner : Running :{o")
     print("-"*80)
 
     # Database connection
@@ -88,6 +89,9 @@ def main():
             # Add it to history
             last_scan = barcode
             print("Added: {}".format(barcode))
+
+            # Treat it in a separate thread
+            utils.FindProduct(barcode).start()
 
             # Try to find it in cache
 
