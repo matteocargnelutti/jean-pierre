@@ -63,6 +63,7 @@ class Connect:
         :rtype: bool
         """
         cls.LINK.close()
+        cls.LINK = None
         cls.CURSOR = None
         return True
 
