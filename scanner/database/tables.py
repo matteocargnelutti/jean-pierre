@@ -97,7 +97,7 @@ class ProductsTable:
         :type name: string
         :rtype: bool
         """
-        query = "INSERT INTO Products (?, ?);"
+        query = "INSERT INTO Products VALUES (?, ?);"
         params = (barcode, name)
 
         Connect.CURSOR.execute(query, params)
