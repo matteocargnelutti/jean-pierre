@@ -53,29 +53,36 @@ class FindProduct(Thread):
         :rtype: bool
         """
         with FindProduct.LOCK:
+            # Marks
             found = False
             cache = False
             products = db.ProductsTable()
+            message = ""
 
             # Try to find the product in the cache database
             cache = products.get_item(self.barcode)
             if cache:
                 found = True
                 self.name = cache['name']
-                print("Found {} from cache".format(self.name))
+                tmp = "{} : Found {} from cache"
+                tmp = tmp.format(self.barcode, self.name)
+                message += tmp+"\n"
 
             # Try to find the product in the OpenFoodFacts API
             if not found:
                 if not self.__fetch_openfoodfacts():
-                    print("Nothing found on OpenFoodFacts for {}".format(self.barcode))
-                    return False
+                    tmp = "{} : Nothing found on OpenFoodFacts for {}"
+                    tmp = tmp.format(self.barcode, self.barcode)
+                    message += tmp+"\n"
                 else:
-                    print("Found {} from OFFapi".format(self.name))
+                    print("Found {} from OpenFoodFacts".format(self.name))
 
             # Insert into cache
-            if not cache:
+            if found and not cache:
                 products.add_item(self.barcode, self.name)
-                print("{} added to cache".format(self.name))
+                tmp = "{} : {} added to cache"
+                tmp = tmp.format(self.barcode, self.name)
+                message += tmp+"\n"
 
             # Insert in the groceries list
                 # If already present, increase quantity by 1
