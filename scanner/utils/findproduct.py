@@ -90,6 +90,9 @@ class FindProduct(Thread):
             # Disconnect the database, allowing it to be used by another thread
             db.Connect.off()
 
+            # Print message
+            print(message)
+
     def __fetch_openfoodfacts(self):
         """
         Fetch infos from OpenFoodFacts
