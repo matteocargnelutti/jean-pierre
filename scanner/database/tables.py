@@ -33,12 +33,9 @@ class ParamsTable:
         if not Connect.is_ready():
             Connect.on()
 
-        # Get all parameters
-        try:
-            Connect.CURSOR.execute("SELECT * FROM Params;")
-            items = Connect.CURSOR.fetchall()
-        except sqlite3.OperationalError as trace:
-            raise Exception("Unable to reach the Params table : please run the config module.")
+        # Get all the parameters
+        Connect.CURSOR.execute("SELECT * FROM Params;")
+        items = Connect.CURSOR.fetchall()
 
         # Store parameters as attributes in lower caps as they are not constants
         for item in items:
