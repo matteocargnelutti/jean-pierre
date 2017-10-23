@@ -38,7 +38,7 @@ class ParamsTable:
             Connect.CURSOR.execute("SELECT * FROM Params;")
             items = Connect.CURSOR.fetchall()
         except sqlite3.OperationalError as trace:
-            raise Exception("Unable to reach the Params table : please run the config module ? \n" + trace)
+            raise Exception("Unable to reach the Params table : please run the config module.")
 
         # Store parameters as attributes in lower caps as they are not constants
         for item in items:
