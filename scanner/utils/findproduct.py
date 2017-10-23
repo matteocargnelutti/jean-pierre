@@ -80,6 +80,9 @@ class FindProduct(Thread):
             # Insert in the groceries list
                 # If already present, increase quantity by 1
 
+            # Disconnect the database, allowing it to be used by another thread
+            db.Connect.off()
+
     def __fetch_openfoodfacts(self):
         """
         Fetch infos from OpenFoodFacts
