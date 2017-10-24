@@ -78,6 +78,7 @@ class FindProduct(Thread):
                     tmp = tmp.format(self.barcode, self.barcode)
                     message += tmp+"\n"
                 else:
+                    found = True
                     print("Found {} from OpenFoodFacts".format(self.name))
 
             # Insert into cache

@@ -82,7 +82,6 @@ def main():
 
             # Ignore if the item has just been scanned
             if barcode == last_scan:
-                #print("Scanned but ignored: {}".format(barcode))
                 continue
 
             # Add it to history

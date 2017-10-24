@@ -12,7 +12,7 @@ scanner/utils/buzzer.py
 #-----------------------------------------------------------------------------
 import time
 
-import RPi.GPIO
+import RPi.GPIO as GPIO
 
 #-----------------------------------------------------------------------------
 # Buzzer class
@@ -25,18 +25,18 @@ class Buzzer:
     - buzzer = Buzzer(port)
     - buzzer.beep()
     """
-    def __init__(self, port=7, time=0.1):
+    def __init__(self, port=7, duration=0.1):
         """
         Constructor
         :param port: GPIO port on which the buzzer is connected
         :type port: int
-        :param time: Duration of a single buzz
-        :type time: float
+        :param duration: Duration of a single buzz
+        :type duration: float
         :rtype: Buzzer
         """
         # Set attributes
         self.port = port
-        self.time = 0.1
+        self.duration = 0.1
 
         # Inits the port
         GPIO.setmode(GPIO.BOARD)
@@ -50,7 +50,7 @@ class Buzzer:
         Triggers the buzzer
         """
         GPIO.output(self.port, GPIO.LOW) # On
-        time(self.time) # Wait
+        time.sleep(self.duration) # Wait
         GPIO.output(self.port, GPIO.HIGH) # Off
 
 
@@ -58,6 +58,4 @@ class Buzzer:
         """
         Frees the GPIO port
         """
-        GPIO.output(self.port, GPIO.HIGH) # Buzzer off
         GPIO.cleanup() # Clean GPIO config
-
