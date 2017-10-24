@@ -53,6 +53,9 @@ class FindProduct(Thread):
         :rtype: bool
         """
         with FindProduct.LOCK:
+            # Database connection
+            db.Connect.on()
+
             # Marks
             found = False
             cache = False

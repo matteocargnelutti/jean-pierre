@@ -8,3 +8,4 @@ Matteo Cargnelutti - github.com/matteocargnelutti
 scanner/utils - Utilitary classes
 """
 from .findproduct import FindProduct
+from .buzzer import Buzzer

@@ -18,3 +18,4 @@
 * pyzbar[scripts]
 * pytest
 * requests
+* RPi.GPIO

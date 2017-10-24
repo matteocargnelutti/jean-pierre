@@ -64,7 +64,6 @@ def main():
 
         # Scan image for barcodes
         barcodes = pyzbar_decode(pil_image.open(stream))[::-1]
-        #print(barcodes)
 
         # If there is no barcode : clean last scan history every 3 empty scans in a row
         if not barcodes:
@@ -91,6 +90,8 @@ def main():
             print("Scanned and considered : {}".format(barcode))
 
             # Beep !
+            buzzer = utils.Buzzer()
+            buzzer.beep()
 
             # Treat it in a separate thread
             utils.FindProduct(barcode).start()
