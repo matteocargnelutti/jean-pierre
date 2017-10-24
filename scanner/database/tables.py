@@ -68,20 +68,114 @@ class GroceriesTable:
     def get_item(self, barcode):
         """
         Get an item by barcode + associated name and pic
-        :param barcode: associated barcode to search
+        :param barcode: barcode of the product to search
         :type barcode: string
         :rtype: dict or false
         """
-        pass
+        query = """
+                SELECT 
+                    Groceries.*, Products.name, Products.pic 
+                FROM 
+                    Groceries
+                INNER JOIN 
+                    Products
+                ON 
+                    Groceries.barcode = Products.barcode
+                WHERE
+                    Groceries.barcode = ?
+                ORDER BY 
+                    Products.name ASC;
+                """
+        params = (barcode,)
+
+        Connect.CURSOR.execute(query, params)
+        product = Connect.CURSOR.fetchone()
+
+        if product:
+            return {
+                'barcode': product['barcode'],
+                'name': product['name'],
+                'quantity': product['quantity'],
+                'pic': product['pic']
+            }
+        else:
+            return False
 
     def add_item(self, barcode, quantity=1):
-        pass
+        """
+        Adds an item to the groceries list
+        :param barcode: barcode
+        :param quantity: quantity
+        :type barcode: str
+        :type quantity: int
+        :rtype: bool
+        """
+        query = "INSERT INTO Groceries VALUES (?, ?);"
+        params = (barcode, quantity)
+        Connect.LINK.execute(query, params)
+        Connect.LINK.commit()
+        return True
 
     def edit_item(self, barcode, quantity):
-        pass
+        """
+        Edits an item from the groceries list
+        :param barcode: barcode
+        :param quantity: quantity
+        :type barcode: str
+        :type quantity: int
+        :rtype: bool
+        """
+        query = "UPDATE Groceries SET quantity = ? WHERE barcode = ?;"
+        params = (barcode, quantity)
+        Connect.LINK.execute(query, params)
+        Connect.LINK.commit()
+        return True
+
+    def delete_item(self, barcode):
+        """
+        Deletes an item from the groceries list
+        :param barcode: barcode
+        :param quantity: quantity
+        :type barcode: str
+        :type quantity: int
+        :rtype: bool
+        """
+        query = "DELETE FROM Groceries WHERE barcode = ?;"
+        params = (barcode,)
+        Connect.LINK.execute(query, params)
+        Connect.LINK.commit()
+        return True
 
     def get_list(self):
-        pass
+        """
+        Gets the groceries list, with associated product data
+        :rtype: list
+        """
+        # Query
+        query = """
+                SELECT 
+                    Groceries.*, Products.name, Products.pic 
+                FROM 
+                    Groceries
+                INNER JOIN 
+                    Products
+                ON 
+                    Groceries.barcode = Products.barcode
+                ORDER BY 
+                    Products.name ASC;
+                """
+        Connect.CURSOR.execute(query)
+        raw_list = Connect.CURSOR.fetchall()
+
+        # Prepare return format
+        groceries = {}
+        for product in raw_list:
+            groceries[product['barcode']] = {
+                'name': product['name'],
+                'quantity': product['quantity'],
+                'pic': product['pic']
+            }
+        return groceries
 
 #-----------------------------------------------------------------------------
 # Products Table class

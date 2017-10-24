@@ -61,6 +61,7 @@ class FindProduct(Thread):
             found = False
             cache = False
             products = db.ProductsTable()
+            groceries = db.GroceriesTable()
             message = ""
 
             # Try to find the product in the local products database
@@ -91,8 +92,15 @@ class FindProduct(Thread):
                 tmp = tmp.format(self.barcode, self.name)
                 message += tmp+"\n"
 
-            # Insert in the groceries list
-                # If already present, increase quantity by 1
+            # Update groceries list
+            if found:
+                # If the product already present in the groceries list: increase its quantity by 1
+                existing = db.GroceriesTable.get_item(self.barcode)
+                if existing:
+                    db.GroceriesTable.edit_item(self.barcode, existing['quantity']+1)
+                # Otherwise : add it
+                else:
+                    db.GroceriesTable.add_item(self.barcode, 1)
 
             # Disconnect the database, allowing it to be used by another thread
             db.Connect.off()
