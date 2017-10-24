@@ -73,7 +73,7 @@ def main():
     # No
     else:
         paramsdb.add_item('BUZZER_ON', '0')
-        paramsdb.add_item('BUZZER_PORT', '')
+        paramsdb.add_item('BUZZER_PORT', '0')
 
     # Ask for : camera resolution ?
     paramsdb.delete_item('CAMERA_RES_X')
