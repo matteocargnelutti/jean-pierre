@@ -27,7 +27,7 @@ def main():
     Creates database, tables and ask for user parameters.
     Defined parameters :
     - BUZZER_ON
-    - BUZZER_POT
+    - BUZZER_PORT
     - CAMERA_RES_X
     - CAMERA_RES_Y
     - USER_PASSWORD

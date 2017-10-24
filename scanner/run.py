@@ -89,8 +89,9 @@ def main():
             print("Scanned and considered : {}".format(barcode))
 
             # Beep !
-            buzzer = utils.Buzzer()
-            buzzer.beep()
+            if params.buzzer_on:
+                buzzer = utils.Buzzer(params.buzzer_port)
+                buzzer.beep()
 
             # Treat it in a separate thread
             utils.FindProduct(barcode).start()

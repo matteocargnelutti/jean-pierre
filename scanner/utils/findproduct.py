@@ -73,13 +73,15 @@ class FindProduct(Thread):
 
             # Try to find the product in the OpenFoodFacts API
             if not found:
-                if not self.__fetch_openfoodfacts():
-                    tmp = "{} : Nothing found on OpenFoodFacts for {}"
-                    tmp = tmp.format(self.barcode, self.barcode)
+                if self.__fetch_openfoodfacts():
+                    found = True
+                    tmp = "{} : Found {} from OpenFoodFacts"
+                    tmp = tmp.format(self.barcode, self.name)
                     message += tmp+"\n"
                 else:
-                    found = True
-                    print("Found {} from OpenFoodFacts".format(self.name))
+                    tmp = "{} : Nothing found on cache nor on OpenFoodFacts."
+                    tmp = tmp.format(self.barcode, self.barcode)
+                    message += tmp+"\n"
 
             # Insert into cache
             if found and not cache:

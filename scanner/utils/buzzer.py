@@ -29,33 +29,27 @@ class Buzzer:
         """
         Constructor
         :param port: GPIO port on which the buzzer is connected
-        :type port: int
         :param duration: Duration of a single buzz
+        :type port: int
         :type duration: float
         :rtype: Buzzer
         """
         # Set attributes
         self.port = port
-        self.duration = 0.1
-
-        # Inits the port
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(self.port, GPIO.OUT)
-
-        # Sets the buzzer to off by default
-        GPIO.output(self.port, GPIO.HIGH)
+        self.duration = duration
 
     def beep(self):
         """
         Triggers the buzzer
         """
+        # Inits the port
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.port, GPIO.OUT)
+
+        # Beep
         GPIO.output(self.port, GPIO.LOW) # On
         time.sleep(self.duration) # Wait
         GPIO.output(self.port, GPIO.HIGH) # Off
 
-
-    def __del__(self):
-        """
-        Frees the GPIO port
-        """
-        GPIO.cleanup() # Clean GPIO config
+        # Cleanup
+        GPIO.cleanup()
