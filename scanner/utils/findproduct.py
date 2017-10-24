@@ -131,7 +131,7 @@ class FindProduct(Thread):
             thumb = attempt['product']['image_thumb_url']
             try:
                 pic = requests.get(thumb, timeout=10)
-                self.pic = ("data:" + pic.headers['Content-Type'] + ";" + "base64," + base64.encodestring(pic.content))
+                self.pic = b"data:image/jpg;base64," + base64.b64encode(pic.content)
             except Exception as trace:
                 self.pic = '' # Ignore
 
