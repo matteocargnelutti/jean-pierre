@@ -44,6 +44,7 @@ class FindProduct(Thread):
         Thread.__init__(self)
         self.barcode = barcode
         self.name = ''
+        self.pic = ''
 
 
     def run(self):
@@ -62,12 +63,12 @@ class FindProduct(Thread):
             products = db.ProductsTable()
             message = ""
 
-            # Try to find the product in the cache database
+            # Try to find the product in the local products database
             cache = products.get_item(self.barcode)
             if cache:
                 found = True
                 self.name = cache['name']
-                tmp = "{} : Found {} from cache"
+                tmp = "{} : Found {} from local (cache) database."
                 tmp = tmp.format(self.barcode, self.name)
                 message += tmp+"\n"
 
@@ -83,9 +84,9 @@ class FindProduct(Thread):
                     tmp = tmp.format(self.barcode, self.barcode)
                     message += tmp+"\n"
 
-            # Insert into cache
+            # Insert into local products list
             if found and not cache:
-                products.add_item(self.barcode, self.name)
+                products.add_item(self.barcode, self.name, self.pic)
                 tmp = "{} : {} added to cache"
                 tmp = tmp.format(self.barcode, self.name)
                 message += tmp+"\n"
@@ -124,6 +125,15 @@ class FindProduct(Thread):
 
         if 'brands' in attempt['product']:
             name = name + ' - ' + attempt['product']['brands'].split(',')[0]
+
+        # Get image
+        if 'image_thumb_url' in attempt['product']:
+            thumb = attempt['product']['image_thumb_url']
+            try:
+                pic = requests.get(thumb, timeout=10)
+                self.pic = pic.raw
+            except Exception as trace:
+                self.pic = '' # Ignore
 
         self.name = name
         return True

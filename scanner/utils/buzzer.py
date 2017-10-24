@@ -35,7 +35,7 @@ class Buzzer:
         :rtype: Buzzer
         """
         # Set attributes
-        self.port = port
+        self.port = int(port)
         self.duration = duration
 
     def beep(self):

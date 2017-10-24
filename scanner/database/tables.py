@@ -49,7 +49,39 @@ class ParamsTable:
 # Groceries Table class
 #-----------------------------------------------------------------------------
 class GroceriesTable:
-    pass
+    """
+    This class handles :
+    - Add / Get items from the Groceries table, which is a cache for products info
+    Usage :
+    - groceries = GroceriesTable()
+    - groceries_list = groceries.get_list()
+    """
+    def __init__(self):
+        """
+        Constructor
+        :rtype: GroceriesTable
+        """
+        # Is the database connexion initialized ?
+        if not Connect.is_ready():
+            Connect.on()
+
+    def get_item(self, barcode):
+        """
+        Get an item by barcode + associated name and pic
+        :param barcode: associated barcode to search
+        :type barcode: string
+        :rtype: dict or false
+        """
+        pass
+
+    def add_item(self, barcode, quantity=1):
+        pass
+
+    def edit_item(self, barcode, quantity):
+        pass
+
+    def get_list(self):
+        pass
 
 #-----------------------------------------------------------------------------
 # Products Table class
@@ -85,21 +117,25 @@ class ProductsTable:
         product = Connect.CURSOR.fetchone()
 
         if product:
-            return product
+            return {'barcode': product['barcode'],
+                    'name': product['name'],
+                    'pic': product['pic']}
         else:
             return False
 
-    def add_item(self, barcode, name):
+    def add_item(self, barcode, name, pic=''):
         """
         Adds a product
         :param barcode: barcode to lookup for
-        :type barcode: string
         :param name: name of the product
+        :param pic: blob of the thumbnail pic
         :type name: string
+        :type barcode: string
+        :type pic: binary
         :rtype: bool
         """
         query = "INSERT INTO Products VALUES (?, ?, ?);"
-        params = (barcode, name, "")
+        params = (barcode, name, pic)
 
         Connect.CURSOR.execute(query, params)
         Connect.LINK.commit()
