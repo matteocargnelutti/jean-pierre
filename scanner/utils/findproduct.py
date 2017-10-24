@@ -10,7 +10,7 @@ scanner/utils/findproduct.py
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
-import re
+import base64
 from threading import Thread, RLock
 
 import requests
@@ -131,7 +131,7 @@ class FindProduct(Thread):
             thumb = attempt['product']['image_thumb_url']
             try:
                 pic = requests.get(thumb, timeout=10)
-                self.pic = pic.raw
+                self.pic = ("data:" + pic.headers['Content-Type'] + ";" + "base64," + base64.encodestring(pic.content))
             except Exception as trace:
                 self.pic = '' # Ignore
 

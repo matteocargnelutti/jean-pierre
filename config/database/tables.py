@@ -103,7 +103,7 @@ class ProductsTable:
                 CREATE TABLE IF NOT EXISTS Products (
                     barcode CHAR (13) PRIMARY KEY,
                     name    TEXT,
-                    pic     BLOB
+                    pic     TEXT
                 )
                 WITHOUT ROWID;
                 """
