@@ -69,11 +69,12 @@ class FindProduct(Thread):
             if cache:
                 found = True
                 self.name = cache['name']
+                self.barcode = cache['barcode']
                 tmp = "{} : Found {} from local (cache) database."
                 tmp = tmp.format(self.barcode, self.name)
                 message += tmp+"\n"
 
-            # Try to find the product in the OpenFoodFacts API
+            # If not found localy : Try to find the product in the OpenFoodFacts API
             if not found:
                 if self.__fetch_openfoodfacts():
                     found = True
@@ -85,22 +86,22 @@ class FindProduct(Thread):
                     tmp = tmp.format(self.barcode, self.barcode)
                     message += tmp+"\n"
 
-            # Insert into local products list
+            # If found : insert it into local products list
             if found and not cache:
                 products.add_item(self.barcode, self.name, self.pic)
                 tmp = "{} : {} added to cache"
                 tmp = tmp.format(self.barcode, self.name)
                 message += tmp+"\n"
 
-            # Update groceries list
+            # If found : Update the groceries list with this item
             if found:
-                # If the product already present in the groceries list: increase its quantity by 1
-                existing = db.GroceriesTable.get_item(self.barcode)
+                # If the product's already present in the groceries list: increase its quantity by 1
+                existing = groceries.get_item(self.barcode)
                 if existing:
-                    db.GroceriesTable.edit_item(self.barcode, existing['quantity']+1)
+                    groceries.edit_item(self.barcode, existing['quantity']+1)
                 # Otherwise : add it
                 else:
-                    db.GroceriesTable.add_item(self.barcode, 1)
+                    groceries.add_item(self.barcode, 1)
 
             # Disconnect the database, allowing it to be used by another thread
             db.Connect.off()
