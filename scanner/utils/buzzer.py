@@ -40,7 +40,9 @@ class Buzzer:
 
     def beep(self):
         """
-        Triggers the buzzer
+        Triggers the buzzer.
+        The GPIO setup is made everytime in order to avoid clogging one of them
+        in case of hard exit.
         """
         # Inits the port
         GPIO.setmode(GPIO.BOARD)

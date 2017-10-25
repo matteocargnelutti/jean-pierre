@@ -5,7 +5,7 @@ Jean-Pierre [Prototype]
 A Raspberry Pi robot helping people to build groceries list.
 Matteo Cargnelutti - github.com/matteocargnelutti
 
-tests/test_config.py - Units tests for the config module
+config/tests/test_config.py - Units tests for the config app
 """
 #-----------------------------------------------------------------------------
 # Imports
@@ -15,9 +15,12 @@ import os
 import database as db
 
 #-----------------------------------------------------------------------------
-# Tests for config.database module
+# Tests for database package
 #-----------------------------------------------------------------------------
 class TestDatabase:
+    """
+    Tests setup, I/O operations on the database, following the app's rules.
+    """
 
     def setup_method(self):
         """

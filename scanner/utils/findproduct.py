@@ -73,7 +73,7 @@ class FindProduct(Thread):
                 self.barcode = cache['barcode']
                 message += "{barcode} : Found {name} from local products database.\n"
 
-            # If not found localy : Try to find the product in the OpenFoodFacts API
+            # If not found locally : Try to find the product in the OpenFoodFacts API
             if not found:
                 # If found on OpenFoodFacts : add it to the local database
                 if self.__fetch_openfoodfacts():
@@ -82,7 +82,7 @@ class FindProduct(Thread):
                     message += "{barcode} : Found {name} from OpenFoodFacts.\n"
                     message += "{barcode} : {name} added to cache.\n"
                 else:
-                    message += "{barcode} : Not found localy nor on OpenFoodFacts.\n"
+                    message += "{barcode} : Not found locally nor on OpenFoodFacts.\n"
 
             # If found : Update the groceries list with this item
             if found:

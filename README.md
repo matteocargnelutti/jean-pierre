@@ -12,7 +12,7 @@
 * Please run *install.sh* : `chmod a+x install.sh` then `./install.sh`
 
 # 3 apps, 1 database
-* Jean-Pierre is made of three apps : **config**, **scanner** and **web**
+* Jean-Pierre is made of three separate apps : **config**, **scanner** and **web**
 * The three apps share as a SQLite 3 database, stored in `database.db` on the root directory.
 
 # Shared parameters
