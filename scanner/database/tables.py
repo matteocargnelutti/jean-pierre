@@ -128,7 +128,7 @@ class GroceriesTable:
         :rtype: bool
         """
         query = "UPDATE Groceries SET quantity = ? WHERE barcode = ?;"
-        params = (barcode, quantity)
+        params = (quantity, barcode)
         Connect.LINK.execute(query, params)
         Connect.LINK.commit()
         return True
