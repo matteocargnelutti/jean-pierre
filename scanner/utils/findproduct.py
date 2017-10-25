@@ -45,6 +45,7 @@ class FindProduct(Thread):
         self.barcode = barcode
         self.name = ''
         self.pic = ''
+        self.quantity = 1
 
 
     def run(self):
@@ -70,36 +71,39 @@ class FindProduct(Thread):
                 found = True
                 self.name = cache['name']
                 self.barcode = cache['barcode']
-                message += "{} : Found {} from local (cache) database.\n".format(self.barcode, self.name)
+                message += "{barcode} : Found {name} from local products database.\n"
 
             # If not found localy : Try to find the product in the OpenFoodFacts API
             if not found:
                 # If found on OpenFoodFacts : add it to the local database
                 if self.__fetch_openfoodfacts():
                     found = True
-                    products.add_item(self.barcode, self.name, self.pic) 
-                    message += "{} : Found {} from OpenFoodFacts.\n".format(self.barcode, self.name)
-                    message += "{} : {} added to cache.\n".format(self.barcode, self.name)
+                    products.add_item(self.barcode, self.name, self.pic)
+                    message += "{barcode} : Found {name} from OpenFoodFacts.\n"
+                    message += "{barcode} : {name} added to cache.\n"
                 else:
-                    message += "{} : Not found localy nor on OpenFoodFacts.\n".format(self.barcode)
+                    message += "{barcode} : Not found localy nor on OpenFoodFacts.\n"
 
             # If found : Update the groceries list with this item
             if found:
                 # If the product's already present in the groceries list: increase its quantity by 1
-                existing = groceries.get_item(self.barcode)
-                if existing:
-                    quantity =  existing['quantity'] + 1
-                    groceries.edit_item(self.barcode, quantity)
-                    message += "{} : {} {} in groceries list.\n".format(self.barcode, quantity, self.name)
+                previous = groceries.get_item(self.barcode)
+                if previous:
+                    self.quantity = previous['quantity'] + 1
+                    groceries.edit_item(self.barcode, self.quantity)
+                    message += "{barcode} : {quantity} {name} now in groceries list.\n"
                 # Otherwise : add it
                 else:
                     groceries.add_item(self.barcode, 1)
-                    message += "{} : {} added to the groceries list, quantity : 1.\n".format(self.barcode, self.name)
+                    message += "{barcode} : 1 {name} added to the groceries list.\n"
 
             # Disconnect the database, allowing it to be used by another thread
             db.Connect.off()
 
             # Print message
+            message = message.format(barcode=self.barcode,
+                                     name=self.name,
+                                     quantity=self.quantity)
             print(message)
 
     def __fetch_openfoodfacts(self):
