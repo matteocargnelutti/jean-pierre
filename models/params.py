@@ -51,7 +51,7 @@ class Params:
             return False
         if items:
             for item in items:
-                setattr(self, item['key'].lower(), item['value'])
+                setattr(self, item['key'], item['value'])
                 self.camera_res_x = int(self.camera_res_x)
                 self.camera_res_y = int(self.camera_res_y)
                 self.buzzer_on = int(self.buzzer_on)
@@ -100,7 +100,7 @@ class Params:
         :rtype: bool
         """
         # Only if the item exists
-        if hasattr(self, key):
+        if not hasattr(self, key):
             return True
 
         # Deletion

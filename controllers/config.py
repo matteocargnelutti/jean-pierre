@@ -82,13 +82,14 @@ class Config:
             params.add_item('buzzer_on', '0')
             params.add_item('buzzer_port', '0')
 
-        # Ask for : camera resolution ?
+        # Ask for : camera resolution
         params.delete_item('camera_res_x')
         params.delete_item('camera_res_y')
 
-        for axis in ['X', 'Y']:
+        for axis in ['x', 'y']:
             question = "Camera resolution, {} (500 by default) : "
-            if axis == 'X':
+
+            if axis == 'x':
                 question = question.format('WIDTH')
             else:
                 question = question.format('HEIGHT')
@@ -96,6 +97,7 @@ class Config:
             resolution = input(question)
             if not re.findall('([0-9]+)', resolution):
                 resolution = 500
+
             params.add_item('camera_res_{}'.format(axis), resolution)
 
         # Ask for : user password
