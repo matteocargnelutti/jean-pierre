@@ -50,7 +50,7 @@ class Config:
         print("SQlite3 database created.")
 
         # Create table : params
-        params = models.Params()
+        params = models.Params(autoload=False)
         params.create_table()
         print("Params table created if not already set.")
 

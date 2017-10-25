@@ -32,7 +32,7 @@ class Products:
         if not Database.is_ready():
             Database.on()
 
-    def create(self):
+    def create_table(self):
         """
         Creates the Products table
         :rtype: bool

@@ -23,9 +23,10 @@ class Params:
     - params = Params()
     - params.PARAM_NAME
     """
-    def __init__(self):
+    def __init__(self, autoload=True):
         """
         Constructor
+        :param autoload: Automaticaly load parameters as attributes ?
         :rtype: ParamsTable
         """
         # Is the database connexion initialized ?
@@ -33,7 +34,8 @@ class Params:
             Database.on()
 
         # Load parameters as attributes
-        self.load()
+        if autoload:
+            self.load()
 
     def load(self):
         """
