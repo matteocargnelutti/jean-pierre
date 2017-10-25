@@ -99,9 +99,15 @@ class FindProduct(Thread):
                 existing = groceries.get_item(self.barcode)
                 if existing:
                     groceries.edit_item(self.barcode, existing['quantity']+1)
+                    tmp = "{} : {} added to the groceries list, quantity : {}."
+                    tmp = tmp.format(self.barcode, self.name, existing['quantity']+1)
+                    message += tmp+"\n"
                 # Otherwise : add it
                 else:
                     groceries.add_item(self.barcode, 1)
+                    tmp = "{} : {} added to the groceries list, quantity : 1."
+                    tmp = tmp.format(self.barcode, self.name)
+                    message += tmp+"\n"
 
             # Disconnect the database, allowing it to be used by another thread
             db.Connect.off()
