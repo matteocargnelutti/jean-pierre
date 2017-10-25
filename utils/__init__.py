@@ -5,7 +5,8 @@ Jean-Pierre [Prototype]
 A Raspberry Pi robot helping people to build groceries list.
 Matteo Cargnelutti - github.com/matteocargnelutti
 
-scanner/utils - Utilitary classes
+utils - App tools
 """
+from .database import Database
 from .findproduct import FindProduct
 from .buzzer import Buzzer

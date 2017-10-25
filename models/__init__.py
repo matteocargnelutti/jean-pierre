@@ -5,7 +5,8 @@ Jean-Pierre [Prototype]
 A Raspberry Pi robot helping people to build groceries list.
 Matteo Cargnelutti - github.com/matteocargnelutti
 
-config/database - Initiates the SQlite database
+database - Interactions with the database
 """
-from .connect import Connect
-from .tables import ParamsTable, GroceriesTable, ProductsTable
+from .params import Params
+from .groceries import Groceries
+from .products import Products

@@ -5,57 +5,22 @@ Jean-Pierre [Prototype]
 A Raspberry Pi robot helping people to build groceries list.
 Matteo Cargnelutti - github.com/matteocargnelutti
 
-scanner/database/tables.py
+scanner/database/groceries.py
 """
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
-import sqlite3
-from database import Connect
-
-#-----------------------------------------------------------------------------
-# Params Table class
-#-----------------------------------------------------------------------------
-class ParamsTable:
-    """
-    This class handles :
-    - Load and read parameters from the Params table as attributes
-    Usage :
-    - ParamsTable()
-    - ParamsTable.PARAM_NAME
-    """
-    def __init__(self):
-        """
-        Constructor
-        :rtype: ParamsTable
-        """
-        # Is the database connexion initialized ?
-        if not Connect.is_ready():
-            Connect.on()
-
-        # Get all the parameters
-        Connect.CURSOR.execute("SELECT * FROM Params;")
-        items = Connect.CURSOR.fetchall()
-
-        # Store parameters as attributes in lower caps as they are not constants
-        for item in items:
-            setattr(self, item['key'].lower(), item['value'])
-
-        # Cast some parameters
-        self.camera_res_x = int(self.camera_res_x)
-        self.camera_res_y = int(self.camera_res_y)
-        self.buzzer_on = int(self.buzzer_on)
-        self.buzzer_port = int(self.buzzer_port)
+from utils import Database
 
 #-----------------------------------------------------------------------------
 # Groceries Table class
 #-----------------------------------------------------------------------------
-class GroceriesTable:
+class Groceries:
     """
     This class handles :
     - Add / Get items from the Groceries table, which is a cache for products info
     Usage :
-    - groceries = GroceriesTable()
+    - groceries = Groceries()
     - groceries_list = groceries.get_list()
     """
     def __init__(self):
@@ -64,8 +29,24 @@ class GroceriesTable:
         :rtype: GroceriesTable
         """
         # Is the database connexion initialized ?
-        if not Connect.is_ready():
-            Connect.on()
+        if not Database.is_ready():
+            Database.on()
+
+    def create_table(self):
+        """
+        Creates the Groceries table
+        :rtype: bool
+        """
+        query = """
+                CREATE TABLE IF NOT EXISTS Groceries (
+                    barcode  CHAR (13) PRIMARY KEY,
+                    quantity INT
+                )
+                WITHOUT ROWID;
+                """
+        Database.LINK.execute(query)
+        Database.LINK.commit()
+        return True
 
     def get_item(self, barcode):
         """
@@ -90,8 +71,8 @@ class GroceriesTable:
                 """
         params = (barcode,)
 
-        Connect.CURSOR.execute(query, params)
-        product = Connect.CURSOR.fetchone()
+        Database.CURSOR.execute(query, params)
+        product = Database.CURSOR.fetchone()
 
         if product:
             return {
@@ -114,8 +95,8 @@ class GroceriesTable:
         """
         query = "INSERT INTO Groceries VALUES (?, ?);"
         params = (barcode, quantity)
-        Connect.LINK.execute(query, params)
-        Connect.LINK.commit()
+        Database.LINK.execute(query, params)
+        Database.LINK.commit()
         return True
 
     def edit_item(self, barcode, quantity):
@@ -129,8 +110,8 @@ class GroceriesTable:
         """
         query = "UPDATE Groceries SET quantity = ? WHERE barcode = ?;"
         params = (quantity, barcode)
-        Connect.LINK.execute(query, params)
-        Connect.LINK.commit()
+        Database.LINK.execute(query, params)
+        Database.LINK.commit()
         return True
 
     def delete_item(self, barcode):
@@ -144,8 +125,8 @@ class GroceriesTable:
         """
         query = "DELETE FROM Groceries WHERE barcode = ?;"
         params = (barcode,)
-        Connect.LINK.execute(query, params)
-        Connect.LINK.commit()
+        Database.LINK.execute(query, params)
+        Database.LINK.commit()
         return True
 
     def get_list(self):
@@ -166,8 +147,8 @@ class GroceriesTable:
                 ORDER BY 
                     Products.name ASC;
                 """
-        Connect.CURSOR.execute(query)
-        raw_list = Connect.CURSOR.fetchall()
+        Database.CURSOR.execute(query)
+        raw_list = Database.CURSOR.fetchall()
 
         # Prepare return format
         groceries = {}
@@ -178,62 +159,3 @@ class GroceriesTable:
                 'pic': product['pic']
             }
         return groceries
-
-#-----------------------------------------------------------------------------
-# Products Table class
-#-----------------------------------------------------------------------------
-class ProductsTable:
-    """
-    This class handles :
-    - Add / Get items from the Products table, which is a cache for products info
-    Usage :
-    - products = ProductsTable()
-    - product = products.get_one(barcode)
-    """
-    def __init__(self):
-        """
-        Constructor
-        :rtype: ProductsTable
-        """
-        # Is the database connexion initialized ?
-        if not Connect.is_ready():
-            Connect.on()
-
-    def get_item(self, barcode):
-        """
-        Get a product from its barcode
-        :param barcode: barcode to lookup for
-        :type barcode: string
-        :rtype: tuple
-        """
-        query = "SELECT * FROM Products WHERE barcode = ?;"
-        params = (barcode,)
-
-        Connect.CURSOR.execute(query, params)
-        product = Connect.CURSOR.fetchone()
-
-        if product:
-            return {'barcode': product['barcode'],
-                    'name': product['name'],
-                    'pic': product['pic']}
-        else:
-            return False
-
-    def add_item(self, barcode, name, pic=''):
-        """
-        Adds a product
-        :param barcode: barcode to lookup for
-        :param name: name of the product
-        :param pic: blob of the thumbnail pic
-        :type name: string
-        :type barcode: string
-        :type pic: binary
-        :rtype: bool
-        """
-        query = "INSERT INTO Products VALUES (?, ?, ?);"
-        params = (barcode, name, pic)
-
-        Connect.CURSOR.execute(query, params)
-        Connect.LINK.commit()
-
-        return True

@@ -11,10 +11,6 @@
 # Setup
 * Please run *install.sh* : `chmod a+x install.sh` then `./install.sh`
 
-# 3 apps, 1 database
-* Jean-Pierre is made of three separate apps : **config**, **scanner** and **web**
-* The three apps share as a SQLite 3 database, stored in `database.db` on the root directory.
-
 # Shared parameters
 Key | Value
 ----| -----
@@ -26,6 +22,28 @@ Key | Value
 
 * Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
 * They are stored into the **Params** database.
+
+# Software dependencies
+## OS
+* Raspbian (lite)
+
+## sudo apt-get install ...
+* python3-dev
+* python3-pip
+* python3-picamera
+* git
+* virtualenv
+* libzbar0
+* supervisor
+* libjpeg8-dev
+
+## pip dependencies (see python_requirements.txt)
+* picamera
+* pyzbar
+* pyzbar[scripts]
+* pytest
+* requests
+* RPi.GPIO
 
 # Note 
 * A note about camera focus adjustement (and how it could break the camera)

@@ -5,7 +5,7 @@ Jean-Pierre [Prototype]
 A Raspberry Pi robot helping people to build groceries list.
 Matteo Cargnelutti - github.com/matteocargnelutti
 
-config/database/connect.py
+utils/cls.py - SQlite connector
 """
 #-----------------------------------------------------------------------------
 # Imports
@@ -14,17 +14,17 @@ import os
 import sqlite3
 
 #-----------------------------------------------------------------------------
-# Connect class
+# Database class
 #-----------------------------------------------------------------------------
-class Connect:
+class Database:
     """
     This class handles :
     - Provides a link and a cursor to the database as class attributes
     Usage :
-    - Connect.on()
-    - Connect.CURSOR.execute(query, params)
+    - Database.on()
+    - Database.CURSOR.execute(query, params)
     - ... etc
-    - Connect.off()
+    - Database.off()
     Available class attributes :
     - LINK
     - CURSOR
@@ -38,28 +38,26 @@ class Connect:
         :rtype: bool
         """
         # Path to the database
-        Connect.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        Connect.FILE = Connect.FILE.replace('/config', '')
-        Connect.FILE = Connect.FILE.replace('/scanner', '')
-        Connect.FILE = Connect.FILE.replace('/web', '')
-        Connect.FILE = Connect.FILE + "/database.db"
+        cls.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        cls.FILE = cls.FILE.replace('/utils', '')
+        cls.FILE = cls.FILE + "/database.db"
 
         if memory_mode:
-            Connect.FILE = ':memory:'
+            cls.FILE = ':memory:'
 
         # Connect
-        Connect.LINK = sqlite3.connect(Connect.FILE)
-        Connect.LINK.row_factory = sqlite3.Row
+        cls.LINK = sqlite3.connect(cls.FILE)
+        cls.LINK.row_factory = sqlite3.Row
 
         # Cursor
-        Connect.CURSOR = Connect.LINK.cursor()
+        cls.CURSOR = cls.LINK.cursor()
 
         return True
 
     @classmethod
     def off(cls):
         """
-        Ends connection with the database.
+        Ends connection with the cls.
         :rtype: bool
         """
         cls.LINK.close()

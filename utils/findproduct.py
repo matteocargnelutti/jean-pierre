@@ -15,7 +15,8 @@ from threading import Thread, RLock
 
 import requests
 
-import database as db
+from utils import Database
+import models
 
 #-----------------------------------------------------------------------------
 # FindProduct class
@@ -56,13 +57,13 @@ class FindProduct(Thread):
         """
         with FindProduct.LOCK:
             # Database connection
-            db.Connect.on()
+            Database.on()
 
             # Marks
             found = False
             cache = False
-            products = db.ProductsTable()
-            groceries = db.GroceriesTable()
+            products = models.Products()
+            groceries = models.Groceries()
             message = ""
 
             # Try to find the product in the local products database
@@ -98,7 +99,7 @@ class FindProduct(Thread):
                     message += "{barcode} : 1 {name} added to the groceries list.\n"
 
             # Disconnect the database, allowing it to be used by another thread
-            db.Connect.off()
+            Database.off()
 
             # Print message
             message = message.format(barcode=self.barcode,
