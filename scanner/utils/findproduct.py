@@ -28,7 +28,7 @@ class FindProduct(Thread):
     Usage :
     - thread = FindProduct(barcode)
     - thread.start()
-    Note : 
+    Note :
     - This class creates its own thread
     """
     LOCK = RLock()
@@ -49,7 +49,7 @@ class FindProduct(Thread):
 
     def run(self):
         """
-        Fetch, gathers, insert product infos.
+        Fetch, gathers, insert product infos and adds it to the groceries list.
         Threaded
         :rtype: bool
         """
@@ -70,44 +70,31 @@ class FindProduct(Thread):
                 found = True
                 self.name = cache['name']
                 self.barcode = cache['barcode']
-                tmp = "{} : Found {} from local (cache) database."
-                tmp = tmp.format(self.barcode, self.name)
-                message += tmp+"\n"
+                message += "{} : Found {} from local (cache) database.\n".format(self.barcode, self.name)
 
             # If not found localy : Try to find the product in the OpenFoodFacts API
             if not found:
+                # If found on OpenFoodFacts : add it to the local database
                 if self.__fetch_openfoodfacts():
                     found = True
-                    tmp = "{} : Found {} from OpenFoodFacts"
-                    tmp = tmp.format(self.barcode, self.name)
-                    message += tmp+"\n"
+                    products.add_item(self.barcode, self.name, self.pic) 
+                    message += "{} : Found {} from OpenFoodFacts.\n".format(self.barcode, self.name)
+                    message += "{} : {} added to cache.\n".format(self.barcode, self.name)
                 else:
-                    tmp = "{} : Nothing found on cache nor on OpenFoodFacts."
-                    tmp = tmp.format(self.barcode, self.barcode)
-                    message += tmp+"\n"
-
-            # If found : insert it into local products list
-            if found and not cache:
-                products.add_item(self.barcode, self.name, self.pic)
-                tmp = "{} : {} added to cache"
-                tmp = tmp.format(self.barcode, self.name)
-                message += tmp+"\n"
+                    message += "{} : Not found localy nor on OpenFoodFacts.\n".format(self.barcode)
 
             # If found : Update the groceries list with this item
             if found:
                 # If the product's already present in the groceries list: increase its quantity by 1
                 existing = groceries.get_item(self.barcode)
                 if existing:
-                    groceries.edit_item(self.barcode, existing['quantity']+1)
-                    tmp = "{} : {} added to the groceries list, quantity : {}."
-                    tmp = tmp.format(self.barcode, self.name, existing['quantity']+1)
-                    message += tmp+"\n"
+                    quantity =  existing['quantity'] + 1
+                    groceries.edit_item(self.barcode, quantity)
+                    message += "{} : {} {} in groceries list.\n".format(self.barcode, quantity, self.name)
                 # Otherwise : add it
                 else:
                     groceries.add_item(self.barcode, 1)
-                    tmp = "{} : {} added to the groceries list, quantity : 1."
-                    tmp = tmp.format(self.barcode, self.name)
-                    message += tmp+"\n"
+                    message += "{} : {} added to the groceries list, quantity : 1.\n".format(self.barcode, self.name)
 
             # Disconnect the database, allowing it to be used by another thread
             db.Connect.off()
@@ -117,7 +104,8 @@ class FindProduct(Thread):
 
     def __fetch_openfoodfacts(self):
         """
-        Fetch infos from OpenFoodFacts
+        Fetch infos from OpenFoodFacts.
+        Automaticaly updates attributes with the results.
         :rtype: bool
         """
         # Fetch
