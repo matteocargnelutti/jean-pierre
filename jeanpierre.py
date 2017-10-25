@@ -32,7 +32,7 @@ def main():
     arguments = arguments.parse_args()
 
     # If no arguments
-    if not arguments or not hasattr(arguments, 'do'):
+    if not arguments or not hasattr(arguments, 'do') or not arguments.do:
         message = "Jean-Pierre understands:\n"
         message += "--do config : launch the configuration assistant"
         message += "--do scanner : launch the scanner process"

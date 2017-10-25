@@ -34,11 +34,11 @@ class Config:
         """
         Creates database, tables and ask for user parameters.
         Defined parameters :
-        - BUZZER_ON
-        - BUZZER_PORT
-        - CAMERA_RES_X
-        - CAMERA_RES_Y
-        - USER_PASSWORD
+        - buzzer_on
+        - buzzer_port
+        - camera_res_x
+        - camera_res_y
+        - user_password
         """
         # Intro
         print("-"*80)
@@ -65,26 +65,26 @@ class Config:
         print("Products table created if not already set.")
 
         # Ask for : use buzzer / on which port ?
-        params.delete_item('BUZZER_ON')
-        params.delete_item('BUZZER_PORT')
+        params.delete_item('buzzer_on')
+        params.delete_item('buzzer_port')
         buzzer_on = input("Shall we use a buzzer (Y/N) : ")
 
         # Yes
         if buzzer_on.upper() == "Y":
             buzzer_port = input("On which GPIO port is the buzzer connected : ")
             if re.findall('([0-9]+)', buzzer_port):
-                params.add_item('BUZZER_ON', '1')
-                params.add_item('BUZZER_PORT', buzzer_port)
+                params.add_item('buzzer_on', '1')
+                params.add_item('buzzer_port', buzzer_port)
             else:
                 print("Invalid GPIO port number : moving on.")
         # No
         else:
-            params.add_item('BUZZER_ON', '0')
-            params.add_item('BUZZER_PORT', '0')
+            params.add_item('buzzer_on', '0')
+            params.add_item('buzzer_port', '0')
 
         # Ask for : camera resolution ?
-        params.delete_item('CAMERA_RES_X')
-        params.delete_item('CAMERA_RES_Y')
+        params.delete_item('camera_res_x')
+        params.delete_item('camera_res_y')
 
         for axis in ['X', 'Y']:
             question = "Camera resolution, {} (500 by default) : "
@@ -96,14 +96,14 @@ class Config:
             resolution = input(question)
             if not re.findall('([0-9]+)', resolution):
                 resolution = 500
-            params.add_item('CAMERA_RES_{}'.format(axis), resolution)
+            params.add_item('camera_res_{}'.format(axis), resolution)
 
         # Ask for : user password
-        params.delete_item('USER_PASSWORD')
+        params.delete_item('user_password')
         user_password = getpass.getpass("Please define a password for Jean-Pierre : ")
         user_password = bytearray(user_password, encoding='utf-8')
         user_password = hashlib.sha1(user_password).hexdigest()
-        params.add_item('USER_PASSWORD', user_password)
+        params.add_item('user_password', user_password)
 
         # Close connection to the database
         Database.off()
