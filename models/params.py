@@ -89,7 +89,7 @@ class Params:
         params = (key, value)
         Database.LINK.execute(query, params)
         Database.LINK.commit()
-        setattr(self, key, value) # Update parameter as attribute
+        setattr(self, key, value) # Update parameter loaded as attribute
         return True
 
     def delete_item(self, key):
@@ -99,11 +99,16 @@ class Params:
         :type key: str
         :rtype: bool
         """
+        # Only if the item exists
+        if hasattr(self, key):
+            return True
+
+        # Deletion
         query = """
                 DELETE FROM params WHERE `key` = ?
                 """
         params = (key,)
         Database.LINK.execute(query, params)
         Database.LINK.commit()
-        delattr(self, key)
+        delattr(self, key) # Delete parameter loaded as attribute
         return True
