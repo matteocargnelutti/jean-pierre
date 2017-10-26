@@ -58,7 +58,7 @@ def main():
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
     elif arguments.do == 'web':
-        controllers.web.run()
+        controllers.web.flask_run()
 
 # Execution
 if __name__ == "__main__":
