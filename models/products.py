@@ -106,3 +106,19 @@ class Products:
         Database.LINK.commit()
 
         return True
+
+    def delete_item(self, barcode):
+        """
+        Deletes a product from the database
+        :param barcode: barcode
+        :type barcode: str
+        :rtype: bool
+        """
+        # Deletion
+        query = """
+                DELETE FROM Products WHERE `barcode` = ?;
+                """
+        params = (barcode,)
+        Database.LINK.execute(query, params)
+        Database.LINK.commit()
+        return True

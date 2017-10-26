@@ -102,7 +102,7 @@ class Params:
         :rtype: bool
         """
         query = """
-                UPDATE INTO params SET value = ? WHERE key = ?;
+                UPDATE params SET value = ? WHERE key = ?;
                 """
         params = (value, key)
         Database.LINK.execute(query, params)
@@ -142,7 +142,7 @@ class Params:
         """
         # Deletion
         query = """
-                DELETE FROM params WHERE `key` = ?
+                DELETE FROM Params WHERE `key` = ?;
                 """
         params = (key,)
         Database.LINK.execute(query, params)
