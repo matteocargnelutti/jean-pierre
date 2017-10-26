@@ -99,10 +99,6 @@ class Params:
         :type key: str
         :rtype: bool
         """
-        # Only if the item exists
-        if not hasattr(self, key):
-            return True
-
         # Deletion
         query = """
                 DELETE FROM params WHERE `key` = ?
@@ -110,5 +106,7 @@ class Params:
         params = (key,)
         Database.LINK.execute(query, params)
         Database.LINK.commit()
-        delattr(self, key) # Delete parameter loaded as attribute
+        # Delete parameter loaded as attribute
+        if hasattr(self, key):
+            delattr(self, key)
         return True

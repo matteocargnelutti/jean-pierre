@@ -77,6 +77,8 @@ class Config:
                 params.add_item('buzzer_port', buzzer_port)
             else:
                 print("Invalid GPIO port number : moving on.")
+                params.add_item('buzzer_on', '0')
+                params.add_item('buzzer_port', '0')
         # No
         else:
             params.add_item('buzzer_on', '0')
