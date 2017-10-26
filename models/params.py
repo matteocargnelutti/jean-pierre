@@ -92,6 +92,29 @@ class Params:
         setattr(self, key, value) # Update parameter loaded as attribute
         return True
 
+    def get_item(self, key):
+        """
+        Get a parameter by its key
+        :param key: key
+        :type key: string
+        :rtype: tuple
+        """
+        query = "SELECT * FROM Params WHERE key = ?;"
+        params = (key,)
+
+        Database.CURSOR.execute(query, params)
+        param = Database.CURSOR.fetchone()
+
+        if param:
+            # Load parameter as an attribute
+            setattr(self, param['key'], param['value'])
+
+            # Return entry
+            return {'key': param['key'],
+                    'value': param['value']}
+        else:
+            return False
+
     def delete_item(self, key):
         """
         Deletes a parameter from the database
