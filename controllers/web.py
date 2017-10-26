@@ -23,6 +23,3 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return "Hello World!"
-
-def flask_run():
-    app.run(debug=True)
