@@ -49,7 +49,7 @@ class Params:
         # Store parameters as attributes in lower caps as they are not constants
         if not items:
             return False
-        if items:
+        else:
             for item in items:
                 setattr(self, item['key'], item['value'])
                 self.camera_res_x = int(self.camera_res_x)

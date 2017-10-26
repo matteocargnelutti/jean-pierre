@@ -38,19 +38,19 @@ class Database:
         :rtype: bool
         """
         # Path to the database
-        cls.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        cls.FILE = cls.FILE.replace('/utils', '')
-        cls.FILE = cls.FILE + "/database.db"
+        Database.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        Database.FILE =Database.FILE.replace('/utils', '')
+        Database.FILE = Database.FILE + "/database.db"
 
         if memory_mode:
-            cls.FILE = ':memory:'
+            Database.FILE = ':memory:'
 
         # Connect
-        cls.LINK = sqlite3.connect(cls.FILE)
-        cls.LINK.row_factory = sqlite3.Row
+        Database.LINK = sqlite3.connect(Database.FILE)
+        Database.LINK.row_factory = sqlite3.Row
 
         # Cursor
-        cls.CURSOR = cls.LINK.cursor()
+        Database.CURSOR = Database.LINK.cursor()
 
         return True
 
@@ -60,9 +60,9 @@ class Database:
         Ends connection with the cls.
         :rtype: bool
         """
-        cls.LINK.close()
-        cls.LINK = None
-        cls.CURSOR = None
+        Database.LINK.close()
+        Database.LINK = None
+        Database.CURSOR = None
         return True
 
     @classmethod
@@ -71,4 +71,4 @@ class Database:
         Is the connection open ?
         :rtype: bool
         """
-        return cls.LINK != None
+        return Database.LINK != None

@@ -10,16 +10,14 @@ controllers/scanner.py - Barcode scanner
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
-import logging
-import os
-import sqlite3
 from io import BytesIO
 
 import picamera
 from pyzbar.pyzbar import decode as pyzbar_decode
 from PIL import Image as pil_image
 
-from utils import Database, Buzzer, FindProduct
+from utils import Database
+import utils
 import models
 
 #-----------------------------------------------------------------------------
