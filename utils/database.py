@@ -21,10 +21,10 @@ class Database:
     This class handles :
     - Provides a link and a cursor to the database as class attributes
     Usage :
-    - cls.on()
-    - cls.CURSOR.execute(query, params)
+    - Database.on()
+    - Database.CURSOR.execute(query, params)
     - ... etc
-    - cls.off()
+    - Database.off()
     Available class attributes :
     - LINK
     - CURSOR

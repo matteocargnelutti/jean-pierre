@@ -159,3 +159,9 @@ class Groceries:
                 'pic': product['pic']
             }
         return groceries
+
+    def __del__(self):
+        """
+        Closes database connexion on delete
+        """
+        Database.off()

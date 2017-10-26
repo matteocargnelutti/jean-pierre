@@ -87,3 +87,9 @@ class Products:
         Database.LINK.commit()
 
         return True
+
+    def __del__(self):
+        """
+        Closes database connexion on delete
+        """
+        Database.off()

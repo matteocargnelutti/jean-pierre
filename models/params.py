@@ -110,3 +110,9 @@ class Params:
         if hasattr(self, key):
             delattr(self, key)
         return True
+
+    def __del__(self):
+        """
+        Closes database connexion on delete
+        """
+        Database.off()

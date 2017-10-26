@@ -14,7 +14,6 @@ import logging
 import argparse
 import os
 
-import models
 import controllers
 from controllers.web import webapp # Gunicorn hook for Flask
 
