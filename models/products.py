@@ -18,7 +18,7 @@ from utils import Database
 class Products:
     """
     This class handles :
-    - Add / Get items from the Products table, which is a cache for products info
+    - Manages and interacts with Products table, which stores products infos.
     Usage :
     - products = Products()
     - product = products.get_one(barcode)
@@ -82,6 +82,25 @@ class Products:
         """
         query = "INSERT INTO Products VALUES (?, ?, ?);"
         params = (barcode, name, pic)
+
+        Database.CURSOR.execute(query, params)
+        Database.LINK.commit()
+
+        return True
+
+    def edit_item(self, barcode, name, pic):
+        """
+        Edits a product
+        :param barcode: barcode to lookup for
+        :param name: name of the product
+        :param pic: blob of the thumbnail pic
+        :type name: string
+        :type barcode: string
+        :type pic: binary
+        :rtype: bool
+        """
+        query = "UPDATE Products SET name = ?, pic = ? WHERE barcode = ?;"
+        params = (name, pic, barcode)
 
         Database.CURSOR.execute(query, params)
         Database.LINK.commit()

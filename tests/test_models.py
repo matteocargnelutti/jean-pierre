@@ -16,11 +16,11 @@ from utils import Database
 import models
 
 #-----------------------------------------------------------------------------
-# Tests for : Params model
+# Tests for : Models
 #-----------------------------------------------------------------------------
-class TestParamsModel:
+class TestModels:
     """
-    Tests setup, I/O operations on the Params table, following the app's rules
+    Tests setup, I/O operations on the database following the app's rules
     """
 
     def setup_method(self):
@@ -31,42 +31,104 @@ class TestParamsModel:
         Database.on(memory_mode=True)
         self.cursor = Database.CURSOR
 
-        # Create table
+        # Create tables
         self.params = models.Params(autoload=False)
+        self.products = models.Products()
+        self.groceries = models.Groceries()
         self.params.create_table()
+        self.products.create_table()
+        self.groceries.create_table()
 
-    def test_create_table(self):
+        # Insert dummy data
+        self.default_barcode = '123456789ABCD'
+        self.default_name = 'Lorem Ipsum'
+        self.default_pic = 'PIC'
+
+        self.params.add_item('foo', 'bar')
+        self.products.add_item(self.default_barcode,
+                               self.default_name,
+                               self.default_pic)
+        self.groceries.add_item(self.default_barcode, 1)
+
+    def test_create_tables(self):
         """
-        Tests the creation of the table Params
+        Tests the creation of the tables, as created in the setup method.
+        Success conditions :
+        - The three tables exist
         """
         # Does the table exist ?
         self.cursor.execute("""
-                            SELECT name FROM sqlite_master 
-                            WHERE type='table' AND name='Params';
+                            SELECT 
+                                name 
+                            FROM 
+                                sqlite_master 
+                            WHERE 
+                                type='table' AND (
+                                name='Params' OR 
+                                name='Groceries' OR 
+                                name='Products' );
                             """)
         check = self.cursor.fetchall()
-        assert check
+        assert len(check) == 3
 
-    def test_crud_item(self):
+    def test_add_item(self):
         """
-        Tests basic operations on the Params table.
+        Tests basic INSERT operations on the database,
+        based on dummy data set in the setup method.
         Success conditions :
-        - Ability to create an item
-        - Ability to load an item
-        - Ability to delete an item
-        - The new item must be loaded as a Param's attribute
+        - Must have 1 item in the Params table, available as an object attribute
+        - Must have 1 item in the Products table
+        - Must have 1 item in the Groceries table
         """
-        # Insert
-        self.params.add_item('foo', 'bar')
+        # Params
+        assert hasattr(self.params, 'foo') # The param must have been set as an attribute when created previously
+        assert self.params.get_item('foo')['value'] == 'bar' # Reload from database
 
-        # Has the parameter been loaded as an attribute ?
-        assert hasattr(self.params, 'foo')
+        # Groceries and product : unique test as Groceries uses JOIN on product table
+        item = self.groceries.get_item(self.default_barcode)
+        assert item['barcode'] == self.default_barcode
+        assert item['name'] == self.default_name
+        assert item['pic'] == self.default_pic
+        assert item['quantity'] == 1
 
-        # Has the item been created ?
-        param = self.params.get_item('foo')
-        assert param['key'] == 'foo'
+    def test_edit_item(self):
+        """
+        Tests basic UPDATE operations on the database,
+        based on dummy data set in the setup method.
+        Success conditions :
+        - Params' entry "foo" now equals "foobar"
+        - Products' entry name is now "Dolor Sit Amet"
+        - Groceries entry quantity is now 2
+        """
+        # Update
+        self.params.edit_item('foo', 'foobar')
+        self.products.edit_item(self.default_barcode, 'Dolor Sit Amet', 'PIC2')
+        self.groceries.edit_item(self.default_barcode, 2)
 
+        # Test
+        assert self.params.foo == 'foobar'
+        assert self.params.get_item('foo')['value'] == 'foobar'
+
+        item = self.groceries.get_item(self.default_barcode)
+        assert item['barcode'] == self.default_barcode
+        assert item['name'] == 'Dolor Sit Amet'
+        assert item['pic'] == 'PIC2'
+        assert item['quantity'] == 2
+
+    def test_delete_item(self):
+        """
+        Tests basic DELETE operations on the database,
+        based on dummy data set in the setup method.
+        Success conditions :
+        - All three tables are freed from the deleted item
+        """
         # Delete
         self.params.delete_item('foo')
-        assert not hasattr(self.params, 'foo') # Object attribute must have been deleted
-        assert not self.params.get_item('foo') # Database entry must have disapeared
+        self.groceries.delete_item(self.default_barcode)
+        self.products.delete_item(self.default_barcode)
+
+        # Test
+        assert not hasattr(self.params, 'foo')
+        assert not self.params.get_item('foo')
+        assert not self.products.get_item(self.default_barcode)
+        assert not self.groceries.get_item(self.default_barcode)

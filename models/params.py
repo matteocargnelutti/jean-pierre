@@ -18,7 +18,7 @@ from utils import Database
 class Params:
     """
     This class handles :
-    - Load and read parameters from the Params table as attributes
+    - Manages and interacts with the Params table as attributes
     Usage :
     - params = Params()
     - params.PARAM_NAME
@@ -84,9 +84,27 @@ class Params:
         :rtype: bool
         """
         query = """
-                INSERT INTO params VALUES (?, ?)
+                INSERT INTO params VALUES (?, ?);
                 """
         params = (key, value)
+        Database.LINK.execute(query, params)
+        Database.LINK.commit()
+        setattr(self, key, value) # Update parameter loaded as attribute
+        return True
+
+    def edit_item(self, key, value):
+        """
+        Edit a parameter in the database
+        :param key: parameter key
+        :param value: parameter value
+        :type key: str
+        :type value: str
+        :rtype: bool
+        """
+        query = """
+                UPDATE INTO params SET value = ? WHERE key = ?;
+                """
+        params = (value, key)
         Database.LINK.execute(query, params)
         Database.LINK.commit()
         setattr(self, key, value) # Update parameter loaded as attribute
@@ -97,7 +115,7 @@ class Params:
         Get a parameter by its key
         :param key: key
         :type key: string
-        :rtype: tuple
+        :rtype: dict {"key": "...", "value": "..."}
         """
         query = "SELECT * FROM Params WHERE key = ?;"
         params = (key,)

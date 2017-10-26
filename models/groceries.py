@@ -18,7 +18,8 @@ from utils import Database
 class Groceries:
     """
     This class handles :
-    - Add / Get items from the Groceries table, which is a cache for products info
+    - Manages and interacts with the Groceries table, 
+    which uses entries from Products to handle a groceries list.
     Usage :
     - groceries = Groceries()
     - groceries_list = groceries.get_list()
@@ -132,7 +133,7 @@ class Groceries:
     def get_list(self):
         """
         Gets the groceries list, with associated product data
-        :rtype: list
+        :rtype: list of dict
         """
         # Query
         query = """
