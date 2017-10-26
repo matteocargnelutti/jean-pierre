@@ -14,8 +14,9 @@ import logging
 import argparse
 import os
 
+import models
 import controllers
-from controllers.web import webapp
+from controllers.web import webapp # Gunicorn hook for Flask
 
 #-----------------------------------------------------------------------------
 # Main : routing
@@ -59,7 +60,9 @@ def main():
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
     elif arguments.do == 'web':
-        print("Please use : gunicorn --bind 0.0.0.0 jeanpierre:webapp")
+        print("Launching Flask on DEBUG mode.")
+        print("For production, please use : gunicorn --bind 0.0.0.0 jeanpierre:webapp")
+        webapp.run(debug=True, host='0.0.0.0')
 
 # Execution
 if __name__ == "__main__":
