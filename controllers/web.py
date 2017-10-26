@@ -22,7 +22,7 @@ import models
 #-----------------------------------------------------------------------------
 # Flask init
 webapp = Flask(__name__)
-webapp.config['SECRET_KEY'] = params.flask_secret_key
+webapp.config['SECRET_KEY'] = models.Params().flask_secret_key
 
 # Index
 @webapp.route("/")
