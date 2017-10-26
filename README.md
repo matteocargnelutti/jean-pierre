@@ -14,8 +14,8 @@
 # Processes
 **Jean-Pierre is made of three separate processes that are meant to run in parallel.**
 * **config** : the configuration assistant.
-* **scanner** : sub-app that scans the products with the camera.
-* **web** : Flask sub-app that handles the web application.
+* **scanner** : Loop that scans the products with the camera.
+* **web** : Flask app that handles the web application.
 
 ## Manually launch processes
 **Processes are automaticaly handled by supervisor. But in case you want to launch it separately :**

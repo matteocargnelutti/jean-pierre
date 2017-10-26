@@ -18,16 +18,21 @@ from utils import Database
 import models
 
 #-----------------------------------------------------------------------------
-# Flask WSGI and Routing
+# Flask WSGI init and routes
 #-----------------------------------------------------------------------------
+# Database connection
+Database.on()
+
 # Flask init
 webapp = Flask(__name__)
-webapp.config['SECRET_KEY'] = models.Params().flask_secret_key # Caution : automaticaly opens the database connexion
+webapp.config['SECRET_KEY'] = models.Params().flask_secret_key
 
-# Index
 @webapp.route("/")
 def hello():
     return "Hello World!"
+
+# Close database connection
+Database.off()
 
 #-----------------------------------------------------------------------------
 # Controller
