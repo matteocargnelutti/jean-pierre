@@ -24,5 +24,5 @@ app = Flask(__name__)
 def hello():
     return "Hello World!"
 
-def run():
+def flask_run():
     app.run(debug=True)
