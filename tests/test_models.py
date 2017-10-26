@@ -100,10 +100,9 @@ class TestModels:
         # Groceries : list
         item = self.groceries.get_list()
         assert len(item) == 1
-        assert item[0]['barcode'] == self.default_barcode
-        assert item[0]['name'] == self.default_name
-        assert item[0]['pic'] == 'PIC'
-        assert item[0]['quantity'] == 1
+        assert item[self.default_barcode]['name'] == self.default_name
+        assert item[self.default_barcode]['pic'] == 'PIC'
+        assert item[self.default_barcode]['quantity'] == 1
 
     def test_add_item(self):
         """
