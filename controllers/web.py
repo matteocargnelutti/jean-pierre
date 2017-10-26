@@ -22,7 +22,6 @@ import models
 #-----------------------------------------------------------------------------
 # Flask init
 webapp = Flask(__name__)
-webapp.config['SECRET_KEY'] = models.Params().flask_secret_key
 
 # Index
 @webapp.route("/")
@@ -31,6 +30,7 @@ def hello():
 
 # Flask run : Used by Gunicorn to launch the server
 if __name__ == "__main__": 
+    webapp.config['SECRET_KEY'] = models.Params().flask_secret_key
     webapp.run()
 
 #-----------------------------------------------------------------------------
