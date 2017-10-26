@@ -21,10 +21,10 @@ class Database:
     This class handles :
     - Provides a link and a cursor to the database as class attributes
     Usage :
-    - Database.on()
-    - Database.CURSOR.execute(query, params)
+    - cls.on()
+    - cls.CURSOR.execute(query, params)
     - ... etc
-    - Database.off()
+    - cls.off()
     Available class attributes :
     - LINK
     - CURSOR
@@ -38,19 +38,19 @@ class Database:
         :rtype: bool
         """
         # Path to the database
-        Database.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        Database.FILE =Database.FILE.replace('/utils', '')
-        Database.FILE = Database.FILE + "/database.db"
+        cls.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        cls.FILE = cls.FILE.replace('/utils', '')
+        cls.FILE = cls.FILE + "/cls.db"
 
         if memory_mode:
-            Database.FILE = ':memory:'
+            cls.FILE = ':memory:'
 
         # Connect
-        Database.LINK = sqlite3.connect(Database.FILE)
-        Database.LINK.row_factory = sqlite3.Row
+        cls.LINK = sqlite3.connect(cls.FILE)
+        cls.LINK.row_factory = sqlite3.Row
 
         # Cursor
-        Database.CURSOR = Database.LINK.cursor()
+        cls.CURSOR = cls.LINK.cursor()
 
         return True
 
@@ -60,9 +60,9 @@ class Database:
         Ends connection with the cls.
         :rtype: bool
         """
-        Database.LINK.close()
-        Database.LINK = None
-        Database.CURSOR = None
+        cls.LINK.close()
+        cls.LINK = None
+        cls.CURSOR = None
         return True
 
     @classmethod
@@ -71,4 +71,4 @@ class Database:
         Is the connection open ?
         :rtype: bool
         """
-        return Database.LINK != None
+        return cls.LINK != None
