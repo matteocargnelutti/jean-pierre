@@ -33,6 +33,7 @@ class TestParamsModel:
 
         # Create table
         self.params = models.Params(autoload=False)
+        self.params.create_table()
 
     def test_create_table(self):
         """
