@@ -58,7 +58,7 @@ def main():
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
     elif arguments.do == 'web':
-        print("Web controller : to do")
+        controllers.web.run()
 
 # Execution
 if __name__ == "__main__":
