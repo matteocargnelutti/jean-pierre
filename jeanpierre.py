@@ -60,9 +60,9 @@ def main():
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
     elif arguments.do == 'web':
-        print("Launching Flask on DEBUG mode.")
-        print("For production, please use : gunicorn --bind 0.0.0.0 jeanpierre:webapp")
         webapp.run(debug=True, host='0.0.0.0')
+        print("Flask launched in DEBUG mode.")
+        print("For production, please use : gunicorn --bind 0.0.0.0 jeanpierre:webapp")
 
 # Execution
 if __name__ == "__main__":

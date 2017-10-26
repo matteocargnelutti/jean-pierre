@@ -71,4 +71,4 @@ class Database:
         Is the connection open ?
         :rtype: bool
         """
-        return cls.LINK != None
+        return hasattr(cls, 'LINK')

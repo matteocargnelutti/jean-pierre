@@ -11,6 +11,19 @@
 # Setup
 * Please run *install.sh* : `chmod a+x install.sh` then `./install.sh`
 
+# Processes
+* **Jean-Pierre** is made of three separate processes that are meant to run in parallel.
+* **config** : the configuration assistant.
+* **scanner** : sub-app that scans the products with the camera.
+* **web** : Flask sub-app that handles the web application.
+
+## Manually launch processes
+* Processes are automaticaly handled by **supervisor**. But in case you want to launch it separately :
+* `python jeanpierre.py --do config` : launches the configuration assistant.
+* `python jeanpierre.py --do scanner` : launches the scanner.
+* `python jeanpierre.py --do web` : launches the web app process in debug mode.
+* `gunicorn --bind 0.0.0.0 jeanpierre:webapp` : launches the web app process in production mode.
+
 # Shared parameters
 Key | Value
 ----| -----

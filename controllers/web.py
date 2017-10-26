@@ -29,11 +29,6 @@ webapp.config['SECRET_KEY'] = models.Params().flask_secret_key
 def hello():
     return "Hello World!"
 
-# Flask run : Used by Gunicorn to launch the server
-#if __name__ == "__main__": 
-#    webapp.config['SECRET_KEY'] = models.Params().flask_secret_key
-#    webapp.run()
-
 #-----------------------------------------------------------------------------
 # Controller
 #-----------------------------------------------------------------------------
