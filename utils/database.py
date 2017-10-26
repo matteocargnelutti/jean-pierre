@@ -40,7 +40,7 @@ class Database:
         # Path to the database
         cls.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         cls.FILE = cls.FILE.replace('/utils', '')
-        cls.FILE = cls.FILE + "/cls.db"
+        cls.FILE = cls.FILE + "/database.db"
 
         if memory_mode:
             cls.FILE = ':memory:'
