@@ -15,6 +15,7 @@ import argparse
 import os
 
 import controllers
+from controllers.web import app
 
 #-----------------------------------------------------------------------------
 # Main : routing
@@ -58,7 +59,7 @@ def main():
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
     elif arguments.do == 'web':
-        controllers.web.flask_run()
+        app.run()
 
 # Execution
 if __name__ == "__main__":
