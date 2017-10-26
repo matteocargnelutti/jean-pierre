@@ -71,6 +71,40 @@ class TestModels:
         check = self.cursor.fetchall()
         assert len(check) == 3
 
+    def test_get_item(self):
+        """
+        Test basic SELECT operations on the database,
+        based on dummy data set in the setup method.
+        Success conditions :
+        - Ability to return a single item from Params (+ as an object attribute)
+        - Ability to return a single item from Products
+        - Ability to return a single item and a list from Groceries
+        """
+        # Params
+        assert hasattr(self.params, 'foo')
+        assert self.params.get_item('foo')['value'] == 'bar'
+
+        # Products
+        item = self.products.get_item(self.default_barcode)
+        assert item['barcode'] == self.default_barcode
+        assert item['name'] == self.default_name
+        assert item['pic'] == 'PIC'
+
+        # Groceries : single item (+ JOIN with Products)
+        item = self.groceries.get_item(self.default_barcode)
+        assert item['barcode'] == self.default_barcode
+        assert item['name'] == self.default_name
+        assert item['pic'] == 'PIC'
+        assert item['quantity'] == 1
+
+        # Groceries : list
+        item = self.groceries.get_list()
+        assert len(item) == 1
+        assert item[0]['barcode'] == self.default_barcode
+        assert item[0]['name'] == self.default_name
+        assert item[0]['pic'] == 'PIC'
+        assert item[0]['quantity'] == 1
+
     def test_add_item(self):
         """
         Tests basic INSERT operations on the database,
