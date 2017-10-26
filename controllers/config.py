@@ -10,6 +10,8 @@ controllers/config.py - Configuration assistant class
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
+import random
+import string
 import re
 import hashlib
 import getpass
@@ -108,6 +110,11 @@ class Config:
         user_password = bytearray(user_password, encoding='utf-8')
         user_password = hashlib.sha1(user_password).hexdigest()
         params.add_item('user_password', user_password)
+
+        # Define a Flask secret key
+        params.delete_item('flask_secret_key')
+        flask_secret_key = "".join([random.choice(string.printable) for _ in range(24)])
+        params.add_item('flask_secret_key', flask_secret_key)
 
         # Close connection to the database
         Database.off()

@@ -10,16 +10,29 @@ controllers/web.py - Web server : uses Flask
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
+import os
+
 from flask import Flask
 
 from utils import Database
 import models
 
 #-----------------------------------------------------------------------------
-# Routes
+# Routing
 #-----------------------------------------------------------------------------
-app = Flask(__name__)
+# Flask init
+webapp = Flask(__name__)
+webapp.config['SECRET_KEY'] = params.flask_secret_key
 
-@app.route("/")
+# Index
+@webapp.route("/")
 def hello():
     return "Hello World!"
+
+# Flask run : Used by Gunicorn to launch the server
+if __name__ == "__main__": 
+    webapp.run()
+
+#-----------------------------------------------------------------------------
+# Controller
+#-----------------------------------------------------------------------------

@@ -15,7 +15,7 @@ import argparse
 import os
 
 import controllers
-from controllers.web import app
+from controllers.web import webapp
 
 #-----------------------------------------------------------------------------
 # Main : routing
@@ -59,7 +59,7 @@ def main():
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
     elif arguments.do == 'web':
-        app.run()
+        print("Please use : gunicorn --bind 0.0.0.0 jeanpierre:webapp")
 
 # Execution
 if __name__ == "__main__":

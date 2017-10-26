@@ -18,7 +18,8 @@ Key | Value
 `buzzer_port` | On which GPIO port the buzzer is ? 
 `camera_res_x` | Camera's resolution : width
 `camera_res_y` | Camera's resolution : height
-`user_password` | Password for the web interface (cyphered) 
+`user_password` | Password for the web interface (cyphered)
+`flask_secret_key`| Auto-generated secret key for Flask
 
 * Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
 * They are stored into the **Params** database.
@@ -44,6 +45,8 @@ Key | Value
 * pytest
 * requests
 * RPi.GPIO
+* flask
+* gunicorn
 
 # Note 
 * A note about camera focus adjustement (and how it could break the camera)
