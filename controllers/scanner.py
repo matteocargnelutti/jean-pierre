@@ -55,7 +55,8 @@ class Scanner:
         # Camera setup
         camera = picamera.PiCamera()
         camera.sharpness = 100
-        camera.brightness = 55
+        camera.brightness = 50
+        camera.contrast = 25
         camera.resolution = (params.camera_res_x, params.camera_res_y)
         camera.start_preview()
 

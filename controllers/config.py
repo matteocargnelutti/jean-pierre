@@ -118,6 +118,8 @@ class Config:
         # Ask for : user password
         params.delete_item('user_password')
         user_password = getpass.getpass(lang.config_password)
+        if not user_password:
+            user_password = 'admin'
         user_password = bytearray(user_password, encoding='utf-8')
         user_password = hashlib.sha1(user_password).hexdigest()
         params.add_item('user_password', user_password)
