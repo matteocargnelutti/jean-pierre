@@ -28,7 +28,7 @@ class TestModels:
         Creates a dummy database for tests
         """
         # Creates database
-        Database.on(alternate_file='database_test.db')
+        Database.on(is_test=True)
         self.cursor = Database.CURSOR
 
         # Create tables
@@ -55,9 +55,7 @@ class TestModels:
         Cleans up dummy database after each test
         """
         Database.off()
-        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        path = path + '/database_test.db'
-        os.remove(path)
+        os.remove(Database.PATH + Database.DATABASE_TEST)
 
     def test_create_tables(self):
         """

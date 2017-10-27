@@ -31,29 +31,29 @@ class Database:
     - CURSOR
     - FILE (path to the database file)
     """
+    DATABASE_PRODUCTION = 'database.db'
+    DATABASE_TEST = 'database_test.db'
+
     @classmethod
-    def on(cls, alternate_file=''):
+    def on(cls, is_test=False):
         """
         Connect to the database
-        :param memory_mode: If True, creates a temporary database in memory
+        :param alternate_file: Allows for use of an alternative database file
         :rtype: bool
         """
         # Path to the database
         path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         path = path.replace('/utils', '')
+        cls.PATH = path + '/'
 
-        # Normal database
-        if not alternate_file:
-            cls.FILE = path + "/database.db"
-        elif alternate_file == ':memory:':
-            cls.FILE = ':memory:'
+        # Filename
+        if not is_test:
+            cls.FILE = cls.DATABASE_PRODUCTION
         else:
-            alternate_file = alternate_file.replace('..', '')
-            alternate_file = alternate_file.replace('/', '')
-            cls.FILE = path + "/" + alternate_file
+            cls.FILE = cls.DATABASE_TEST
 
         # Connect
-        cls.LINK = sqlite3.connect(cls.FILE)
+        cls.LINK = sqlite3.connect(cls.PATH + cls.FILE)
         cls.LINK.row_factory = sqlite3.Row
 
         # Cursor

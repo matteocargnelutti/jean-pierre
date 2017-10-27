@@ -30,7 +30,7 @@ class TestFindProduct:
         Setup method, creates a dummy database
         """
         # Creates database
-        Database.on(alternate_file='database_test.db')
+        Database.on(is_test=True)
         self.cursor = Database.CURSOR
 
         # Create tables
@@ -53,9 +53,7 @@ class TestFindProduct:
         Cleans up dummy database after each test
         """
         Database.off()
-        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        path = path + '/database_test.db'
-        os.remove(path)
+        os.remove(Database.PATH + Database.DATABASE_TEST)
 
     def test_run_valid(self):
         """

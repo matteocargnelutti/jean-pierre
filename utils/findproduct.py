@@ -58,10 +58,7 @@ class FindProduct(Thread):
         """
         with FindProduct.LOCK:
             # Database connection
-            if not self.is_test:
-                Database.on()
-            else:
-                Database.on('database_test.db') # If test, connect to test database
+            Database.on(self.is_test)
 
             # Marks
             found = False
