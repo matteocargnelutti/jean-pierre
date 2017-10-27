@@ -31,7 +31,26 @@ class TestConfig:
         - The database has been created and contains the new data
         """
         # Monkeypatch : inputs
-        controllers.Config.input = TestConfig.input_monkeypatched_valid
+        def input_monkeypatched(phrase):
+            """
+            Returns what input() should have returned : valid inputs
+            """
+            if phrase == "Shall we use a buzzer (Y/N) : ":
+                return 'Y'
+
+            if phrase == "On which GPIO port is the buzzer connected : ":
+                return '7'
+
+            if phrase == "Camera resolution, WIDTH (500 by default) : ":
+                return 500
+
+            if phrase == "Camera resolution, HEIGHT (500 by default) : ":
+                return 500
+
+            if phrase == "Please define a password for Jean-Pierre : ":
+                return "1234abcd"
+
+        input = input_monkeypatched
 
         # Connect to the dummy database
         Database.on(is_test=True)
