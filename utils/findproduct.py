@@ -35,11 +35,10 @@ class FindProduct(Thread):
     LOCK = RLock()
     """ Thread lock """
 
-    def __init__(self, barcode, memory_mode=False):
+    def __init__(self, barcode):
         """
         Inits the thread
         :param barcode: Barcode to search
-        :param memory_mode: Use memory-based temporary database ?
         :type barcode: str
         :rtype: FindProduct
         """
@@ -48,8 +47,6 @@ class FindProduct(Thread):
         self.name = ''
         self.pic = ''
         self.quantity = 1
-        self.memory_mode = memory_mode
-
 
     def run(self):
         """
@@ -59,7 +56,7 @@ class FindProduct(Thread):
         """
         with FindProduct.LOCK:
             # Database connection
-            Database.on(self.memory_mode)
+            Database.on()
 
             # Marks
             found = False
