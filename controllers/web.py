@@ -25,9 +25,12 @@ Database.on()
 
 # Flask init
 webapp = Flask(__name__)
+params = models.Params()
 
-if hasattr(models.Params(), 'flask_secret_key'): # If the database is ready
-    webapp.config['SECRET_KEY'] = models.Params().flask_secret_key
+if hasattr(params, 'flask_secret_key'): # If the database is ready
+    webapp.config['SECRET_KEY'] = params.flask_secret_key
+
+del params
 
 @webapp.route("/")
 def hello():

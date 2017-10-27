@@ -42,6 +42,20 @@ class Params:
         Load parameters as attributes
         :rtype bool:
         """
+        # Is the table ready ?
+        Database.CURSOR.execute("""
+                            SELECT 
+                                name 
+                            FROM 
+                                sqlite_master 
+                            WHERE 
+                                type='table' AND name='Params';
+                            """)
+        check = Database.CURSOR.fetchall()
+
+        if not check:
+            return False
+
         # Get all the parameters
         Database.CURSOR.execute("SELECT * FROM Params;")
         items = Database.CURSOR.fetchall()
