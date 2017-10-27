@@ -27,6 +27,7 @@ class TestConfig:
     def test_run_valid(self, monkeypatch):
         """
         Tests the configuration assistant with valid parameters.
+        Uses a dummy database.
         Success conditions :
         - The database has been created and contains the new data
         """
@@ -68,22 +69,9 @@ class TestConfig:
         assert params.user_password
         assert params.flask_secret_key
 
-    @classmethod
-    def input_monkeypatched_valid(cls, phrase):
+    def teardown_method(self):
         """
-        Returns what input() should have returned : valid inputs
+        Cleans up dummy database after each test
         """
-        if phrase == "Shall we use a buzzer (Y/N) : ":
-            return 'Y'
-
-        if phrase == "On which GPIO port is the buzzer connected : ":
-            return '7'
-
-        if phrase == "Camera resolution, WIDTH (500 by default) : ":
-            return 500
-
-        if phrase == "Camera resolution, HEIGHT (500 by default) : ":
-            return 500
-
-        if phrase == "Please define a password for Jean-Pierre : ":
-            return "1234abcd"
+        Database.off()
+        os.remove(Database.PATH + Database.DATABASE_TEST)
