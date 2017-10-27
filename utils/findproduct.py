@@ -35,10 +35,11 @@ class FindProduct(Thread):
     LOCK = RLock()
     """ Thread lock """
 
-    def __init__(self, barcode):
+    def __init__(self, barcode, is_test=False):
         """
         Inits the thread
         :param barcode: Barcode to search
+        :param is_test: Is it a test ?
         :type barcode: str
         :rtype: FindProduct
         """
@@ -47,6 +48,7 @@ class FindProduct(Thread):
         self.name = ''
         self.pic = ''
         self.quantity = 1
+        self.is_test = is_test
 
     def run(self):
         """
@@ -56,7 +58,10 @@ class FindProduct(Thread):
         """
         with FindProduct.LOCK:
             # Database connection
-            Database.on()
+            if not self.is_test:
+                Database.on()
+            else:
+                Database.on('database_test.db') # If test, connect to test database
 
             # Marks
             found = False
