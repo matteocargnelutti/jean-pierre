@@ -55,11 +55,11 @@ class TestFindProduct:
         """
         # Valid input
         thread_valid = utils.FindProduct(self.valid_barcode)
-        thread_valid.start()
+        thread_valid.start(memory_mode=True)
 
         # Invalid input
         thread_invalid = utils.FindProduct(self.invalid_barcode)
-        thread_invalid.start()
+        thread_invalid.start(memory_mode=True)
 
         # Tests
         thread_valid.join()
