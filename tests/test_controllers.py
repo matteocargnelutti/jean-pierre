@@ -51,7 +51,7 @@ class TestConfig:
                 return "1234abcd"
 
         monkeypatch.setitem(__builtins__, 'input', input_monkeypatched)
-        monkeypatch.setitem(getpass, 'getpass', input_monkeypatched)
+        monkeypatch.setattr(getpass, 'getpass', input_monkeypatched)
 
         # Connect to the dummy database
         Database.on(is_test=True)
