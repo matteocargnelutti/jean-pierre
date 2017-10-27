@@ -10,7 +10,7 @@ tests/test_controllers.py - Units tests for the controllers package
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
-import os
+import getpass
 
 import models
 import controllers
@@ -51,6 +51,7 @@ class TestConfig:
                 return "1234abcd"
 
         monkeypatch.setitem(__builtins__, 'input', input_monkeypatched)
+        getpass.getpass == input_monkeypatched
 
         # Connect to the dummy database
         Database.on(is_test=True)
