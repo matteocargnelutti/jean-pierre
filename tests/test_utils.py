@@ -114,5 +114,5 @@ class TestLang:
         - Returns a list containing at least "en"
         """
         available = Lang.available()
-        assert isinstance(available, 'list')
+        assert isinstance(available, list)
         assert 'en' in available
