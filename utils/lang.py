@@ -26,7 +26,8 @@ class Lang:
     """
     def __init__(self, language='en'):
         """
-        Loads a lang file's content as class attributes
+        Loads a lang file's content as class attributes.
+        Tries to find given language, falls back to english if needed.
         :param language: language to load (default : en)
         :type language: str
         :rtype: bool

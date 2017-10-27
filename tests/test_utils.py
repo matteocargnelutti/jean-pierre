@@ -14,7 +14,7 @@ import os
 
 import models
 import utils
-from utils import Database
+from utils import Database, Lang
 
 #-----------------------------------------------------------------------------
 # Tests for : Utils.FindProduct
@@ -76,3 +76,32 @@ class TestFindProduct:
         Database.on(is_test=True)
         assert self.groceries.get_item(self.valid_barcode)
         assert not self.groceries.get_item(self.invalid_barcode)
+
+#-----------------------------------------------------------------------------
+# Tests for : Utils.Lang
+#-----------------------------------------------------------------------------
+class TestLang:
+    """
+    Tests for the Lang internationalization tool.
+    """
+
+    def test_init_valid(self):
+        """
+        Tests init with a valid language.
+        Success conditions :
+        - self.language == en
+        - self.config_intro exists and is not empty
+        """
+        lang = Lang()
+        assert lang.language == 'en'
+        assert lang.config_intro
+
+    def test_available(self):
+        """
+        Tests method that returns list of available languages.
+        Success conditions :
+        - Returns a list containing at least "en"
+        """
+        available = Lang.available()
+        assert isinstance(available, 'list')
+        assert 'en' in available
