@@ -56,13 +56,11 @@ class TestFindProduct:
         # Valid input
         thread_valid = utils.FindProduct(self.valid_barcode, memory_mode=True)
         thread_valid.start()
+        thread_valid.join()
+        assert self.groceries.get_item(self.valid_barcode)
 
         # Invalid input
         thread_invalid = utils.FindProduct(self.invalid_barcode, memory_mode=True)
         thread_invalid.start()
-
-        # Tests
-        thread_valid.join()
         thread_invalid.join()
-        assert self.groceries.get_item(self.valid_barcode)
         assert not self.groceries.get_item(self.invalid_barcode)
