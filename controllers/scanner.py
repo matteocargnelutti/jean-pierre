@@ -62,8 +62,7 @@ class Scanner:
         # Double beep to inform the user that Jean-Pierre is ready
         if params.buzzer_on:
             buzzer = utils.Buzzer(params.buzzer_port)
-            buzzer.beep()
-            buzzer.beep()
+            buzzer.beep(2)
 
         # Capture loop
         last_scan = ''
