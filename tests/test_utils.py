@@ -22,6 +22,7 @@ from utils import Database
 class TestFindProduct:
     """
     Tests for the FindProduct tool.
+    This tool is threaded.
     """
 
     def setup_method(self):
@@ -45,28 +46,19 @@ class TestFindProduct:
         self.valid_barcode = '3017620424403'
         self.invalid_barcode = '123456789ABCD'
 
-    def test_fetch_openfoodfacts(self):
+    def test_run_valid(self):
         """
-        Tests the processed return of the OpenFoodFact API
-        with both a valid an invalid input.
-        These tests run real HTTP requests, not mocks.
+        Tests FindProduct process with both valid and invalid inputs
         Success conditions :
-        - Valid input : data returned
-        - Invalid input : no data returned
+        - Valid input : an item has been added to the Products and Groceries databases
+        - Invalid input : no item has been added to the Products nor the Groceries databases
         """
         # Valid input
-        finder = utils.FindProduct(self.valid_barcode)
-        found = finder.__fetch_openfoodfacts()
-        assert found
-        assert finder.barcode == self.valid_barcode
-        assert finder.name
-        assert finder.pic
-        assert finder.quantity == 1
+        thread = utils.FindProduct(self.valid_barcode).start()
+        thread.join()
+        assert self.groceries.get_item(self.valid_barcode)
 
         # Invalid input
-        finder = utils.FindProduct(self.invalid_barcode)
-        found = finder.__fetch_openfoodfacts()
-        assert not found
-        assert finder.barcode == self.valid_barcode
-        assert not finder.name
-        assert not finder.pic
+        thread = utils.FindProduct(self.invalid_barcode).start()
+        thread.join()
+        assert not self.groceries.get_item(self.invalid_barcode)
