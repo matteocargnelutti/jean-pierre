@@ -10,6 +10,7 @@ tests/test_controllers.py - Units tests for the controllers package
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
+import os
 import getpass
 
 import models

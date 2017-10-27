@@ -38,20 +38,25 @@ class Buzzer:
         self.port = int(port)
         self.duration = duration
 
-    def beep(self):
+    def beep(self, times = 1):
         """
         Triggers the buzzer.
         The GPIO setup is made everytime in order to avoid clogging one of them
         in case of hard exit.
+        :param times: How many times does the buzzer has to beep ?
+        :type times: int
         """
         # Inits the port
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.port, GPIO.OUT)
 
         # Beep
-        GPIO.output(self.port, GPIO.LOW) # On
-        time.sleep(self.duration) # Wait
-        GPIO.output(self.port, GPIO.HIGH) # Off
+        for i in range(1, times):
+            GPIO.output(self.port, GPIO.LOW) # On
+            time.sleep(self.duration) # Wait
+            GPIO.output(self.port, GPIO.HIGH) # Off
+            if i < times: # Add a sleep in case of multiple beeps
+                time.sleep(self.duration)
 
         # Cleanup
         GPIO.cleanup()
