@@ -73,6 +73,6 @@ class TestFindProduct:
         thread_invalid.join()
 
         # Tests
-        Database.on('database_test.db')
+        Database.on(is_test=True)
         assert self.groceries.get_item(self.valid_barcode)
         assert not self.groceries.get_item(self.invalid_barcode)
