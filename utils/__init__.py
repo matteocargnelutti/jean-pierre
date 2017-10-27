@@ -10,3 +10,4 @@ utils - App tools
 from .database import Database
 from .findproduct import FindProduct
 from .buzzer import Buzzer
+from .lang import Lang

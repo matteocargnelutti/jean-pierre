@@ -1,0 +1,15 @@
+{
+    "config_intro": "Configuring Jean-Pierre, the groceries helper bot :{o",
+    "config_database_created": "SQlite3 database created if it didn't exist.",
+    "config_table_params_set": "Params table created if not already set.",
+    "config_table_groceries_set": "Groceries table created if not already set.",
+    "config_table_products_set": "Products table created if not already set.",
+    "config_language_set": "Set language (default : en) :",
+    "config_buzzer_on": "Shall we use a buzzer (Y/N) : ",
+    "config_buzzer_port": "On which GPIO port is the buzzer connected : ",
+    "config_buzzer_invalid_port": "Invalid GPIO port number : moving on.",
+    "config_camera_res_x": "Camera resolution, WIDTH (500 by default) : ",
+    "config_camera_res_y": "Camera resolution, HEIGHT (500 by default) : ",
+    "config_password": "Please define a password for Jean-Pierre : ",
+    "config_done": "All set ! Enjoy !"
+}

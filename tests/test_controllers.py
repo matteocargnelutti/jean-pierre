@@ -15,7 +15,7 @@ import getpass
 
 import models
 import controllers
-from utils import Database
+from utils import Database, Lang
 
 #-----------------------------------------------------------------------------
 # Tests for : controllers.Config
@@ -32,25 +32,31 @@ class TestConfig:
         Success conditions :
         - The database has been created and contains the new data
         """
+        # Language
+        lang = Lang()
+
         # Monkeypatch : inputs
         def input_monkeypatched(phrase):
             """
             Returns what input() should have returned : valid inputs
             """
-            if phrase == "Shall we use a buzzer (Y/N) : ":
+            if phrase == lang.config_buzzer_on:
                 return "Y"
 
-            if phrase == "On which GPIO port is the buzzer connected : ":
+            if phrase == lang.config_buzzer_port:
                 return "7"
 
-            if phrase == "Camera resolution, WIDTH (500 by default) : ":
+            if phrase == lang.config_camera_res_x:
                 return "500"
 
-            if phrase == "Camera resolution, HEIGHT (500 by default) : ":
+            if phrase == lang.config_camera_res_y:
                 return "500"
 
-            if phrase == "Please define a password for Jean-Pierre : ":
+            if phrase == lang.config_password:
                 return "1234abcd"
+
+            if phrase == lang.config_language_set:
+                return 'en'
 
         monkeypatch.setitem(__builtins__, 'input', input_monkeypatched)
         monkeypatch.setattr(getpass, 'getpass', input_monkeypatched)

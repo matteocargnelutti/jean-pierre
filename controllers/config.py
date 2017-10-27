@@ -16,7 +16,7 @@ import re
 import hashlib
 import getpass
 
-from utils import Database
+from utils import Database, Lang
 import models
 
 #-----------------------------------------------------------------------------
@@ -32,7 +32,7 @@ class Config:
     - controllers.Config.execute()
     """
     @classmethod
-    def execute(cls):
+    def execute(cls, language='en'):
         """
         Creates database, tables and ask for user parameters.
         Defined parameters :
@@ -41,44 +41,55 @@ class Config:
         - camera_res_x
         - camera_res_y
         - user_password
+        - lang
         """
+        # Lang
+        lang = Lang()
+
         # Intro
         print("-"*80)
-        print("Configuring Jean-Pierre, the groceries helper bot :{o")
+        print(lang.config_intro)
         print("-"*80)
 
         # Create / connects to the database
         Database.on()
-        print("SQlite3 database created.")
+        print(lang.config_database_created)
 
         # Create table : params
         params = models.Params(autoload=False)
         params.create_table()
-        print("Params table created if not already set.")
+        print(lang.config_table_params_set)
 
         # Create table : groceries
         groceries = models.Groceries()
         groceries.create_table()
-        print("Groceries table created if not already set.")
+        print(lang.config_table_groceries_set)
 
         # Create table : products
         products = models.Products()
         products.create_table()
-        print("Products table created if not already set.")
+        print(lang.config_table_products_set)
+
+        # Set language
+        params.delete_item('lang')
+        language = input(lang.config_language_set)
+        if language not in Lang.available():
+            language = 'en'
+        params.add_item('lang', language)
 
         # Ask for : use buzzer / on which port ?
         params.delete_item('buzzer_on')
         params.delete_item('buzzer_port')
-        buzzer_on = input("Shall we use a buzzer (Y/N) : ")
+        buzzer_on = input(lang.config_buzzer_on)
 
         # Yes
         if buzzer_on.upper() == "Y":
-            buzzer_port = input("On which GPIO port is the buzzer connected : ")
+            buzzer_port = input(lang.config_buzzer_port)
             if re.findall('([0-9]+)', buzzer_port):
                 params.add_item('buzzer_on', '1')
                 params.add_item('buzzer_port', buzzer_port)
             else:
-                print("Invalid GPIO port number : moving on.")
+                print(lang.config_buzzer_invalid_port)
                 params.add_item('buzzer_on', '0')
                 params.add_item('buzzer_port', '0')
         # No
@@ -91,12 +102,10 @@ class Config:
         params.delete_item('camera_res_y')
 
         for axis in ['x', 'y']:
-            question = "Camera resolution, {} (500 by default) : "
-
             if axis == 'x':
-                question = question.format('WIDTH')
+                question = lang.config_camera_res_x
             else:
-                question = question.format('HEIGHT')
+                question = lang.config_camera_res_y
 
             resolution = input(question)
             if not re.findall('([0-9]+)', resolution):
@@ -106,7 +115,7 @@ class Config:
 
         # Ask for : user password
         params.delete_item('user_password')
-        user_password = getpass.getpass("Please define a password for Jean-Pierre : ")
+        user_password = getpass.getpass(lang.config_password)
         user_password = bytearray(user_password, encoding='utf-8')
         user_password = hashlib.sha1(user_password).hexdigest()
         params.add_item('user_password', user_password)
@@ -120,4 +129,4 @@ class Config:
         Database.off()
 
         # Bye !
-        print("All set ! Enjoy !")
+        print(lang.config_done)
