@@ -12,8 +12,9 @@ tests/test_models.py - Units tests for the models
 #-----------------------------------------------------------------------------
 import os
 
-from utils import Database
 import models
+import utils
+from utils import Database
 
 #-----------------------------------------------------------------------------
 # Tests for : Models
