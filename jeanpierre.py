@@ -57,7 +57,7 @@ def main():
 
     # Call the appropriate controller
     if arguments.do == 'config':
-        controllers.Config.execute(arguments.lang)
+        controllers.Config.execute(str(arguments.lang))
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
     elif arguments.do == 'web':
