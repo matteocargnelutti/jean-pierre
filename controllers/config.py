@@ -35,6 +35,8 @@ class Config:
     def execute(cls, language='en'):
         """
         Creates database, tables and ask for user parameters.
+        :param language: Set language for this menu
+        :type language: str
         Defined parameters :
         - buzzer_on
         - buzzer_port
@@ -43,8 +45,8 @@ class Config:
         - user_password
         - lang
         """
-        # Lang
-        lang = Lang()
+        # Language file
+        lang = Lang(language)
 
         # Intro
         print("-"*80)

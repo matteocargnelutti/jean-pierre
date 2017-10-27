@@ -30,6 +30,8 @@ def main():
     arguments = argparse.ArgumentParser()
     arguments.add_argument("-d", "--do",
                            help="Jean-Pierre's process to launch: config/scanner/web")
+    arguments.add_argument("-l", "--lang",
+                           help="Language for the web app and config assistant. Default: en")
     arguments = arguments.parse_args()
 
     # If no arguments
@@ -55,7 +57,7 @@ def main():
 
     # Call the appropriate controller
     if arguments.do == 'config':
-        controllers.Config.execute()
+        controllers.Config.execute(arguments.language)
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
     elif arguments.do == 'web':
