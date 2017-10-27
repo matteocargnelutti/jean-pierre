@@ -52,7 +52,7 @@ class Database:
         if not is_test:
             cls.FILE = cls.DATABASE_PRODUCTION
         else:
-            cls.FILE = cls.DATABASE_TEST # Test database
+            cls.FILE = cls.DATABASE_TEST
 
         # Connect
         cls.LINK = sqlite3.connect(cls.PATH + cls.FILE)

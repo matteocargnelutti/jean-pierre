@@ -59,7 +59,7 @@ class Scanner:
         camera.resolution = (params.camera_res_x, params.camera_res_y)
         camera.start_preview()
 
-        # Double beep to inform the user that the Jean-Pierre is ready
+        # Double beep to inform the user that Jean-Pierre is ready
         if params.buzzer_on:
             buzzer = utils.Buzzer(params.buzzer_port)
             buzzer.beep()
