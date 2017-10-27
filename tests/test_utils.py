@@ -28,20 +28,7 @@ class TestFindProduct:
     def setup_method(self):
         """
         Setup method
-        Creates a dummy database
         """
-        # Creates database
-        Database.on(memory_mode=True)
-        self.cursor = Database.CURSOR
-
-        # Create tables
-        self.params = models.Params(autoload=False)
-        self.products = models.Products()
-        self.groceries = models.Groceries()
-        self.params.create_table()
-        self.products.create_table()
-        self.groceries.create_table()
-
         # Defaults
         self.valid_barcode = '3017620424403'
         self.invalid_barcode = '123456789ABCD'
@@ -53,6 +40,16 @@ class TestFindProduct:
         - Valid input : an item has been added to the Products and Groceries databases
         - Invalid input : no item has been added to the Products nor the Groceries databases
         """
+        # Database init function to be launched at init by the thread
+        def init_db():
+            Database.on(memory_mode=True)
+            models.Params(autoload=False).create_table()
+            models.Products().create_table()
+            models.Groceries().create_table()
+            return True
+
+        utils.FindProduct.init_db = init_db()
+
         # Valid input
         thread_valid = utils.FindProduct(self.valid_barcode, memory_mode=True)
         thread_valid.start()
