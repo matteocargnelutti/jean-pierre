@@ -44,8 +44,8 @@ class Database:
         :rtype: bool
         """
         # Don't reconnect if already connected
-        if hasattr(cls, 'LINK'):
-            return True
+        if cls.is_ready():
+            return False
 
         # Path to the database
         path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -84,4 +84,4 @@ class Database:
         Is the connection open ?
         :rtype: bool
         """
-        return hasattr(cls, 'LINK')
+        return hasattr(cls, 'LINK') and cls.LINK != None
