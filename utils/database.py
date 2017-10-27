@@ -43,6 +43,10 @@ class Database:
         :param alternate_file: Allows for use of an alternative database file
         :rtype: bool
         """
+        # Don't reconnect if already connected
+        if hasattr(cls, 'LINK'):
+            return True
+
         # Path to the database
         path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         path = path.replace('/utils', '')
