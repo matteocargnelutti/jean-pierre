@@ -62,5 +62,7 @@ class TestFindProduct:
         thread_invalid.start()
 
         # Tests
+        thread_valid.join()
+        thread_invalid.join()
         assert self.groceries.get_item(self.valid_barcode)
         assert not self.groceries.get_item(self.invalid_barcode)
