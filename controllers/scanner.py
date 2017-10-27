@@ -59,6 +59,12 @@ class Scanner:
         camera.resolution = (params.camera_res_x, params.camera_res_y)
         camera.start_preview()
 
+        # Double beep to inform the user that the Jean-Pierre is ready
+        if params.buzzer_on:
+            buzzer = utils.Buzzer(params.buzzer_port)
+            buzzer.beep()
+            buzzer.beep()
+
         # Capture loop
         last_scan = ''
         empty_scans = 0
@@ -96,7 +102,6 @@ class Scanner:
 
                 # Beep !
                 if params.buzzer_on:
-                    buzzer = utils.Buzzer(params.buzzer_port)
                     buzzer.beep()
 
                 # Analyze it in a separate thread

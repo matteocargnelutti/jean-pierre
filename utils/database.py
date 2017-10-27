@@ -32,7 +32,9 @@ class Database:
     - FILE (path to the database file)
     """
     DATABASE_PRODUCTION = 'database.db'
+    """ Normal database filename """
     DATABASE_TEST = 'database_test.db'
+    """ Test database filename : this database is temporary """
 
     @classmethod
     def on(cls, is_test=False):
@@ -50,7 +52,7 @@ class Database:
         if not is_test:
             cls.FILE = cls.DATABASE_PRODUCTION
         else:
-            cls.FILE = cls.DATABASE_TEST
+            cls.FILE = cls.DATABASE_TEST # Test database
 
         # Connect
         cls.LINK = sqlite3.connect(cls.PATH + cls.FILE)
