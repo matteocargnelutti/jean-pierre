@@ -12,6 +12,8 @@ tests/test_controllers.py - Units tests for the controllers package
 #-----------------------------------------------------------------------------
 import os
 
+from 
+
 import models
 import controllers
 from utils import Database
@@ -24,7 +26,7 @@ class TestConfig:
     Tests for the config controller
     """
 
-    def test_run_valid(self):
+    def test_run_valid(self, monkeypatch):
         """
         Tests the configuration assistant with valid parameters.
         Success conditions :
@@ -50,7 +52,7 @@ class TestConfig:
             if phrase == "Please define a password for Jean-Pierre : ":
                 return "1234abcd"
 
-        input = input_monkeypatched
+        monkeypatch.setitem(__builtins__, 'input', input_monkeypatched)
 
         # Connect to the dummy database
         Database.on(is_test=True)
