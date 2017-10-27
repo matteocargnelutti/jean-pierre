@@ -36,7 +36,7 @@ class TestConfig:
         lang = Lang()
 
         # Monkeypatch : inputs
-        def input_monkeypatched(phrase):
+        def input_monkeypatched_valid(phrase):
             """
             Returns what input() should have returned : valid inputs
             """
@@ -58,8 +58,8 @@ class TestConfig:
             if phrase == lang.config_language_set:
                 return 'en'
 
-        monkeypatch.setitem(__builtins__, 'input', input_monkeypatched)
-        monkeypatch.setattr(getpass, 'getpass', input_monkeypatched)
+        monkeypatch.setitem(__builtins__, 'input', input_monkeypatched_valid)
+        monkeypatch.setattr(getpass, 'getpass', input_monkeypatched_valid)
 
         # Connect to the dummy database
         Database.on(is_test=True)
@@ -88,7 +88,7 @@ class TestConfig:
         lang = Lang()
 
         # Monkeypatch : inputs
-        def input_monkeypatched(phrase):
+        def input_monkeypatched_invalid(phrase):
             """
             Returns what input() should have returned : invalid inputs
             """
@@ -110,8 +110,8 @@ class TestConfig:
             if phrase == lang.config_language_set:
                 return 'xxx'
 
-        monkeypatch.setitem(__builtins__, 'input', input_monkeypatched)
-        monkeypatch.setattr(getpass, 'getpass', input_monkeypatched)
+        monkeypatch.setitem(__builtins__, 'input', input_monkeypatched_invalid)
+        monkeypatch.setattr(getpass, 'getpass', input_monkeypatched_invalid)
 
         # Connect to the dummy database
         Database.on(is_test=True)
