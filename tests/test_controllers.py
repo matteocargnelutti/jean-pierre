@@ -12,8 +12,6 @@ tests/test_controllers.py - Units tests for the controllers package
 #-----------------------------------------------------------------------------
 import os
 
-from 
-
 import models
 import controllers
 from utils import Database
@@ -38,16 +36,16 @@ class TestConfig:
             Returns what input() should have returned : valid inputs
             """
             if phrase == "Shall we use a buzzer (Y/N) : ":
-                return 'Y'
+                return "Y"
 
             if phrase == "On which GPIO port is the buzzer connected : ":
-                return '7'
+                return "7"
 
             if phrase == "Camera resolution, WIDTH (500 by default) : ":
-                return 500
+                return "500"
 
             if phrase == "Camera resolution, HEIGHT (500 by default) : ":
-                return 500
+                return "500"
 
             if phrase == "Please define a password for Jean-Pierre : ":
                 return "1234abcd"
