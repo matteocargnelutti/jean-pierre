@@ -28,7 +28,7 @@ class TestModels:
         Creates a dummy database for tests
         """
         # Creates database
-        Database.on(memory_mode=True)
+        Database.on(alternate_file='database_test.db')
         self.cursor = Database.CURSOR
 
         # Create tables
@@ -49,6 +49,15 @@ class TestModels:
                                self.default_name,
                                self.default_pic)
         self.groceries.add_item(self.default_barcode, 1)
+
+    def teardown_method(self):
+        """
+        Cleans up dummy database after each test
+        """
+        Database.off()
+        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        path = path + '/database_test.db'
+        os.remove(path)
 
     def test_create_tables(self):
         """

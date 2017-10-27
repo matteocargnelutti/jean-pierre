@@ -11,6 +11,7 @@ utils/cls.py - SQlite connector
 # Imports
 #-----------------------------------------------------------------------------
 import os
+import re
 import sqlite3
 
 #-----------------------------------------------------------------------------
@@ -31,19 +32,25 @@ class Database:
     - FILE (path to the database file)
     """
     @classmethod
-    def on(cls, memory_mode=False):
+    def on(cls, alternate_file=''):
         """
         Connect to the database
         :param memory_mode: If True, creates a temporary database in memory
         :rtype: bool
         """
         # Path to the database
-        cls.FILE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        cls.FILE = cls.FILE.replace('/utils', '')
-        cls.FILE = cls.FILE + "/database.db"
+        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        path = path.replace('/utils', '')
 
-        if memory_mode:
+        # Normal database
+        if not alternate_file:
+            cls.FILE = path + "/database.db"
+        elif alternate_file == ':memory:':
             cls.FILE = ':memory:'
+        else:
+            alternate_file = alternate_file.replace('..', '')
+            alternate_file = alternate_file.replace('/', '')
+            cls.FILE = path + "/" + alternate_file
 
         # Connect
         cls.LINK = sqlite3.connect(cls.FILE)
