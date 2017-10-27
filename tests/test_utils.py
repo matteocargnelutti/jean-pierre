@@ -96,6 +96,17 @@ class TestLang:
         assert lang.language == 'en'
         assert lang.config_intro
 
+    def test_init_invalid(self):
+        """
+        Tests init with a invalid language.
+        Success conditions :
+        - self.language == en (english fallback)
+        - self.config_intro exists and is not empty
+        """
+        lang = Lang('xxx')
+        assert lang.language == 'en'
+        assert lang.config_intro
+
     def test_available(self):
         """
         Tests method that returns list of available languages.
