@@ -22,7 +22,7 @@ class Lang:
     Loads messages in a given language and keeps them as object attributes.
     Usage :
     - lang = Lang('en')
-    = lang.get('message')
+    - lang.message_key
     """
     def __init__(self, language='en'):
         """
@@ -39,7 +39,7 @@ class Lang:
         # Path to the "lang" directory
         path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         path = path + '/lang/'
-        langfile = path + '' + language + '.json'
+        langfile = path + '' + self.language + '.json'
 
         # Is the wanted language available ?
         if not os.path.isfile(langfile):
