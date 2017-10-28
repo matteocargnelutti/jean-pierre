@@ -24,6 +24,9 @@ class Lang:
     - lang = Lang('en')
     - lang.message_key
     """
+    LANG_PATH = 'lang/'
+    """ Defines lang files directory """
+
     def __init__(self, language='en'):
         """
         Loads a lang file's content as class attributes.
@@ -37,13 +40,11 @@ class Lang:
         self.language = self.language.replace('/', '')
 
         # Path to the "lang" directory
-        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        path = path + '/lang/'
-        langfile = path + '' + self.language + '.json'
+        langfile = Lang.LANG_PATH + self.language + '.json'
 
         # Is the wanted language available ?
         if not os.path.isfile(langfile):
-            langfile = path + 'en.json' # Load default
+            langfile = Lang.LANG_PATH + 'en.json' # Load default
             self.language = 'en'
 
         # Load file
@@ -61,9 +62,8 @@ class Lang:
         :rtype: list
         """
         available = []
-        path = 'lang/'
-        for filename in os.listdir(path):
-            if os.path.isfile(path+filename):
-                available.append(filename.replace('.json', ''))
+        for langfile in os.listdir(Lang.LANG_PATH):
+            if os.path.isfile(Lang.LANG_PATH + langfile):
+                available.append(langfile.replace('.json', ''))
 
         return available

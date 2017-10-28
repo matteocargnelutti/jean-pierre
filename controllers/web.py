@@ -30,16 +30,17 @@ class Web:
         Creates / Return a secret key, stored in a file
         :rtype: str
         """
+        filename = 'flask_secret_key'
         # Is there a secret key ?
-        if os.path.isfile('flask_secret_key'):
-            file = open('flask_secret_key', 'r')
+        if os.path.isfile(filename):
+            file = open(filename, 'r')
             secret_key = file.read()
             file.close()
             return secret_key
 
         # If there's none : generate a new one
         newkey = "".join([random.choice(string.printable) for _ in range(24)])
-        keyfile = open('flask_secret_key', 'w')
+        keyfile = open(filename, 'w')
         keyfile.write(newkey)
         keyfile.close()
         return newkey
