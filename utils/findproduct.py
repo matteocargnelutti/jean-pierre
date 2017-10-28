@@ -35,7 +35,7 @@ class FindProduct(Thread):
     LOCK = RLock()
     """ Thread lock """
 
-    def __init__(self, barcode):
+    def __init__(self, barcode, is_test=False):
         """
         Inits the thread
         :param barcode: Barcode to search
@@ -48,6 +48,9 @@ class FindProduct(Thread):
         self.name = ''
         self.pic = ''
         self.quantity = 1
+
+        if is_test:
+            Database.TEST_MODE = True
 
     def run(self):
         """
