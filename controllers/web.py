@@ -15,6 +15,7 @@ import random
 import string
 
 from flask import Flask
+from flask import render_template
 
 from utils import Database
 import models
@@ -58,4 +59,4 @@ if __name__ != '__main__':
 
     @webapp.route("/")
     def hello():
-        return flask.render_template('index.html')
+        return render_template('index.html')
