@@ -59,7 +59,7 @@ class TestFindProduct:
         Tests FindProduct process with both valid and invalid inputs
         Success conditions :
         - Valid input : an item has been added to the Products and Groceries databases
-        - Invalid input : no item has been added to the Products nor the Groceries databases
+        - Invalid input : an "unknown" item has been added to the Products and Groceries databases
         """
         # Launch threads
         thread_valid = utils.FindProduct(self.valid_barcode)
@@ -73,8 +73,12 @@ class TestFindProduct:
 
         # Tests
         groceries = models.Groceries() # Re-opens the DB connexion too, closed by FindProduct
-        assert groceries.get_item(self.valid_barcode)
-        assert not groceries.get_item(self.invalid_barcode)
+        valid = groceries.get_item(self.valid_barcode)
+        invalid = groceries.get_item(self.invalid_barcode)
+        assert valid
+        assert valid['name'] != '???'
+        assert invalid
+        assert invalid['name'] == '???'
 
 #-----------------------------------------------------------------------------
 # Tests for : Utils.Lang
