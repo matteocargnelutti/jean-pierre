@@ -46,7 +46,7 @@ class Web:
         return newkey
 
 #-----------------------------------------------------------------------------
-# Flask WSGI init and routes
+# Flask WSGI init and views
 #-----------------------------------------------------------------------------
 if __name__ != '__main__':
 
@@ -56,4 +56,4 @@ if __name__ != '__main__':
 
     @webapp.route("/")
     def hello():
-        return "Hello World!"
+        return flask.render_template('index.html')
