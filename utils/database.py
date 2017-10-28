@@ -69,10 +69,11 @@ class Database:
     @classmethod
     def off(cls):
         """
-        Ends connection with the cls.
+        Ends connection with the database.
         :rtype: bool
         """
-        cls.LINK.close()
+        if cls.LINK:
+            cls.LINK.close()
         cls.LINK = None
         cls.CURSOR = None
         return True
