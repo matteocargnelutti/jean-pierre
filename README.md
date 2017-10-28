@@ -22,7 +22,6 @@
 * `python jeanpierre.py --do config` : launches the configuration assistant.
 * `python jeanpierre.py --do scanner` : launches the scanner.
 * `python jeanpierre.py --do web` : launches the web app process in debug mode.
-* `python jeanpierre.py --do key` : generates a secret key for Flask.
 * `gunicorn --bind 0.0.0.0 jeanpierre:webapp` : launches the web app process in production mode.
 
 # Shared parameters
