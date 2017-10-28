@@ -48,7 +48,9 @@ class FindProduct(Thread):
         self.name = ''
         self.pic = ''
         self.quantity = 1
-        self.is_test = is_test
+
+        if is_test:
+            Database.TEST_MODE = True
 
     def run(self):
         """
@@ -58,7 +60,7 @@ class FindProduct(Thread):
         """
         with FindProduct.LOCK:
             # Database connection
-            Database.on(self.is_test)
+            Database.on()
 
             # Marks
             found = False

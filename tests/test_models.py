@@ -28,7 +28,8 @@ class TestModels:
         Creates a dummy database for tests
         """
         # Creates database
-        Database.on(is_test=True)
+        Database.TEST_MODE = True
+        Database.on()
         self.cursor = Database.CURSOR
 
         # Create tables
@@ -172,4 +173,3 @@ class TestModels:
         assert not self.params.get_item('foo')
         assert not self.products.get_item(self.default_barcode)
         assert not self.groceries.get_item(self.default_barcode)
-

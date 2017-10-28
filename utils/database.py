@@ -35,12 +35,13 @@ class Database:
     """ Normal database filename """
     DATABASE_TEST = 'database_test.db'
     """ Test database filename : this database is temporary """
+    TEST_MODE = False
+    """ Does it need to use the test database ? """
 
     @classmethod
-    def on(cls, is_test=False):
+    def on(cls):
         """
         Connect to the database
-        :param alternate_file: Allows for use of an alternative database file
         :rtype: bool
         """
         # Don't reconnect if already connected
@@ -53,16 +54,13 @@ class Database:
         cls.PATH = path + '/'
 
         # Filename
-        if not is_test:
-            cls.FILE = cls.DATABASE_PRODUCTION
-        else:
+        cls.FILE = cls.DATABASE_PRODUCTION
+        if cls.TEST_MODE:
             cls.FILE = cls.DATABASE_TEST
 
         # Connect
         cls.LINK = sqlite3.connect(cls.PATH + cls.FILE)
         cls.LINK.row_factory = sqlite3.Row
-
-        # Cursor
         cls.CURSOR = cls.LINK.cursor()
 
         return True

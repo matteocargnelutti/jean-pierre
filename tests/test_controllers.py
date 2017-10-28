@@ -24,6 +24,11 @@ class TestConfig:
     """
     Tests for the config controller
     """
+    def setup_method(self):
+        """
+        Setup method. Sets database to test mode
+        """
+        Database.TEST_MODE = True
 
     def test_execute_valid(self, monkeypatch):
         """
@@ -60,9 +65,6 @@ class TestConfig:
 
         monkeypatch.setitem(__builtins__, 'input', input_monkeypatched_valid)
         monkeypatch.setattr(getpass, 'getpass', input_monkeypatched_valid)
-
-        # Connect to the dummy database
-        Database.on(is_test=True)
 
         # Launch
         controllers.Config.execute()
@@ -112,9 +114,6 @@ class TestConfig:
 
         monkeypatch.setitem(__builtins__, 'input', input_monkeypatched_invalid)
         monkeypatch.setattr(getpass, 'getpass', input_monkeypatched_invalid)
-
-        # Connect to the dummy database
-        Database.on(is_test=True)
 
         # Launch
         controllers.Config.execute()

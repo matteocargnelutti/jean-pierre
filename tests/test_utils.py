@@ -30,7 +30,8 @@ class TestFindProduct:
         Setup method, creates a dummy database
         """
         # Creates database
-        Database.on(is_test=True)
+        Database.TEST_MODE = True
+        Database.on()
         self.cursor = Database.CURSOR
 
         # Create tables
@@ -73,7 +74,7 @@ class TestFindProduct:
         thread_invalid.join()
 
         # Tests
-        Database.on(is_test=True)
+        Database.on()
         assert self.groceries.get_item(self.valid_barcode)
         assert not self.groceries.get_item(self.invalid_barcode)
 
