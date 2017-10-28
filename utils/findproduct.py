@@ -85,18 +85,23 @@ class FindProduct(Thread):
                 else:
                     message += "{barcode} : Not found locally nor on OpenFoodFacts.\n"
 
-            # If found : Update the groceries list with this item
-            if found:
-                # If the product's already present in the groceries list: increase its quantity by 1
-                previous = groceries.get_item(self.barcode)
-                if previous:
-                    self.quantity = previous['quantity'] + 1
-                    groceries.edit_item(self.barcode, self.quantity)
-                    message += "{barcode} : {quantity} {name} now in groceries list.\n"
-                # Otherwise : add it
-                else:
-                    groceries.add_item(self.barcode, 1)
-                    message += "{barcode} : 1 {name} added to the groceries list.\n"
+            # If not found : default values (name = ???)
+            if not found:
+                self.name = '???'
+                self.pic = ''
+                products.add_item(self.barcode, self.name, self.pic)
+                message += "{barcode} : Unknown product added to the database.\n"
+
+            # If the product's already present in the groceries list: increase its quantity by 1
+            previous = groceries.get_item(self.barcode)
+            if previous:
+                self.quantity = previous['quantity'] + 1
+                groceries.edit_item(self.barcode, self.quantity)
+                message += "{barcode} : {quantity} {name} now in groceries list.\n"
+            # Otherwise : add it
+            else:
+                groceries.add_item(self.barcode, 1)
+                message += "{barcode} : 1 {name} added to the groceries list.\n"
 
             # Disconnect the database, allowing it to be used by another thread
             Database.off()
