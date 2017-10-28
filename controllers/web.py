@@ -31,7 +31,7 @@ def hello():
 # Controller
 #-----------------------------------------------------------------------------
 class Web:
-    
+    pass
     #
     # To do : loading secret key at startup !
     #
