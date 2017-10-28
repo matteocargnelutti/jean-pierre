@@ -46,16 +46,34 @@ class Web:
         keyfile.close()
         return newkey
 
+    @classmethod
+    def folders(cls):
+        """
+        Returns a dict of Flask folders.
+        Also set them as class attributes
+        :rtype: dict
+        """
+        path = os.path.abspath(os.path.dirname(__file__))
+        path = path.replace('controllers', '')
+        folders = {
+            'static': path + '/assets/static',
+            'templates': path + '/assets/templates'
+        }
+        cls.folders = folders
+        return folders
+
 #-----------------------------------------------------------------------------
 # Flask WSGI init and views
 #-----------------------------------------------------------------------------
 if __name__ != '__main__':
 
     # Flask init
-    webapp = Flask(__name__)
+    Web.folders()
+    webapp = Flask(__name__,
+                   static_url_path='/static/',
+                   static_folder=Web.folders['static'],
+                   template_folder=Web.folders['template'])
     webapp.config['SECRET_KEY'] = Web.secret_key()
-    webapp.config['STATIC_FOLDER'] = 'assets/static'
-    webapp.config['TEMPLATE_FOLDER'] = 'assets/templates'
 
     @webapp.route("/")
     def hello():
