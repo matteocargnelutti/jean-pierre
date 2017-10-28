@@ -20,27 +20,19 @@ import models
 #-----------------------------------------------------------------------------
 # Flask WSGI init and routes
 #-----------------------------------------------------------------------------
-# Database connection
-Database.on()
-
 # Flask init
 webapp = Flask(__name__)
-
-# Load flask secret key if the app has been configured
-params = models.Params()
-if hasattr(params, 'flask_secret_key'):
-    webapp.config['SECRET_KEY'] = params.flask_secret_key
-del params
 
 @webapp.route("/")
 def hello():
     return "Hello World!"
 
-# Close database connection
-Database.off()
-
 #-----------------------------------------------------------------------------
 # Controller
 #-----------------------------------------------------------------------------
 class Web:
-    pass
+    
+    #
+    # To do : loading secret key at startup !
+    #
+    # webapp.config['SECRET_KEY'] = params.flask_secret_key

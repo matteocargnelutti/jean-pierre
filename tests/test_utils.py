@@ -72,7 +72,7 @@ class TestFindProduct:
         thread_invalid.join()
 
         # Tests
-        groceries = models.Groceries() # Re-opens the DB connexion too
+        groceries = models.Groceries() # Re-opens the DB connexion too, closed by FindProduct
         assert groceries.get_item(self.valid_barcode)
         assert not groceries.get_item(self.invalid_barcode)
 
