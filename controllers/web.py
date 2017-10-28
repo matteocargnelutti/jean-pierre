@@ -47,10 +47,12 @@ class Web:
 #-----------------------------------------------------------------------------
 # Flask WSGI init and routes
 #-----------------------------------------------------------------------------
-# Flask init
-webapp = Flask(__name__)
-webapp.config['SECRET_KEY'] = Web.secret_key()
+if __name__ != '__main__':
 
-@webapp.route("/")
-def hello():
-    return "Hello World!"
+    # Flask init
+    webapp = Flask(__name__)
+    webapp.config['SECRET_KEY'] = Web.secret_key()
+
+    @webapp.route("/")
+    def hello():
+        return "Hello World!"
