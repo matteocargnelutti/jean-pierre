@@ -29,7 +29,7 @@ def main():
     # Get arguments
     arguments = argparse.ArgumentParser()
     arguments.add_argument("-d", "--do",
-                           help="Jean-Pierre's process to launch: config/scanner/web")
+                           help="Jean-Pierre's process to launch: config/scanner/web/key")
     arguments.add_argument("-l", "--lang",
                            help="Language for the web app and config assistant. Default: en")
     arguments = arguments.parse_args()
@@ -40,11 +40,12 @@ def main():
         message += "--do config : launch the configuration assistant"
         message += "--do scanner : launch the scanner process"
         message += "--do web : launch the web server"
+        message += "--do key : generates a secret key for Flask"
         print(message)
         return
 
     # If invalid arguments
-    if arguments.do not in ['config', 'scanner', 'web']:
+    if arguments.do not in ['config', 'scanner', 'web', 'key']:
         message = 'Invalid option --do "{}"'.format(arguments.do)
         print(message)
         return
@@ -55,15 +56,24 @@ def main():
         print(message)
         return
 
-    # Call the appropriate controller
+    # Config
     if arguments.do == 'config':
         controllers.Config.execute(str(arguments.lang))
+    # Scanner
     elif arguments.do == 'scanner':
         controllers.Scanner.execute()
+    # Web debug
     elif arguments.do == 'web':
         webapp.run(debug=True, host='0.0.0.0')
         print("Flask launched in DEBUG mode.")
         print("For production, please use : gunicorn --bind 0.0.0.0 jeanpierre:webapp")
+    # Flask secret key
+    elif arguments.key == 'key':
+        newkey = "".join([random.choice(string.printable) for _ in range(24)])
+        keyfile = open('flask_secret_key', 'w')
+        keyfile.write(newkey)
+        keyfile.close()
+        print("New secret key generated for Flask.")
 
 # Execution
 if __name__ == "__main__":

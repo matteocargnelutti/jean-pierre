@@ -22,6 +22,9 @@ import models
 #-----------------------------------------------------------------------------
 # Flask init
 webapp = Flask(__name__)
+secret_key = open('flask_secret_key', 'r')
+secret_key = secret_key.read()
+webapp.config['SECRET_KEY'] = secret_key
 
 @webapp.route("/")
 def hello():

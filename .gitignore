@@ -6,3 +6,4 @@
 .sass_cache/
 env/
 database.db
+flask_secret_key

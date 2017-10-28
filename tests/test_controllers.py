@@ -76,7 +76,6 @@ class TestConfig:
         assert params.camera_res_x == 500
         assert params.camera_res_y == 500
         assert params.user_password
-        assert params.flask_secret_key
         assert params.lang == 'en'
 
     def test_execute_invalid(self, monkeypatch):
@@ -125,7 +124,6 @@ class TestConfig:
         assert params.camera_res_x == 500
         assert params.camera_res_y == 500
         assert params.user_password
-        assert params.flask_secret_key
         assert params.lang == 'en'
 
     def teardown_method(self):

@@ -18,10 +18,11 @@
 * **web** : Flask app that handles the web application.
 
 ## Manually launch processes
-**Processes are automaticaly handled by supervisor. But in case you want to launch it separately :**
+**Processes are automaticaly handled by both supervisor and the install script. But in case you want to launch it separately :**
 * `python jeanpierre.py --do config` : launches the configuration assistant.
 * `python jeanpierre.py --do scanner` : launches the scanner.
 * `python jeanpierre.py --do web` : launches the web app process in debug mode.
+* `python jeanpierre.py --do key` : generates a secret key for Flask.
 * `gunicorn --bind 0.0.0.0 jeanpierre:webapp` : launches the web app process in production mode.
 
 # Shared parameters
@@ -32,7 +33,6 @@ Key | Value
 `camera_res_x` | Camera's resolution : width
 `camera_res_y` | Camera's resolution : height
 `user_password` | Password for the web interface (cyphered)
-`flask_secret_key`| Auto-generated secret key for Flask
 
 * Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
 * They are stored into the **Params** database.
