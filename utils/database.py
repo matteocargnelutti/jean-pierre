@@ -55,6 +55,7 @@ class Database:
 
         # Filename
         cls.FILE = cls.DATABASE_PRODUCTION
+
         if cls.TEST_MODE:
             cls.FILE = cls.DATABASE_TEST
 

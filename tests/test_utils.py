@@ -64,17 +64,16 @@ class TestFindProduct:
         - Invalid input : no item has been added to the Products nor the Groceries databases
         """
         # Launch threads
-        thread_valid = utils.FindProduct(self.valid_barcode, is_test=True)
+        thread_valid = utils.FindProduct(self.valid_barcode)
         thread_valid.start()
 
-        thread_invalid = utils.FindProduct(self.invalid_barcode, is_test=True)
+        thread_invalid = utils.FindProduct(self.invalid_barcode)
         thread_invalid.start()
 
         thread_valid.join()
         thread_invalid.join()
 
         # Tests
-        Database.on()
         assert self.groceries.get_item(self.valid_barcode)
         assert not self.groceries.get_item(self.invalid_barcode)
 
