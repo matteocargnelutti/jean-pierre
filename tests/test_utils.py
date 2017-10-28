@@ -22,27 +22,25 @@ from utils import Database, Lang
 class TestFindProduct:
     """
     Tests for the FindProduct tool.
-    This tool is threaded.
+    FindProduct is threaded : hence, we need to keep an eye on database's
+    connection status, since a connexion can only be used by a single thread at once !
     """
 
     def setup_method(self):
         """
         Setup method, creates a dummy database
         """
-        # Creates database
+        # Creates test database
         Database.TEST_MODE = True
         Database.on()
         self.cursor = Database.CURSOR
 
         # Create tables
-        self.params = models.Params(autoload=False)
-        self.products = models.Products()
-        self.groceries = models.Groceries()
-        self.params.create_table()
-        self.products.create_table()
-        self.groceries.create_table()
+        models.Params(autoload=False).create_table()
+        models.Products().create_table()
+        models.Groceries().create_table()
 
-        # Defaults
+        # Defaults barcodes
         self.valid_barcode = '3017620424403'
         self.invalid_barcode = '123456789ABCD'
 
@@ -64,17 +62,17 @@ class TestFindProduct:
         - Invalid input : no item has been added to the Products nor the Groceries databases
         """
         # Launch threads
-        thread_valid = utils.FindProduct(self.valid_barcode, is_test=True)
+        thread_valid = utils.FindProduct(self.valid_barcode)
         thread_valid.start()
 
-        thread_invalid = utils.FindProduct(self.invalid_barcode, is_test=True)
+        thread_invalid = utils.FindProduct(self.invalid_barcode)
         thread_invalid.start()
 
         thread_valid.join()
         thread_invalid.join()
 
         # Tests
-        groceries = models.Groceries()
+        groceries = models.Groceries() # Re-opens the DB connexion too
         assert groceries.get_item(self.valid_barcode)
         assert not groceries.get_item(self.invalid_barcode)
 
