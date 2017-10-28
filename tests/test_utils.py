@@ -74,8 +74,9 @@ class TestFindProduct:
         thread_invalid.join()
 
         # Tests
-        assert self.groceries.get_item(self.valid_barcode)
-        assert not self.groceries.get_item(self.invalid_barcode)
+        groceries = models.Groceries()
+        assert groceries.get_item(self.valid_barcode)
+        assert not groceries.get_item(self.invalid_barcode)
 
 #-----------------------------------------------------------------------------
 # Tests for : Utils.Lang
