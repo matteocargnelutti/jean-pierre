@@ -53,6 +53,8 @@ if __name__ != '__main__':
     # Flask init
     webapp = Flask(__name__)
     webapp.config['SECRET_KEY'] = Web.secret_key()
+    webapp.static_folder  = 'assets/static'
+    webapp.template_folder  = 'assets/templates'
 
     @webapp.route("/")
     def hello():
