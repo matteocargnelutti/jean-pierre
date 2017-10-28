@@ -131,4 +131,4 @@ class TestConfig:
         Cleans up dummy database after each test
         """
         Database.off()
-        os.remove(Database.PATH + Database.DATABASE_TEST)
+        os.remove(Database.DATABASE_TEST)

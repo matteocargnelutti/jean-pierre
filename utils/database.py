@@ -48,11 +48,6 @@ class Database:
         if cls.is_ready():
             return False
 
-        # Path to the database
-        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        path = path.replace('/utils', '')
-        cls.PATH = path + '/'
-
         # Filename
         cls.FILE = cls.DATABASE_PRODUCTION
 
@@ -60,7 +55,7 @@ class Database:
             cls.FILE = cls.DATABASE_TEST
 
         # Connect
-        cls.LINK = sqlite3.connect(cls.PATH + cls.FILE)
+        cls.LINK = sqlite3.connect(cls.FILE)
         cls.LINK.row_factory = sqlite3.Row
         cls.CURSOR = cls.LINK.cursor()
 

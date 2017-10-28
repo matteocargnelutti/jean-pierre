@@ -60,12 +60,10 @@ class Lang:
         Returns a list of available languages
         :rtype: list
         """
-        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        path = path + '/lang/'
-
         available = []
-        for file in os.listdir(path):
-            if os.path.isfile(path+file):
-                available.append(file.replace('.json', ''))
+        path = 'lang/'
+        for filename in os.listdir(path):
+            if os.path.isfile(path+filename):
+                available.append(filename.replace('.json', ''))
 
         return available

@@ -56,7 +56,7 @@ class TestModels:
         Cleans up dummy database after each test
         """
         Database.off()
-        os.remove(Database.PATH + Database.DATABASE_TEST)
+        os.remove(Database.DATABASE_TEST)
 
     def test_create_tables(self):
         """

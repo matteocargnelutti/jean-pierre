@@ -23,10 +23,6 @@ import models
 # Controller
 #-----------------------------------------------------------------------------
 class Web:
-    #
-    # To do : loading secret key at startup !
-    #
-    # webapp.config['SECRET_KEY'] = params.flask_secret_key
 
     @classmethod
     def secret_key(cls):
@@ -41,7 +37,7 @@ class Web:
             file.close()
             return secret_key
 
-        # If there's none
+        # If there's none : generate a new one
         newkey = "".join([random.choice(string.printable) for _ in range(24)])
         keyfile = open('flask_secret_key', 'w')
         keyfile.write(newkey)
