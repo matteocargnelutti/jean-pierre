@@ -70,9 +70,9 @@ if __name__ != '__main__':
     # Flask init
     Web.folders()
     webapp = Flask(__name__,
-                   static_url_path='/static/',
+                   static_url_path='/static',
                    static_folder=Web.folders['static'],
-                   template_folder=Web.folders['template'])
+                   template_folder=Web.folders['templates'])
     webapp.config['SECRET_KEY'] = Web.secret_key()
 
     @webapp.route("/")
