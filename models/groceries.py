@@ -19,7 +19,7 @@ class Groceries:
     """
     This class handles :
     - Manages and interacts with the Groceries table, 
-    which uses entries from Products to handle a groceries list.
+    which uses entries from Products to handle a grocery list.
     Usage :
     - groceries = Groceries()
     - groceries_list = groceries.get_list()
@@ -87,7 +87,7 @@ class Groceries:
 
     def add_item(self, barcode, quantity=1):
         """
-        Adds an item to the groceries list
+        Adds an item to the grocery list
         :param barcode: barcode
         :param quantity: quantity
         :type barcode: str
@@ -102,7 +102,7 @@ class Groceries:
 
     def edit_item(self, barcode, quantity):
         """
-        Edits an item from the groceries list
+        Edits an item from the grocery list
         :param barcode: barcode
         :param quantity: quantity
         :type barcode: str
@@ -117,7 +117,7 @@ class Groceries:
 
     def delete_item(self, barcode):
         """
-        Deletes an item from the groceries list
+        Deletes an item from the grocery list
         :param barcode: barcode
         :param quantity: quantity
         :type barcode: str
@@ -132,7 +132,7 @@ class Groceries:
 
     def get_list(self):
         """
-        Gets the groceries list, with associated product data
+        Gets the grocery list, with associated product data
         :rtype: list of dict
         """
         # Query

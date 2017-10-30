@@ -25,7 +25,7 @@ class FindProduct(Thread):
     """
     This class handles :
     - Fetch product's from a barcode from the OpenFoodFacts OR local cache
-    - Add it to the groceries list OR increase the quantity
+    - Add it to the grocery list OR increase the quantity
     Usage :
     - thread = FindProduct(barcode)
     - thread.start()
@@ -51,7 +51,7 @@ class FindProduct(Thread):
 
     def run(self):
         """
-        Fetch, gathers, insert product infos and adds it to the groceries list.
+        Fetch, gathers, insert product infos and adds it to the grocery list.
         Threaded
         :rtype: bool
         """
@@ -92,16 +92,16 @@ class FindProduct(Thread):
                 products.add_item(self.barcode, self.name, self.pic)
                 message += "{barcode} : Unknown product added to the database.\n"
 
-            # If the product's already present in the groceries list: increase its quantity by 1
+            # If the product's already present in the grocery list: increase its quantity by 1
             previous = groceries.get_item(self.barcode)
             if previous:
                 self.quantity = previous['quantity'] + 1
                 groceries.edit_item(self.barcode, self.quantity)
-                message += "{barcode} : {quantity} {name} now in groceries list.\n"
+                message += "{barcode} : {quantity} {name} now in grocery list.\n"
             # Otherwise : add it
             else:
                 groceries.add_item(self.barcode, 1)
-                message += "{barcode} : 1 {name} added to the groceries list.\n"
+                message += "{barcode} : 1 {name} added to the grocery list.\n"
 
             # Disconnect the database, allowing it to be used by another thread
             Database.off()

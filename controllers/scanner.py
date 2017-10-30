@@ -35,7 +35,7 @@ class Scanner:
     def execute(cls):
         """
         This method constantly tries to catch barcodes from the camera :
-        if it does, search for info and add it to the user's groceries list.
+        if it does, search for info and add it to the user's grocery list.
         """
         # Intro
         print("-"*80)
