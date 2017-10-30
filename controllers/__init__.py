@@ -9,4 +9,4 @@ controllers
 """
 from .config import Config
 from .scanner import Scanner
-from .web import webapp, Web
+from .web import webapp

@@ -83,12 +83,11 @@ def landing():
 
     # If the user is already logged : go to "grocery_list"
     if 'is_logged' in session and session['is_logged']:
-        redirect(url_for('grocery_list'))
-        return
+        return redirect(url_for('grocery_list'))
 
     # If no post data : login form
     if not request.form:
-        render_template('login.html', lang=lang)
+        return render_template('login.html', lang=lang)
 
     # Handle post data
     if 'password' in request.form:
@@ -98,9 +97,9 @@ def landing():
 
         if password == params.user_password:
             session['is_logged'] = True
-            render_template('login.html', lang=lang, error=True)
+            return render_template('login.html', lang=lang, error=True)
         else:
-            redirect(url_for('grocery_list'))
+            return redirect(url_for('grocery_list'))
 
 @webapp.route('/my-list')
 def grocery_list():
@@ -108,4 +107,4 @@ def grocery_list():
     Grocery list page.
     Only accessible if logged
     """
-    render_template('logged.html')
+    return render_template('logged.html')
