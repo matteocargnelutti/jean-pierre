@@ -2,7 +2,7 @@
 # coding: utf-8
 """
 Jean-Pierre [Prototype]
-A Raspberry Pi robot helping people to build groceries list.
+A Raspberry Pi robot that helps people make their grocery list.
 Matteo Cargnelutti - github.com/matteocargnelutti
 
 scanner/utils/findproduct.py
@@ -85,7 +85,7 @@ class FindProduct(Thread):
                 else:
                     message += "{barcode} : Not found locally nor on OpenFoodFacts.\n"
 
-            # If not found : default values (name = ???)
+            # If not found : add as unknown item (name = ???)
             if not found:
                 self.name = '???'
                 self.pic = ''

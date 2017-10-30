@@ -1,5 +1,5 @@
 # jeanpierre
-**[Prototype]** A Raspberry Pi robot helping people to build groceries list.
+**[Prototype]** A Raspberry Pi robot that helps people make their grocery list.
 
 **Work in progress**
 
