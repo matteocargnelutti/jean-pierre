@@ -1,5 +1,5 @@
 {
-    "config_intro": "Configuring Jean-Pierre, the groceries helper bot :{o",
+    "config_intro": "Configuring Jean-Pierre [:{, the grocery-list bot.",
     "config_database_created": "SQlite3 database created if it didn't exist.",
     "config_table_params_set": "Params table created if not already set.",
     "config_table_groceries_set": "Groceries table created if not already set.",

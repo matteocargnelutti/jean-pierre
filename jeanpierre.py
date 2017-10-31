@@ -19,7 +19,7 @@ from controllers.web import webapp # Gunicorn hook for Flask
 #-----------------------------------------------------------------------------
 # Version
 #-----------------------------------------------------------------------------
-JEANPIERRE_VERSION = 'v0.1 - Opération Baguette'
+JEANPIERRE_VERSION = '[:{ v0.1 - Opération Baguette'
 
 #-----------------------------------------------------------------------------
 # Main : routing
@@ -39,7 +39,7 @@ def main():
     arguments.add_argument("-d", "--do",
                            help="Jean-Pierre's process to launch: config/scanner/web")
     arguments.add_argument("-v", "--version",
-                           help="Jean-Pierre's version.", 
+                           help="Jean-Pierre's version.",
                            action='store_true')
     arguments.add_argument("-l", "--lang",
                            help="Language for the web app and config assistant. Default: en")

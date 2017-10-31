@@ -39,7 +39,7 @@ class Scanner:
         """
         # Intro
         print("-"*80)
-        print("Jean-Pierre's Barcode Scanner : Running :{o")
+        print("[:{ Jean-Pierre's Barcode Scanner : Running")
         print("-"*80)
 
         # Database connection
