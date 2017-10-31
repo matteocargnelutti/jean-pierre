@@ -70,7 +70,7 @@ if __name__ != '__main__':
 # Views
 #-----------------------------------------------------------------------------
 @webapp.route('/', methods=['GET', 'POST'])
-def landing():
+def login():
     """
     Landing page.
     Launches login form if needed.
@@ -95,11 +95,22 @@ def landing():
         password = bytearray(password, encoding='utf-8')
         password = hashlib.sha1(password).hexdigest()
 
+        # Right password
         if password == params.user_password:
             session['is_logged'] = True
-            return render_template('login.html', lang=lang, error=True)
-        else:
             return redirect(url_for('grocery_list'))
+        # Wrong password
+        else:
+            return render_template('login.html', lang=lang, error=True)
+
+@webapp.route('/logout')
+def logout():
+    """
+    Logs the user out
+    """
+    if 'is_logged' in session:
+        del session['is_logged']
+    return redirect(url_for('login'))
 
 @webapp.route('/my-list')
 def grocery_list():
@@ -107,4 +118,20 @@ def grocery_list():
     Grocery list page.
     Only accessible if logged
     """
-    return render_template('logged.html')
+    # Loggin check
+    if not session['is_logged']:
+        return redirect(url_for('login'))
+
+    # Database access + loads basic info
+    Database.on()
+    params = models.Params()
+    groceries = models.Groceries()
+    lang = utils.Lang(params.lang)
+
+    # Shuts database access before returning the template
+    Database.off()
+
+    # Return template
+    return render_template('logged.html',
+                           lang=lang,
+                           groceries=groceries.get_list())
