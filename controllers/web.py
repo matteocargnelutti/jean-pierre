@@ -51,7 +51,8 @@ if __name__ != '__main__':
     path = path.replace('controllers', '')
     webapp_folders = {
         'static': path + '/assets/static',
-        'templates': path + '/assets/templates'
+        'templates': path + '/assets/templates',
+        'products': path  + '/assets/products'
     }
     del path
 

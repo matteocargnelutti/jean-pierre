@@ -138,18 +138,18 @@ class FindProduct(Thread):
         if 'brands' in attempt['product']:
             name = name + ' - ' + attempt['product']['brands'].split(',')[0]
 
-        # Get image
+        self.name = name
+
+        # Get and save image in assets/products
         if 'image_thumb_url' in attempt['product']:
             thumb = attempt['product']['image_thumb_url']
             try:
                 pic = requests.get(thumb, timeout=10, stream=True)
-                self.pic = True
-                # Save
-                with open('assets/products/'+self.pic, 'wb') as file:
+                with open('assets/products/'+pic, 'wb') as file:
                     for chunk in pic:
                         file.write(chunk)
+                self.pic = True
             except Exception as trace:
                 self.pic = False # Ignore
 
-        self.name = name
         return True
