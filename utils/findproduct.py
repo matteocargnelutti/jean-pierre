@@ -142,12 +142,13 @@ class FindProduct(Thread):
         if 'image_thumb_url' in attempt['product']:
             thumb = attempt['product']['image_thumb_url']
             try:
-                pic = requests.get(thumb, timeout=10)
+                pic = requests.get(thumb, timeout=10, stream=True)
                 self.pic = self.barcode + '.jpg'
                 filepath = 'assets/products/'+self.pic
                 # Save
-                with open(filepath) as file:
-                    file.write(pic.content)
+                with open(filepath, 'wb') as file:
+                    for chunk in pic:
+                        file.write(chunk)
             except Exception as trace:
                 self.pic = False # Ignore
 
