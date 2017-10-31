@@ -145,7 +145,8 @@ class FindProduct(Thread):
             thumb = attempt['product']['image_thumb_url']
             try:
                 pic = requests.get(thumb, timeout=10, stream=True)
-                with open('assets/products/'+pic, 'wb') as file:
+                filename = 'assets/products/'+self.barcode+'.jpg'
+                with open(filename, 'wb') as file:
                     for chunk in pic:
                         file.write(chunk)
                 self.pic = True
