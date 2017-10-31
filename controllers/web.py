@@ -118,7 +118,7 @@ def groceries():
     """
     Shows GROCERIES template if the user is logged.
     """
-    # Loggin check
+    # Auth check
     if not session['is_logged']:
         return redirect(url_for('login'))
 
@@ -144,8 +144,8 @@ def groceries_list():
     Possible return status :
     - OK
     """
-    # Auth check
-    if not session['is_logged']:
+    # AJAX Auth check
+    if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
 
     # Output
@@ -174,8 +174,8 @@ def groceries_edit(barcode, quantity):
     - EDITED / EDIT ERROR
     - DELETED / DELETE ERROR
     """
-    # Auth check
-    if not session['is_logged']:
+    # AJAX Auth check
+    if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
 
     # Output
@@ -195,31 +195,31 @@ def groceries_edit(barcode, quantity):
                                json=json.dumps(data)), 404
 
     # Try to get the entry in the grocery list
-    with groceries_db.get_item(barcode) as exists:
+    exists = groceries_db.get_item(barcode)
 
-        # If it doesn't exist : add it
-        if not exists:
+    # If it doesn't exist : add it
+    if not exists:
+        try:
+            groceries_db.add_item(barcode, quantity)
+            data['status'] = 'ADDED'
+        except Exception as trace:
+            data['status'] = 'ADD ERROR'
+    # If it exists :
+    else:
+        # If quantity = 0 : Delete
+        if quantity <= 0:
             try:
-                groceries_db.add_item(barcode, quantity)
-                data['status'] = 'ADDED'
+                groceries_db.delete_item(barcode)
+                data['status'] = 'DELETED'
             except Exception as trace:
-                data['status'] = 'ADD ERROR'
-        # If it exists :
+                data['status'] = 'DELETE ERROR'
+        # If quantity > 0 : Edit quantity
         else:
-            # If quantity = 0 : Delete
-            if quantity <= 0:
-                try:
-                    groceries_db.delete_item(barcode)
-                    data['status'] = 'DELETED'
-                except Exception as trace:
-                    data['status'] = 'DELETE ERROR'
-            # If quantity > 0 : Edit quantity
-            else:
-                try:
-                    groceries_db.edit_item(barcode, exists['quantity'] + quantity)
-                    data['status'] = 'EDITED'
-                except Exception as trace:
-                    data['status'] = 'EDIT ERROR'
+            try:
+                groceries_db.edit_item(barcode, exists['quantity'] + quantity)
+                data['status'] = 'EDITED'
+            except Exception as trace:
+                data['status'] = 'EDIT ERROR'
 
     # Database : off and outputs data
     Database.off()
@@ -253,8 +253,11 @@ def products_list():
     Possible return status :
     - OK
     """
-    # Auth check
-    if not session['is_logged']:
+    # AJAX Auth check
+    if not ('is_logged' in session and session['is_logged']):
+        return render_template('json.html', json="{}"), 401
+
+    if not auth:
         return render_template('json.html', json="{}"), 401
 
     # Output
@@ -281,8 +284,8 @@ def products_edit(barcode, name):
     - ADDED / ADD ERROR
     - EDITED / EDIT ERROR
     """
-    # Auth check
-    if not session['is_logged']:
+    # AJAX Auth check
+    if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
 
     # Output
@@ -293,22 +296,22 @@ def products_edit(barcode, name):
     products_db = models.Products()
 
     # Try to get the entry in the grocery list
-    with products_db.get_item(barcode) as exists:
+    exists = products_db.get_item(barcode)
 
-        # If it doesn't exist : add it
-        if not exists:
-            try:
-                products_db.add_item(barcode, name, '')
-                data['status'] = 'ADDED'
-            except Exception as trace:
-                data['status'] = 'ADD ERROR'
-        # If it exists : edit it
-        else:
-            try:
-                products_db.edit_item(barcode, name, '')
-                data['status'] = 'EDITED'
-            except Exception as trace:
-                data['status'] = 'EDIT ERROR'
+    # If it doesn't exist : add it
+    if not exists:
+        try:
+            products_db.add_item(barcode, name, '')
+            data['status'] = 'ADDED'
+        except Exception as trace:
+            data['status'] = 'ADD ERROR'
+    # If it exists : edit it
+    else:
+        try:
+            products_db.edit_item(barcode, name, '')
+            data['status'] = 'EDITED'
+        except Exception as trace:
+            data['status'] = 'EDIT ERROR'
 
     # Database : off and outputs data
     Database.off()
@@ -326,8 +329,8 @@ def products_delete(barcode):
     - OK
     - DELETE ERROR
     """
-    # Auth check
-    if not session['is_logged']:
+    # AJAX Auth check
+    if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
 
     # Output
