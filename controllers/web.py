@@ -216,7 +216,7 @@ def groceries_edit(barcode, quantity):
             # If quantity > 0 : Edit quantity
             else:
                 try:
-                    groceries_db.edit_item(barcode, quantity)
+                    groceries_db.edit_item(barcode, exists['quantity'] + quantity)
                     data['status'] = 'EDITED'
                 except Exception as trace:
                     data['status'] = 'EDIT ERROR'

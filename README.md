@@ -3,6 +3,9 @@
 
 **Work in progress**
 
+# Curent version :
+* v0.1 - "Opération Baguette"
+
 # Hardware used
 * Raspberry Pi Zero W
 * Raspberry Pi Camera Module V2
@@ -60,5 +63,6 @@ Key | Value
 * flask
 * gunicorn
 
-# Note 
+# Notes to write
 * A note about camera focus adjustement (and how it could break the camera)
+* A note about the web server security and how it shouldn't be used in production (no https !)

@@ -16,6 +16,10 @@ import os
 
 import controllers
 from controllers.web import webapp # Gunicorn hook for Flask
+#-----------------------------------------------------------------------------
+# Version
+#-----------------------------------------------------------------------------
+JEANPIERRE_VERSION = 'v0.1 - Opération Baguette'
 
 #-----------------------------------------------------------------------------
 # Main : routing
@@ -30,6 +34,8 @@ def main():
     arguments = argparse.ArgumentParser()
     arguments.add_argument("-d", "--do",
                            help="Jean-Pierre's process to launch: config/scanner/web")
+    arguments.add_argument("-v", "--version",
+                           help="Jean-Pierre's version.")
     arguments.add_argument("-l", "--lang",
                            help="Language for the web app and config assistant. Default: en")
     arguments = arguments.parse_args()
@@ -54,6 +60,11 @@ def main():
         message = "Jean-Pierre is not configured. Please launch jeanpierre.py --do config"
         print(message)
         return
+
+    # Version
+    if arguments.version:
+        print(JEANPIERRE_VERSION)
+        exit()
 
     # Config
     if arguments.do == 'config':
