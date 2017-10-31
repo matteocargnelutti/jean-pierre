@@ -18,10 +18,13 @@ from utils import Database
 class Params:
     """
     This class handles :
-    - Manages and interacts with the Params table as attributes
+    - Manages and interacts with the Params table, which stores config paramaters
+    - Loads config parameters as attributes
     Usage :
     - params = Params()
-    - params.PARAM_NAME
+    - params.param_name
+    .. OR
+    - Params().param_name 
     """
     def __init__(self, autoload=True):
         """

@@ -122,3 +122,29 @@ class Products:
         Database.LINK.execute(query, params)
         Database.LINK.commit()
         return True
+
+    def get_list(self):
+        """
+        Gets the products list
+        :rtype: list of dict
+        """
+        # Query
+        query = """
+                SELECT 
+                    *
+                FROM 
+                    Products
+                ORDER BY 
+                    name ASC;
+                """
+        Database.CURSOR.execute(query)
+        raw_list = Database.CURSOR.fetchall()
+
+        # Prepare return format
+        products = {}
+        for product in raw_list:
+            products[product['barcode']] = {
+                'name': product['name'],
+                'pic': product['pic']
+            }
+        return products

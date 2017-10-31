@@ -116,8 +116,7 @@ def logout():
 @webapp.route('/groceries')
 def groceries():
     """
-    Grocery list page.
-    Only accessible if logged.
+    Shows GROCERIES template if the user is logged.
     """
     # Loggin check
     if not session['is_logged']:
@@ -125,17 +124,19 @@ def groceries():
 
     # Database access + loads basic info
     Database.on()
-    params = models.Params()
-    lang = utils.Lang(params.lang)
+    lang = utils.Lang(models.Params().lang)
+    items = models.Products().get_list()
     Database.off()
 
     # Return template
-    return render_template('groceries.html', lang=lang)
+    return render_template('groceries.html',
+                           lang=lang,
+                           products_list=items)
 
 @webapp.route('/groceries_list')
 def groceries_list():
     """
-    AJAX method : Add/Edit/Delete items from the grocery list.
+    AJAX method : Gets all items from the grocery list.
     Outputs JSON.
     Returns the latest version of the grocery list.
     JSON format :
@@ -143,9 +144,9 @@ def groceries_list():
     Possible return status :
     - OK
     """
-    # Loggin check
+    # Auth check
     if not session['is_logged']:
-        return redirect(url_for('login'))
+        return render_template('json.html', json="{}"), 401
 
     # Output
     data = {"status": "OK", "items": []}
@@ -169,24 +170,24 @@ def groceries_edit(barcode, quantity):
     - {"status": ..., "barcode" ..., "quantity": ...}
     Possible return status :
     - PRODUCT NOT FOUND
-    - ADDED
-    - EDITED
-    - DELETED
+    - ADDED / ADD ERROR
+    - EDITED / EDIT ERROR
+    - DELETED / DELETE ERROR
     """
-    # Loggin check
+    # Auth check
     if not session['is_logged']:
-        return redirect(url_for('login'))
+        return render_template('json.html', json="{}"), 401
 
     # Output
     data = {"status": "", "barcode": barcode, "quantity": quantity}
 
-    # Database connexion + load basic infos
+    # Database access
     Database.on()
-    products = models.Products()
-    groceries = models.Groceries()
+    products_db = models.Products()
+    groceries_db = models.Groceries()
 
     # Try to get the product associated with the barcode
-    product = products.get_item(barcode)
+    product = products_db.get_item(barcode)
 
     if not product:
         data['status'] = 'PRODUCT NOT FOUND'
@@ -194,23 +195,152 @@ def groceries_edit(barcode, quantity):
                                json=json.dumps(data)), 404
 
     # Try to get the entry in the grocery list
-    with groceries.get_item(barcode) as exists:
+    with groceries_db.get_item(barcode) as exists:
 
         # If it doesn't exist : add it
         if not exists:
-            groceries.add_item(barcode, quantity)
-            data['status'] = 'ADDED'
+            try:
+                groceries_db.add_item(barcode, quantity)
+                data['status'] = 'ADDED'
+            except Exception as trace:
+                data['status'] = 'ADD ERROR'
         # If it exists :
         else:
             # If quantity = 0 : Delete
             if quantity <= 0:
-                groceries.delete_item(barcode)
-                data['status'] = 'DELETED'
+                try:
+                    groceries_db.delete_item(barcode)
+                    data['status'] = 'DELETED'
+                except Exception as trace:
+                    data['status'] = 'DELETE ERROR'
             # If quantity > 0 : Edit quantity
             else:
-                groceries.edit_item(barcode, quantity)
-                data['status'] = 'EDITED'
+                try:
+                    groceries_db.edit_item(barcode, quantity)
+                    data['status'] = 'EDITED'
+                except Exception as trace:
+                    data['status'] = 'EDIT ERROR'
 
     # Database : off and outputs data
     Database.off()
+    return render_template('json.html', json=json.dumps(data))
+
+@webapp.route('/products')
+def products():
+    """
+    Shows PRODUCTS template if the user is logged.
+    """
+    # Auth check
+    if not session['is_logged']:
+        return redirect(url_for('login'))
+
+    # Database access + loads basic info
+    Database.on()
+    lang = utils.Lang(models.Params().lang)
+    Database.off()
+
+    # Return template
+    return render_template('products.html', lang=lang)
+
+@webapp.route('/products_list')
+def products_list():
+    """
+    AJAX method : Gets all items from the products table.
+    Outputs JSON.
+    Returns the latest version of the grocery list.
+    JSON format :
+    - {"status": ..., "items" ...}
+    Possible return status :
+    - OK
+    """
+    # Auth check
+    if not session['is_logged']:
+        return render_template('json.html', json="{}"), 401
+
+    # Output
+    data = {"status": "OK", "items": []}
+
+    # Get info
+    Database.on()
+    data['items'] = models.Products().get_list()
+    Database.off()
+
+    # Render
+    return render_template('json.html', json=json.dumps(data))
+
+@webapp.route('/products_edit/<string:barcode>/<string:name>')
+def products_edit(barcode, name):
+    """
+    AJAX method : Add/Edit/Delete items from the grocery list.
+    Outputs JSON.
+    :param barcode: An unknown product barcode
+    :param name: The new product's name
+    JSON format :
+    - {"status": ..., "barcode" ..., "name": ...}
+    Possible return status :
+    - ADDED / ADD ERROR
+    - EDITED / EDIT ERROR
+    """
+    # Auth check
+    if not session['is_logged']:
+        return render_template('json.html', json="{}"), 401
+
+    # Output
+    data = {"status": "", "barcode": barcode, "name": name}
+
+    # Database access
+    Database.on()
+    products_db = models.Products()
+
+    # Try to get the entry in the grocery list
+    with products_db.get_item(barcode) as exists:
+
+        # If it doesn't exist : add it
+        if not exists:
+            try:
+                products_db.add_item(barcode, name, '')
+                data['status'] = 'ADDED'
+            except Exception as trace:
+                data['status'] = 'ADD ERROR'
+        # If it exists : edit it
+        else:
+            try:
+                products_db.edit_item(barcode, name, '')
+                data['status'] = 'EDITED'
+            except Exception as trace:
+                data['status'] = 'EDIT ERROR'
+
+    # Database : off and outputs data
+    Database.off()
+    return render_template('json.html', json=json.dumps(data))
+
+@webapp.route('/products_delete/<string:barcode>')
+def products_delete(barcode):
+    """
+    AJAX method : Deletes an item from the products table.
+    Outputs JSON.
+    Returns the latest version of the grocery list.
+    JSON format :
+    - {"status": ...}
+    Possible return status :
+    - OK
+    - DELETE ERROR
+    """
+    # Auth check
+    if not session['is_logged']:
+        return render_template('json.html', json="{}"), 401
+
+    # Output
+    data = {"status": "OK"}
+
+    # Try to delete
+    Database.on()
+    try:
+        models.Products().delete_item(barcode)
+        data['status'] = 'OK'
+    except Exception as trace:
+        data['status'] = 'DELETE ERROR'
+    Database.off()
+
+    # Render
     return render_template('json.html', json=json.dumps(data))
