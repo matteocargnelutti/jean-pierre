@@ -41,7 +41,7 @@ class Products:
                 CREATE TABLE IF NOT EXISTS Products (
                     barcode CHAR (13) PRIMARY KEY,
                     name    TEXT,
-                    pic     TEXT
+                    pic     BOOL
                 )
                 WITHOUT ROWID;
                 """
@@ -69,12 +69,12 @@ class Products:
         else:
             return False
 
-    def add_item(self, barcode, name, pic=''):
+    def add_item(self, barcode, name, pic=False):
         """
         Adds a product
         :param barcode: barcode to lookup for
         :param name: name of the product
-        :param pic: blob of the thumbnail pic
+        :param pic: bool that says if the product has a pic
         :type name: string
         :type barcode: string
         :type pic: binary
@@ -93,7 +93,7 @@ class Products:
         Edits a product
         :param barcode: barcode to lookup for
         :param name: name of the product
-        :param pic: blob of the thumbnail pic
+        :param pic: bool that says if the product has a pic
         :type name: string
         :type barcode: string
         :type pic: binary

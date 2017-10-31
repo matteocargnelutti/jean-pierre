@@ -10,7 +10,6 @@ scanner/utils/findproduct.py
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
-import base64
 from threading import Thread, RLock
 
 import requests
@@ -46,7 +45,7 @@ class FindProduct(Thread):
         Thread.__init__(self)
         self.barcode = barcode
         self.name = ''
-        self.pic = ''
+        self.pic = False
         self.quantity = 1
 
     def run(self):
@@ -144,9 +143,13 @@ class FindProduct(Thread):
             thumb = attempt['product']['image_thumb_url']
             try:
                 pic = requests.get(thumb, timeout=10)
-                self.pic = b"data:image/jpg;base64," + base64.b64encode(pic.content)
+                self.pic = self.barcode + '.jpg'
+                filepath = 'assets/products/'+self.pic
+                # Save
+                with open(filepath) as file:
+                    file.write(pic.content)
             except Exception as trace:
-                self.pic = '' # Ignore
+                self.pic = False # Ignore
 
         self.name = name
         return True
