@@ -12,10 +12,14 @@ tests/test_controllers.py - Units & integration tests for the controllers packag
 #-----------------------------------------------------------------------------
 import os
 import getpass
+import hashlib
+
+from flask import session
 
 import models
 import controllers
 from utils import Database, Lang
+from controllers import webapp
 
 #-----------------------------------------------------------------------------
 # Tests for : controllers.Config
@@ -132,3 +136,60 @@ class TestConfig:
         """
         Database.off()
         os.remove(Database.DATABASE_TEST)
+
+#-----------------------------------------------------------------------------
+# Tests for : controllers.Web
+#-----------------------------------------------------------------------------
+class TestWeb:
+    """
+    Tests for the web controller, based on flask
+    """
+    def setup_method(self):
+        """
+        Setup method :
+        - Sets database to test mode and populates it
+        - Launches Flask in test mode
+        """
+        # Database
+        Database.TEST_MODE = True
+        Database.on()
+
+        # Populate test database
+        self.params = models.Params(autoload=False)
+
+        self.password = bytearray(self.password, encoding='utf-8')
+        self.password = hashlib.sha1(self.password).hexdigest()
+        self.params.add_item('user_password', self.password)
+
+        # Flask test client
+        self.app = webapp.test_client()
+
+    def teardown_method(self):
+        """
+        Cleans up dummy database after each test
+        """
+        Database.off()
+        os.remove(Database.DATABASE_TEST)
+
+    def test_login(self):
+        """
+        Tests the login process, with both valid and invalid input.
+        Success conditions :
+        - Valid : HTTP 200, session "is_logged" = True
+        - Invalid : HTTP 200, session "is_logged" doesn't exist or is False
+        """
+        # Invalid
+        with webapp.test_client() as app:
+            data = {'password': 'abcd'}
+            response = app.post('/', data=data, follow_redirects=True)
+            assert response.status_code == 200
+            assert 'is_logged' not in session or not session['is_logged']
+
+        # Valid
+        with webapp.test_client() as app:
+            data = {'password': 'admin'}
+            response = app.post('/', data=data, follow_redirects=True)
+            assert response.status_code == 200
+            assert session['is_logged']
+
+    # To do : test each route

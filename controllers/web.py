@@ -301,14 +301,14 @@ def products_edit(barcode, name):
     # If it doesn't exist : add it
     if not exists:
         try:
-            products_db.add_item(barcode, name, '')
+            products_db.add_item(barcode, name, False)
             data['status'] = 'ADDED'
         except Exception as trace:
             data['status'] = 'ADD ERROR'
     # If it exists : edit it
     else:
         try:
-            products_db.edit_item(barcode, name, '')
+            products_db.edit_item(barcode, name, False)
             data['status'] = 'EDITED'
         except Exception as trace:
             data['status'] = 'EDIT ERROR'
