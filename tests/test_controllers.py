@@ -167,6 +167,7 @@ class TestWeb:
         self.password_sha1 = bytearray(self.password_raw, encoding='utf-8')
         self.password_sha1 = hashlib.sha1(self.password_sha1).hexdigest()
         self.params.add_item('user_password', self.password_sha1)
+        self.params.add_item('lang', 'en')
 
         # Flask test client
         self.app = webapp.test_client()
