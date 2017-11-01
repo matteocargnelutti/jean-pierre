@@ -134,10 +134,10 @@ def groceries():
                            lang=lang,
                            products_list=items)
 
-@webapp.route('/groceries_list')
-def groceries_list():
+@webapp.route('/api/groceries_list')
+def api_groceries_list():
     """
-    AJAX method : Gets all items from the grocery list.
+    API method : Gets all items from the grocery list.
     Outputs JSON.
     Returns the latest version of the grocery list.
     JSON format :
@@ -160,10 +160,10 @@ def groceries_list():
     # Render
     return render_template('json.html', json=json.dumps(data))
 
-@webapp.route('/groceries_edit/<string:barcode>/<int:quantity>')
-def groceries_edit(barcode, quantity):
+@webapp.route('/api/groceries_edit/<string:barcode>/<int:quantity>')
+def api_groceries_edit(barcode, quantity):
     """
-    AJAX method : Add/Edit/Delete items from the grocery list.
+    API method : Add/Edit/Delete items from the grocery list.
     Outputs JSON.
     :param barcode: A known product barcode
     :param quantity: The quantity defines the operation (quantity 0 = delete)
@@ -245,10 +245,10 @@ def products():
     # Return template
     return render_template('products.html', lang=lang)
 
-@webapp.route('/products_list')
-def products_list():
+@webapp.route('/api/products_list')
+def api_products_list():
     """
-    AJAX method : Gets all items from the products table.
+    API method : Gets all items from the products table.
     Outputs JSON.
     Returns the latest version of the grocery list.
     JSON format :
@@ -271,10 +271,10 @@ def products_list():
     # Render
     return render_template('json.html', json=json.dumps(data))
 
-@webapp.route('/products_edit/<string:barcode>/<string:name>')
-def products_edit(barcode, name):
+@webapp.route('/api/products_edit/<string:barcode>/<string:name>')
+def api_products_edit(barcode, name):
     """
-    AJAX method : Add/Edit/Delete items from the grocery list.
+    API method : Add/Edit/Delete items from the grocery list.
     Outputs JSON.
     :param barcode: An unknown product barcode
     :param name: The new product's name
@@ -317,10 +317,10 @@ def products_edit(barcode, name):
     Database.off()
     return render_template('json.html', json=json.dumps(data))
 
-@webapp.route('/products_delete/<string:barcode>')
-def products_delete(barcode):
+@webapp.route('/api/products_delete/<string:barcode>')
+def api_products_delete(barcode):
     """
-    AJAX method : Deletes an item from the products table.
+    API method : Deletes an item from the products table.
     Outputs JSON.
     Returns the latest version of the grocery list.
     JSON format :

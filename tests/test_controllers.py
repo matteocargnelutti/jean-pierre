@@ -154,7 +154,7 @@ class TestWeb:
         Database.TEST_MODE = True
         Database.on()
 
-        # Populate test database
+        # Create test database
         self.params = models.Params(autoload=False)
         self.products = models.Products()
         self.groceries = models.Groceries()
@@ -163,14 +163,18 @@ class TestWeb:
         self.products.create_table()
         self.groceries.create_table()
 
+        # Params : user config
         self.password_raw = 'abcdefg'
         self.password_sha1 = bytearray(self.password_raw, encoding='utf-8')
         self.password_sha1 = hashlib.sha1(self.password_sha1).hexdigest()
         self.params.add_item('user_password', self.password_sha1)
         self.params.add_item('lang', 'en')
 
-        # Flask test client
-        self.app = webapp.test_client()
+        # Products : 1 sample item
+        self.products.add_item('1234567890123', 'Lorem Ipsum', True)
+
+        # Groceries : 1 sample item
+        self.groceries.add_item('1234567890123', 1)
 
     def teardown_method(self):
         """
@@ -200,4 +204,59 @@ class TestWeb:
             assert response.status_code == 200
             assert session['is_logged']
 
-    # To do : test each route
+    def test_logout(self):
+        """
+        Tests the logout process.
+        Success conditions :
+        - HTTP 200, session "is_logged" doesn't exist anymore
+        """
+        with webapp.test_client() as app:
+            # Log in
+            data = {'password': self.password_raw}
+            response = app.post('/', data=data, follow_redirects=True)
+            assert response.status_code == 200
+            assert session['is_logged']
+
+            # Log out
+            response = app.get('/logout', follow_redirects=True)
+            assert response.status_code == 200
+            assert 'is_logged' not in session
+
+    def test_groceries(self):
+        """
+        Tests the access to the "groceries" page.
+        Success conditions :
+        - The page can't be accessed without being logged (returns HTTP 302)
+        - Returns HTTP 200 when logged
+        """
+        with webapp.test_client() as app:
+            # Tests access without being authenticated
+            response = app.get('/groceries')
+            assert response.status_code == 302
+
+            # Tests access while being authenticated
+            data = {'password': self.password_raw}
+            response = app.post('/', data=data, follow_redirects=True)
+            response = app.get('/groceries')
+            assert response.status_code == 200
+
+    def test_api_groceries_list(self):
+        """
+        Tests the access to the "groceries_list" API method.
+        Success conditions :
+        - The API can't be accessed without being logged : HTTP 401
+        - Returns HTTP 200 when logged with the expected content as JSON
+        """
+        with webapp.test_client() as app:
+            # Tests access without being authenticated
+            response = app.get('/api/groceries_list')
+            assert response.status_code == 401
+
+            # Tests access while being authenticated
+            data = {'password': self.password_raw}
+            response = app.post('/', data=data, follow_redirects=True)
+
+            # Does the API returns the expected data ?
+            response = app.get('/api/groceries_list')
+            assert response.status_code == 200
+            assert set(self.groceries.get_list()) == set(json.loads(response.data).keys())
