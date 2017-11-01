@@ -13,6 +13,7 @@ tests/test_controllers.py - Units & integration tests for the controllers packag
 import os
 import getpass
 import hashlib
+import json
 
 from flask import session
 
@@ -155,26 +156,23 @@ class TestWeb:
         Database.on()
 
         # Create test database
-        self.params = models.Params(autoload=False)
-        self.products = models.Products()
-        self.groceries = models.Groceries()
-
-        self.params.create_table()
-        self.products.create_table()
-        self.groceries.create_table()
+        models.Params(autoload=False).create_table()
+        models.Products().create_table()
+        models.Groceries().create_table()
 
         # Params : user config
         self.password_raw = 'abcdefg'
         self.password_sha1 = bytearray(self.password_raw, encoding='utf-8')
         self.password_sha1 = hashlib.sha1(self.password_sha1).hexdigest()
-        self.params.add_item('user_password', self.password_sha1)
-        self.params.add_item('lang', 'en')
+        params = models.Params()
+        params.add_item('user_password', self.password_sha1)
+        params.add_item('lang', 'en')
 
         # Products : 1 sample item
-        self.products.add_item('1234567890123', 'Lorem Ipsum', True)
+        models.Products().add_item('1234567890123', 'Lorem Ipsum', True)
 
         # Groceries : 1 sample item
-        self.groceries.add_item('1234567890123', 1)
+        models.Groceries().add_item('1234567890123', 1)
 
     def teardown_method(self):
         """
@@ -259,5 +257,10 @@ class TestWeb:
 
             # Does the API returns the expected data ?
             response = app.get('/api/groceries_list')
+
+            expected_data = models.Groceries.get_list()
+            given_data = str(response.data, encoding='utf-8')
+            given_data = json.loads(given_data).keys()
+
             assert response.status_code == 200
-            assert set(self.groceries.get_list()) == set(json.loads(response.data).keys())
+            assert set(expected_data) == set(given_data)
