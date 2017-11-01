@@ -157,9 +157,10 @@ class TestWeb:
         # Populate test database
         self.params = models.Params(autoload=False)
 
-        self.password = bytearray(self.password, encoding='utf-8')
-        self.password = hashlib.sha1(self.password).hexdigest()
-        self.params.add_item('user_password', self.password)
+        self.password_raw = 'admin'
+        self.password_sha1 = bytearray(self.password_raw, encoding='utf-8')
+        self.password_sha1 = hashlib.sha1(self.password_sha1).hexdigest()
+        self.params.add_item('user_password', self.password_sha1)
 
         # Flask test client
         self.app = webapp.test_client()
@@ -180,14 +181,14 @@ class TestWeb:
         """
         # Invalid
         with webapp.test_client() as app:
-            data = {'password': 'abcd'}
+            data = {'password': 'xxx'}
             response = app.post('/', data=data, follow_redirects=True)
             assert response.status_code == 200
             assert 'is_logged' not in session or not session['is_logged']
 
         # Valid
         with webapp.test_client() as app:
-            data = {'password': 'admin'}
+            data = {'password': self.password_raw}
             response = app.post('/', data=data, follow_redirects=True)
             assert response.status_code == 200
             assert session['is_logged']
