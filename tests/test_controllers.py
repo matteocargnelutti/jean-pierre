@@ -156,8 +156,14 @@ class TestWeb:
 
         # Populate test database
         self.params = models.Params(autoload=False)
+        self.products = models.Products()
+        self.groceries = models.Groceries()
 
-        self.password_raw = 'admin'
+        self.params.create_table()
+        self.products.create_table()
+        self.groceries.create_table()
+
+        self.password_raw = 'abcdefg'
         self.password_sha1 = bytearray(self.password_raw, encoding='utf-8')
         self.password_sha1 = hashlib.sha1(self.password_sha1).hexdigest()
         self.params.add_item('user_password', self.password_sha1)
