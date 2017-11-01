@@ -120,7 +120,7 @@ def groceries():
     Shows GROCERIES template if the user is logged.
     """
     # Auth check
-    if not session['is_logged']:
+    if 'is_logged' not in session or not session['is_logged']:
         return redirect(url_for('login'))
 
     # Database access + loads basic info
@@ -234,7 +234,7 @@ def products():
     Shows PRODUCTS template if the user is logged.
     """
     # Auth check
-    if not session['is_logged']:
+    if 'is_logged' not in session or not session['is_logged']:
         return redirect(url_for('login'))
 
     # Database access + loads basic info

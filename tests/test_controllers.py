@@ -236,10 +236,8 @@ class TestWeb:
 
             # Tests access while being authenticated
             data = {'password': self.password_raw}
-            Database.on() # Previous call has shut db access
             response = app.post('/', data=data, follow_redirects=True)
 
-            Database.on() # Previous call has shut db access
             response = app.get('/groceries')
             assert response.status_code == 200
 
@@ -257,11 +255,9 @@ class TestWeb:
 
             # Tests access while being authenticated
             data = {'password': self.password_raw}
-            Database.on() # Previous call has shut db access
             response = app.post('/', data=data, follow_redirects=True)
 
             # Does the API returns the expected data ?
-            Database.on() # Previous call has shut db access
             response = app.get('/api/groceries_list')
             assert response.status_code == 200
             assert set(self.groceries.get_list()) == set(json.loads(response.data).keys())
