@@ -258,7 +258,7 @@ class TestWeb:
             # Does the API returns the expected data ?
             response = app.get('/api/groceries_list')
 
-            expected_data = models.Groceries.get_list()
+            expected_data = models.Groceries().get_list()
             given_data = str(response.data, encoding='utf-8')
             given_data = json.loads(given_data).keys()
 
