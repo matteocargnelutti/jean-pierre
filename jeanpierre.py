@@ -19,7 +19,7 @@ from controllers.web import webapp # Gunicorn hook for Flask
 #-----------------------------------------------------------------------------
 # Version
 #-----------------------------------------------------------------------------
-JEANPIERRE_VERSION = '[:{ v0.1 - Opération Baguette'
+JEANPIERRE_VERSION = '[:{ v0.1 - Baguette'
 
 #-----------------------------------------------------------------------------
 # Main : routing

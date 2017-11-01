@@ -4,7 +4,7 @@
 **Work in progress**
 
 # Curent version :
-* v0.1 - "Opération Baguette"
+* v0.1 - "Baguette"
 
 # Hardware used
 * Raspberry Pi Zero W

@@ -201,6 +201,8 @@ def groceries_edit(barcode, quantity):
     # If it doesn't exist : add it
     if not exists:
         try:
+            if not quantity:
+                quantity = 1
             groceries_db.add_item(barcode, quantity)
             data['status'] = 'ADDED'
         except Exception as trace:
@@ -217,7 +219,7 @@ def groceries_edit(barcode, quantity):
         # If quantity > 0 : Edit quantity
         else:
             try:
-                groceries_db.edit_item(barcode, exists['quantity'] + quantity)
+                groceries_db.edit_item(barcode, abs(quantity))
                 data['status'] = 'EDITED'
             except Exception as trace:
                 data['status'] = 'EDIT ERROR'
@@ -256,9 +258,6 @@ def products_list():
     """
     # AJAX Auth check
     if not ('is_logged' in session and session['is_logged']):
-        return render_template('json.html', json="{}"), 401
-
-    if not auth:
         return render_template('json.html', json="{}"), 401
 
     # Output
