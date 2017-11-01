@@ -68,11 +68,9 @@ class Params:
             return False
         else:
             for item in items:
+                if item['key'] in ['camera_res_x', 'camera_res_y', 'buzzer_on', 'buzzer_port']:
+                    item['key'] = int(item['value'])
                 setattr(self, item['key'], item['value'])
-            self.camera_res_x = int(self.camera_res_x)
-            self.camera_res_y = int(self.camera_res_y)
-            self.buzzer_on = int(self.buzzer_on)
-            self.buzzer_port = int(self.buzzer_port)
             return True
 
     def create_table(self):
