@@ -179,10 +179,6 @@ def api_groceries_edit(barcode, quantity):
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
 
-    # Required parameters
-    if not barcode or not quantity:
-        return render_template('json.html', json="{}"), 400
-
     # Output
     data = {"status": "", "barcode": barcode, "quantity": quantity}
 
@@ -296,10 +292,6 @@ def api_products_edit(barcode, name):
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
 
-    # Required parameters
-    if not barcode or not name:
-        return render_template('json.html', json="{}"), 400
-
     # Output
     data = {"status": "", "barcode": barcode, "name": name}
 
@@ -347,10 +339,6 @@ def api_products_delete(barcode):
     # AJAX Auth check
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
-
-    # Required parameters
-    if not barcode:
-        return render_template('json.html', json="{}"), 400
 
     # Output
     data = {"status": "OK"}

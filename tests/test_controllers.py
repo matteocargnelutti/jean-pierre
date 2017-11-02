@@ -286,11 +286,6 @@ class TestWeb:
             data = {'password': self.password_raw}
             response = app.post('/', data=data, follow_redirects=True)
 
-            # Test : add/edit/delete
-            # Invalid input : missing parameters
-            response = app.get('/api/groceries_edit')
-            assert response.status_code == 400
-
             # Test : delete, valid input
             response = app.get('/api/groceries_edit/'+self.default_barcode+'/0')
             assert response.status_code == 200
@@ -386,11 +381,6 @@ class TestWeb:
             data = {'password': self.password_raw}
             response = app.post('/', data=data, follow_redirects=True)
 
-            # Test : add/edit
-            # Invalid input : missing parameters
-            response = app.get('/api/products_edit')
-            assert response.status_code == 400
-
             # Test : add
             # Valid input
             barcode = '1000000000001'
@@ -438,12 +428,6 @@ class TestWeb:
             response = app.post('/', data=data, follow_redirects=True)
 
             # Test : Delete
-            # Valid input : the entry we want to delete exists
             response = app.get('/api/products_delete/'+self.default_barcode)
             assert response.status_code == 200
             assert not models.Products().get_item(self.default_barcode)
-
-            # Test : Delete
-            # Invalid input : the entry we want to delete doesn't exist
-            response = app.get('/api/products_delete/'+self.default_barcode)
-            assert response.status_code == 400
