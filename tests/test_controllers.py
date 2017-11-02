@@ -286,12 +286,21 @@ class TestWeb:
             data = {'password': self.password_raw}
             response = app.post('/', data=data, follow_redirects=True)
 
-            # Test : delete
+            # Test : add/edit/delete
+            # Invalid input : missing parameters
+            response = app.get('/api/groceries_edit')
+            assert response.status_code == 400
+
+            # Test : delete, valid input
             response = app.get('/api/groceries_edit/'+self.default_barcode+'/0')
             assert response.status_code == 200
             assert not models.Groceries().get_item(self.default_barcode)
 
-            # Test : add
+            # Test : delete, invalid input (item doesn't exist, can't be deleted)
+            response = app.get('/api/groceries_edit/1337')
+            assert response.status_code == 404
+
+            # Test : add, valid input
             response = app.get('/api/groceries_edit/'+self.default_barcode+'/2')
             entry = models.Groceries().get_item(self.default_barcode)
             assert response.status_code == 200
@@ -299,13 +308,20 @@ class TestWeb:
             assert entry['barcode'] == self.default_barcode
             assert entry['quantity'] == 2
 
-            # Test : edit
+            # Test : edit, valid input
             response = app.get('/api/groceries_edit/'+self.default_barcode+'/4')
             entry = models.Groceries().get_item(self.default_barcode)
             assert response.status_code == 200
             assert entry
             assert entry['barcode'] == self.default_barcode
             assert entry['quantity'] == 4
+
+            # Test : edit, invalid input (item doesn't exist, can't be edited)
+            response = app.get('/api/groceries_edit/1337/1')
+            entry = models.Groceries().get_item('1337')
+            assert response.status_code == 400
+            assert not entry
+
 
     def test_products(self):
         """
@@ -358,8 +374,7 @@ class TestWeb:
         """
         Tests the "api_products_edit" API method.
         Success conditions :
-        - The API can't be accessed without being logged : HTTP 401
-        - Returns HTTP 200 when logged with the expected content as JSON
+        - The API can't be accessed without being logged
         - Perfoms correctly ADD / EDIT  operations
         """
         with webapp.test_client() as app:
@@ -371,7 +386,13 @@ class TestWeb:
             data = {'password': self.password_raw}
             response = app.post('/', data=data, follow_redirects=True)
 
+            # Test : add/edit
+            # Invalid input : missing parameters
+            response = app.get('/api/products_edit')
+            assert response.status_code == 400
+
             # Test : add
+            # Valid input
             barcode = '1000000000001'
             name = 'foobar'
 
@@ -383,6 +404,7 @@ class TestWeb:
             assert entry['name'] == name
 
             # Test : edit
+            # Valid input : the item we want to edit exists
             name = 'barfoo'
             response = app.get('/api/products_edit/'+barcode+'/'+name)
             entry = models.Products().get_item(barcode)
@@ -391,12 +413,19 @@ class TestWeb:
             assert entry['barcode'] == barcode
             assert entry['name'] == name
 
+            # Test : edit
+            # Invalid input : the item doesn't exist, so it can't be edited
+            response = app.get('/api/products_edit/1337/foo')
+            entry = models.Products().get_item('1337')
+            assert response.status_code == 400
+            assert not entry
+
+
     def test_api_products_delete(self):
         """
         Tests the "api_products_delete" API method.
         Success conditions :
-        - The API can't be accessed without being logged : HTTP 401
-        - Returns HTTP 200 when logged with the expected content as JSON
+        - The API can't be accessed without being logged
         - Perfoms correctly DELETE operations
         """
         with webapp.test_client() as app:
@@ -409,6 +438,12 @@ class TestWeb:
             response = app.post('/', data=data, follow_redirects=True)
 
             # Test : Delete
+            # Valid input : the entry we want to delete exists
             response = app.get('/api/products_delete/'+self.default_barcode)
             assert response.status_code == 200
             assert not models.Products().get_item(self.default_barcode)
+
+            # Test : Delete
+            # Invalid input : the entry we want to delete doesn't exist
+            response = app.get('/api/products_delete/'+self.default_barcode)
+            assert response.status_code == 400

@@ -170,14 +170,18 @@ def api_groceries_edit(barcode, quantity):
     JSON format :
     - {"status": ..., "barcode" ..., "quantity": ...}
     Possible return status :
-    - PRODUCT NOT FOUND
-    - ADDED / ADD ERROR
-    - EDITED / EDIT ERROR
-    - DELETED / DELETE ERROR
+    - PRODUCT NOT FOUND (404)
+    - ADDED (200) / ADD ERROR (400)
+    - EDITED (200) / EDIT ERROR (400)
+    - DELETED (200) / DELETE ERROR (400)
     """
     # AJAX Auth check
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
+
+    # Required parameters
+    if not barcode or not quantity:
+        return render_template('json.html', json="{}"), 400
 
     # Output
     data = {"status": "", "barcode": barcode, "quantity": quantity}
@@ -197,6 +201,7 @@ def api_groceries_edit(barcode, quantity):
 
     # Try to get the entry in the grocery list
     exists = groceries_db.get_item(barcode)
+    status_code = 200
 
     # If it doesn't exist : add it
     if not exists:
@@ -207,6 +212,7 @@ def api_groceries_edit(barcode, quantity):
             data['status'] = 'ADDED'
         except Exception as trace:
             data['status'] = 'ADD ERROR'
+            status_code = 400
     # If it exists :
     else:
         # If quantity = 0 : Delete
@@ -216,6 +222,7 @@ def api_groceries_edit(barcode, quantity):
                 data['status'] = 'DELETED'
             except Exception as trace:
                 data['status'] = 'DELETE ERROR'
+                status_code = 400
         # If quantity > 0 : Edit quantity
         else:
             try:
@@ -223,10 +230,11 @@ def api_groceries_edit(barcode, quantity):
                 data['status'] = 'EDITED'
             except Exception as trace:
                 data['status'] = 'EDIT ERROR'
+                status_code = 400
 
     # Database : off and outputs data
     Database.off()
-    return render_template('json.html', json=json.dumps(data))
+    return render_template('json.html', json=json.dumps(data)), status_code
 
 @webapp.route('/products')
 def products():
@@ -254,7 +262,7 @@ def api_products_list():
     JSON format :
     - {"status": ..., "items" ...}
     Possible return status :
-    - OK
+    - OK (200)
     """
     # AJAX Auth check
     if not ('is_logged' in session and session['is_logged']):
@@ -281,12 +289,16 @@ def api_products_edit(barcode, name):
     JSON format :
     - {"status": ..., "barcode" ..., "name": ...}
     Possible return status :
-    - ADDED / ADD ERROR
-    - EDITED / EDIT ERROR
+    - ADDED (200) / ADD ERROR (400)
+    - EDITED (200) / EDIT ERROR (400)
     """
     # AJAX Auth check
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
+
+    # Required parameters
+    if not barcode or not name:
+        return render_template('json.html', json="{}"), 400
 
     # Output
     data = {"status": "", "barcode": barcode, "name": name}
@@ -297,6 +309,7 @@ def api_products_edit(barcode, name):
 
     # Try to get the entry in the grocery list
     exists = products_db.get_item(barcode)
+    status_code = 200
 
     # If it doesn't exist : add it
     if not exists:
@@ -305,6 +318,7 @@ def api_products_edit(barcode, name):
             data['status'] = 'ADDED'
         except Exception as trace:
             data['status'] = 'ADD ERROR'
+            status_code = 400
     # If it exists : edit it
     else:
         try:
@@ -312,10 +326,11 @@ def api_products_edit(barcode, name):
             data['status'] = 'EDITED'
         except Exception as trace:
             data['status'] = 'EDIT ERROR'
+            status_code = 400
 
     # Database : off and outputs data
     Database.off()
-    return render_template('json.html', json=json.dumps(data))
+    return render_template('json.html', json=json.dumps(data)), status_code
 
 @webapp.route('/api/products_delete/<string:barcode>')
 def api_products_delete(barcode):
@@ -326,12 +341,16 @@ def api_products_delete(barcode):
     JSON format :
     - {"status": ...}
     Possible return status :
-    - OK
-    - DELETE ERROR
+    - OK (200)
+    - DELETE ERROR (400)
     """
     # AJAX Auth check
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
+
+    # Required parameters
+    if not barcode:
+        return render_template('json.html', json="{}"), 400
 
     # Output
     data = {"status": "OK"}
@@ -341,9 +360,11 @@ def api_products_delete(barcode):
     try:
         models.Products().delete_item(barcode)
         data['status'] = 'OK'
+        status_code = 200
     except Exception as trace:
         data['status'] = 'DELETE ERROR'
+        status_code = 400
     Database.off()
 
     # Render
-    return render_template('json.html', json=json.dumps(data))
+    return render_template('json.html', json=json.dumps(data)), status_code
