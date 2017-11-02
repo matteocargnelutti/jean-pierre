@@ -164,6 +164,7 @@ def api_groceries_list():
 def api_groceries_edit(barcode, quantity):
     """
     API method : Add/Edit/Delete items from the grocery list.
+    If the item doesn't exist, it will be created.
     Outputs JSON.
     :param barcode: A known product barcode
     :param quantity: The quantity defines the operation (quantity 0 = delete)
@@ -278,7 +279,8 @@ def api_products_list():
 @webapp.route('/api/products_edit/<string:barcode>/<string:name>')
 def api_products_edit(barcode, name):
     """
-    API method : Add/Edit/Delete items from the grocery list.
+    API method : Add/Edit/Delete items from the products database.
+    If an item doesn't exist, it will be created.
     Outputs JSON.
     :param barcode: An unknown product barcode
     :param name: The new product's name

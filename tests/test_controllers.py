@@ -291,10 +291,6 @@ class TestWeb:
             assert response.status_code == 200
             assert not models.Groceries().get_item(self.default_barcode)
 
-            # Test : delete, invalid input (item doesn't exist, can't be deleted)
-            response = app.get('/api/groceries_edit/1337')
-            assert response.status_code == 404
-
             # Test : add, valid input
             response = app.get('/api/groceries_edit/'+self.default_barcode+'/2')
             entry = models.Groceries().get_item(self.default_barcode)
@@ -310,12 +306,6 @@ class TestWeb:
             assert entry
             assert entry['barcode'] == self.default_barcode
             assert entry['quantity'] == 4
-
-            # Test : edit, invalid input (item doesn't exist, can't be edited)
-            response = app.get('/api/groceries_edit/1337/1')
-            entry = models.Groceries().get_item('1337')
-            assert response.status_code == 400
-            assert not entry
 
 
     def test_products(self):
@@ -382,7 +372,6 @@ class TestWeb:
             response = app.post('/', data=data, follow_redirects=True)
 
             # Test : add
-            # Valid input
             barcode = '1000000000001'
             name = 'foobar'
 
@@ -394,7 +383,6 @@ class TestWeb:
             assert entry['name'] == name
 
             # Test : edit
-            # Valid input : the item we want to edit exists
             name = 'barfoo'
             response = app.get('/api/products_edit/'+barcode+'/'+name)
             entry = models.Products().get_item(barcode)
@@ -402,14 +390,6 @@ class TestWeb:
             assert entry
             assert entry['barcode'] == barcode
             assert entry['name'] == name
-
-            # Test : edit
-            # Invalid input : the item doesn't exist, so it can't be edited
-            response = app.get('/api/products_edit/1337/foo')
-            entry = models.Products().get_item('1337')
-            assert response.status_code == 400
-            assert not entry
-
 
     def test_api_products_delete(self):
         """
