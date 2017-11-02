@@ -258,6 +258,7 @@ class TestWeb:
             response = app.post('/', data=data, follow_redirects=True)
 
             # Does the API returns the expected data ?
+            # JSON "item" entry must contain the same thing as Groceries > get_list
             response = app.get('/api/groceries_list')
 
             expected_data = models.Groceries().get_list()
@@ -287,21 +288,24 @@ class TestWeb:
 
             # Test : delete
             response = app.get('/api/groceries_edit/'+self.default_barcode+'/0')
+            assert response.status_code == 200
             assert not models.Groceries().get_item(self.default_barcode)
 
             # Test : add
             response = app.get('/api/groceries_edit/'+self.default_barcode+'/2')
-            added = models.Groceries().get_item(self.default_barcode)
-            assert added
-            assert added['barcode'] == self.default_barcode
-            assert added['quantity'] == 2
+            entry = models.Groceries().get_item(self.default_barcode)
+            assert response.status_code == 200
+            assert entry
+            assert entry['barcode'] == self.default_barcode
+            assert entry['quantity'] == 2
 
             # Test : edit
             response = app.get('/api/groceries_edit/'+self.default_barcode+'/4')
-            added = models.Groceries().get_item(self.default_barcode)
-            assert added
-            assert added['barcode'] == self.default_barcode
-            assert added['quantity'] == 4
+            entry = models.Groceries().get_item(self.default_barcode)
+            assert response.status_code == 200
+            assert entry
+            assert entry['barcode'] == self.default_barcode
+            assert entry['quantity'] == 4
 
     def test_products(self):
         """
@@ -321,3 +325,90 @@ class TestWeb:
 
             response = app.get('/products')
             assert response.status_code == 200
+
+    def test_api_products_list(self):
+        """
+        Tests the "api_products_list" API method.
+        Success conditions :
+        - The API can't be accessed without being logged : HTTP 401
+        - Returns HTTP 200 when logged with the expected content as JSON
+        """
+        with webapp.test_client() as app:
+            # Tests access without being authenticated
+            response = app.get('/api/products_list')
+            assert response.status_code == 401
+
+            # Authenticate
+            data = {'password': self.password_raw}
+            response = app.post('/', data=data, follow_redirects=True)
+
+            # Does the API returns the expected data ?
+            # JSON "item" entry must contain the same thing as Products > get_list
+            response = app.get('/api/products_list')
+
+            expected_data = models.Products().get_list()
+            given_data = str(response.data, encoding='utf-8')
+            given_data = json.loads(given_data)
+            given_data = given_data['items'].keys()
+
+            assert response.status_code == 200
+            assert set(expected_data) == set(given_data)
+
+    def test_api_products_edit(self):
+        """
+        Tests the "api_products_edit" API method.
+        Success conditions :
+        - The API can't be accessed without being logged : HTTP 401
+        - Returns HTTP 200 when logged with the expected content as JSON
+        - Perfoms correctly ADD / EDIT  operations
+        """
+        with webapp.test_client() as app:
+            # Tests access without being authenticated
+            response = app.get('/api/products_edit/foo/bar')
+            assert response.status_code == 401
+
+            # Authenticate
+            data = {'password': self.password_raw}
+            response = app.post('/', data=data, follow_redirects=True)
+
+            # Test : add
+            barcode = '1000000000001'
+            name = 'foobar'
+
+            response = app.get('/api/products_edit/'+barcode+'/'+name)
+            entry = models.Products().get_item(barcode)
+            assert response.status_code == 200
+            assert entry
+            assert entry['barcode'] == barcode
+            assert entry['name'] == name
+
+            # Test : edit
+            name = 'barfoo'
+            response = app.get('/api/products_edit/'+barcode+'/'+name)
+            entry = models.Products().get_item(barcode)
+            assert response.status_code == 200
+            assert entry
+            assert entry['barcode'] == barcode
+            assert entry['name'] == name
+
+    def test_api_products_delete(self):
+        """
+        Tests the "api_products_delete" API method.
+        Success conditions :
+        - The API can't be accessed without being logged : HTTP 401
+        - Returns HTTP 200 when logged with the expected content as JSON
+        - Perfoms correctly DELETE operations
+        """
+        with webapp.test_client() as app:
+            # Tests access without being authenticated
+            response = app.get('/api/products_edit/foo/bar')
+            assert response.status_code == 401
+
+            # Authenticate
+            data = {'password': self.password_raw}
+            response = app.post('/', data=data, follow_redirects=True)
+
+            # Test : Delete
+            response = app.get('/api/products_delete/'+self.default_barcode)
+            assert response.status_code == 200
+            assert not models.Products().get_item(self.default_barcode)
