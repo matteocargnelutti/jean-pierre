@@ -169,10 +169,12 @@ class TestWeb:
         params.add_item('lang', 'en')
 
         # Products : 1 sample item
-        models.Products().add_item('1234567890123', 'Lorem Ipsum', True)
+        self.default_barcode = '1234567890123'
+        self.default_name = 'Lorem Ipsum'
+        models.Products().add_item(self.default_barcode, self.default_name, True)
 
         # Groceries : 1 sample item
-        models.Groceries().add_item('1234567890123', 1)
+        models.Groceries().add_item(self.default_barcode, 1)
 
     def teardown_method(self):
         """
@@ -222,7 +224,7 @@ class TestWeb:
 
     def test_groceries(self):
         """
-        Tests the access to the "groceries" page.
+        Tests access to the "groceries" page.
         Success conditions :
         - The page can't be accessed without being logged (returns HTTP 302)
         - Returns HTTP 200 when logged
@@ -241,7 +243,7 @@ class TestWeb:
 
     def test_api_groceries_list(self):
         """
-        Tests the access to the "groceries_list" API method.
+        Tests the "api_groceries_list" API method.
         Success conditions :
         - The API can't be accessed without being logged : HTTP 401
         - Returns HTTP 200 when logged with the expected content as JSON
@@ -251,7 +253,7 @@ class TestWeb:
             response = app.get('/api/groceries_list')
             assert response.status_code == 401
 
-            # Tests access while being authenticated
+            # Authenticate
             data = {'password': self.password_raw}
             response = app.post('/', data=data, follow_redirects=True)
 
@@ -265,3 +267,57 @@ class TestWeb:
 
             assert response.status_code == 200
             assert set(expected_data) == set(given_data)
+
+    def test_api_groceries_edit(self):
+        """
+        Tests the "api_groceries_edit" API method.
+        Success conditions :
+        - The API can't be accessed without being logged : HTTP 401
+        - Returns HTTP 200 when logged with the expected content as JSON
+        - Perfoms correctly ADD / EDIT / DELETE operations
+        """
+        with webapp.test_client() as app:
+            # Tests access without being authenticated
+            response = app.get('/api/groceries_edit/'+self.default_barcode+'/1')
+            assert response.status_code == 401
+
+            # Authenticate
+            data = {'password': self.password_raw}
+            response = app.post('/', data=data, follow_redirects=True)
+
+            # Test : delete
+            response = app.get('/api/groceries_edit/'+self.default_barcode+'/0')
+            assert not models.Groceries().get_item(self.default_barcode)
+
+            # Test : add
+            response = app.get('/api/groceries_edit/'+self.default_barcode+'/2')
+            added = models.Groceries().get_item(self.default_barcode)
+            assert added
+            assert added['barcode'] == self.default_barcode
+            assert added['quantity'] == 2
+
+            # Test : edit
+            response = app.get('/api/groceries_edit/'+self.default_barcode+'/4')
+            added = models.Groceries().get_item(self.default_barcode)
+            assert added
+            assert added['barcode'] == self.default_barcode
+            assert added['quantity'] == 4
+
+    def test_products(self):
+        """
+        Tests access to the "products" page.
+        Success conditions :
+        - The page can't be accessed without being logged (returns HTTP 302)
+        - Returns HTTP 200 when logged
+        """
+        with webapp.test_client() as app:
+            # Tests access without being authenticated
+            response = app.get('/products')
+            assert response.status_code == 302
+
+            # Tests access while being authenticated
+            data = {'password': self.password_raw}
+            response = app.post('/', data=data, follow_redirects=True)
+
+            response = app.get('/products')
+            assert response.status_code == 200
