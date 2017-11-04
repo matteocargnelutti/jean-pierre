@@ -6,10 +6,17 @@
  * main.js - Main event catcher / handler
 */
 /** Global handler  */
-window.jeanpierre = {}
+window.jp = {}
 
 jQuery(document).ready( function() {
 //-----------------------------------------------------------------------------
-// 
+// Inits LANG content
 //-----------------------------------------------------------------------------
+/**
+ * Globally accessible objects :
+ * - jp.lang = Use jp.lang.get('key') to get a message by its key
+ * - jp.status = Use jp.status.say('key') to show a message by its key
+*/
+jp.lang = new jp.Lang()
+jp.status = new jp.Status()
 });

@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------
 // Lang Prototype
 //-----------------------------------------------------------------------------
-jeanpierre.Lang = function() {
+jp.Lang = function() {
     /**
      * Constructor
     */
@@ -26,7 +26,6 @@ jeanpierre.Lang = function() {
             dataType: 'json',
             success: function(response){
                 self.data = response;
-                console.log(response);
             }
         })
     };

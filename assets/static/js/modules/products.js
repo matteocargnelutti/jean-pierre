@@ -9,11 +9,12 @@
 //-----------------------------------------------------------------------------
 // Products Prototype
 //-----------------------------------------------------------------------------
-jeanpierre.Products = function() {
+jp.Products = function() {
     /**
      * Constructor
     */
-    this.list = {} // Products list data
+    var self = this;
+    this.list = {}; // Products list data
 
     /**
      * Injects the list as HTML content
@@ -22,16 +23,16 @@ jeanpierre.Products = function() {
     */
     this.show_list = function(refresh, selector) {
         if( refresh == true ) {
-            this.refresh_list()
+            this.refresh_list();
         }
-        console.log(this.list)
+        console.log(this.list);
     };
 
     /**
      * Fetches products list from the server
     */
     this.refresh_list = function() {
-        console.log("Refresh")
+        console.log("Refresh");
     };
 
     /**
@@ -40,7 +41,7 @@ jeanpierre.Products = function() {
      * @param {string} name
     */
     this.edit_item = function(barcode, name) {
-        console.log("Edit : "+ barcode + ' - '+ name)
+        console.log("Edit : "+ barcode + ' - '+ name);
     }
 
     /**
@@ -48,7 +49,7 @@ jeanpierre.Products = function() {
      * @param {string} barcode
     */
     this.delete_item = function(barcode) {
-        console.log("Edit : "+ barcode + ' - '+ name)
+        console.log("Edit : "+ barcode + ' - '+ name);
     }
 
 };

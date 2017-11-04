@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------
 // Groceries Prototype
 //-----------------------------------------------------------------------------
-jeanpierre.Groceries = function() {
+jp.Groceries = function() {
     /**
      * Constructor
     */
@@ -22,16 +22,27 @@ jeanpierre.Groceries = function() {
     */
     this.show_list = function(refresh) {
         if( refresh == true ) {
-            this.refresh_list()
+            this.refresh_list();
         }
-        console.log(this.list)
+        console.log(this.list);
     };
 
     /**
      * Fetches grocery list from the server
     */
     this.refresh_list = function() {
-        console.log("Refresh")
+        $.ajax({
+            url: "/groceries_list",
+            type: 'GET',
+            dataType: 'json',
+            success: function(response){
+                self.list = response;
+            },
+            error: function(){
+                jp.status.say('web_groceries_list_error')
+            }
+
+        })
     };
 
     /**
@@ -41,7 +52,7 @@ jeanpierre.Groceries = function() {
      * @param {int} quantity
     */
     this.edit_item = function(barcode, quantity) {
-        console.log("Edit : "+ barcode + ' - '+ quantity)
+        console.log("Edit : "+ barcode + ' - '+ quantity);
     }
 
 };
