@@ -359,8 +359,8 @@ def api_products_delete(barcode):
     # Render
     return render_template('json.html', json=json.dumps(data)), status_code
 
-@webapp.route('/lang')
-def lang():
+@webapp.route('/api/lang')
+def api_lang():
     """
     Returns JSON of the lang file
     """

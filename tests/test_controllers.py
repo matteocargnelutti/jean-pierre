@@ -420,8 +420,8 @@ class TestWeb:
         - Returns HTTP 200 with associated JSON data
         """
         with webapp.test_client() as app:
-            response = app.get('/lang')
-            
+            response = app.get('/api/lang')
+
             expected_data = utils.Lang('en').__dict__
             given_data = str(response.data, encoding='utf-8')
             given_data = json.loads(given_data)

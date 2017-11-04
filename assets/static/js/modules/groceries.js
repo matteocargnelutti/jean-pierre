@@ -13,6 +13,7 @@ jp.Groceries = function() {
     /**
      * Constructor
     */
+    var self = this;
     this.list = {} // Grocery list data
 
     /**
@@ -22,17 +23,17 @@ jp.Groceries = function() {
     */
     this.show_list = function(refresh) {
         if( refresh == true ) {
-            this.refresh_list();
+            self.fetch_list();
         }
-        console.log(this.list);
+        console.log(self.list);
     };
 
     /**
      * Fetches grocery list from the server
     */
-    this.refresh_list = function() {
+    this.fetch_list = function() {
         $.ajax({
-            url: "/groceries_list",
+            url: "/api/groceries_list",
             type: 'GET',
             dataType: 'json',
             success: function(response){
@@ -42,7 +43,7 @@ jp.Groceries = function() {
                 jp.status.say('web_groceries_list_error')
             }
 
-        })
+        });
     };
 
     /**
@@ -54,5 +55,10 @@ jp.Groceries = function() {
     this.edit_item = function(barcode, quantity) {
         console.log("Edit : "+ barcode + ' - '+ quantity);
     }
+
+    /**
+     * Fetches list at init
+    */
+    this.fetch_list();
 
 };

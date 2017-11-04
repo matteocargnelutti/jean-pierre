@@ -23,16 +23,27 @@ jp.Products = function() {
     */
     this.show_list = function(refresh, selector) {
         if( refresh == true ) {
-            this.refresh_list();
+            self.fetch_list();
         }
-        console.log(this.list);
+        console.log(self.list);
     };
 
     /**
      * Fetches products list from the server
     */
-    this.refresh_list = function() {
-        console.log("Refresh");
+    this.fetch_list = function() {
+        $.ajax({
+            url: "/api/products_list",
+            type: 'GET',
+            dataType: 'json',
+            success: function(response){
+                self.list = response;
+            },
+            error: function(){
+                jp.status.say('web_products_list_error')
+            }
+
+        });
     };
 
     /**
@@ -51,5 +62,10 @@ jp.Products = function() {
     this.delete_item = function(barcode) {
         console.log("Edit : "+ barcode + ' - '+ name);
     }
+
+    /**
+     * Fetches list at init
+    */
+    this.fetch_list();
 
 };

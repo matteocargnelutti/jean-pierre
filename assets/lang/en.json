@@ -12,5 +12,6 @@
     "config_camera_res_y": "Camera resolution, HEIGHT (500 by default) : ",
     "config_password": "Please define a password for Jean-Pierre ('admin' by default) : ",
     "config_done": "All set ! Enjoy !",
-    "web_groceries_list_error": "Unable to fetch your grocery list."
+    "web_groceries_list_error": "Unable to fetch your grocery list : are you logged in ?",
+    "web_products_list_error": "Unable to fetch your products list : are you logged in ?"
 }

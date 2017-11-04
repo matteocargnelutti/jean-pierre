@@ -17,17 +17,17 @@ jp.Lang = function() {
     this.data = {};
 
     /**
-     * Fetches messages in the language set in the Params config table
+     * Fetches lang content in the language the user has defined
     */
-    this.fetch = function() {
+    this.fetch_list = function() {
         $.ajax({
-            url: "/lang",
+            url: "/api/lang",
             type: 'GET',
             dataType: 'json',
             success: function(response){
                 self.data = response;
             }
-        })
+        });
     };
 
     /**
@@ -37,7 +37,7 @@ jp.Lang = function() {
     */
     this.get = function(key) {
         if( self.data[key] ) {
-            return this.data[key];
+            return self.data[key];
         }
         else {
             return key;
@@ -47,5 +47,5 @@ jp.Lang = function() {
     /**
      * Automaticaly fetches lang data on init
     */
-    this.fetch();
+    this.fetch_list();
 };
