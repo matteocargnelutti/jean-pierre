@@ -411,3 +411,20 @@ class TestWeb:
             response = app.get('/api/products_delete/'+self.default_barcode)
             assert response.status_code == 200
             assert not models.Products().get_item(self.default_barcode)
+
+    def test_lang(self):
+        """
+        Tests access to the "lang" JSON content
+        Success conditions :
+        - Returns HTTP 200 with associated JSON data
+        """
+        with webapp.test_client() as app:
+            response = app.get('/lang')
+            
+            expected_data = models.Lang().__dict__
+            given_data = str(response.data, encoding='utf-8')
+            given_data = json.loads(given_data)
+            given_data = given_data['items'].keys()
+
+            assert response.status_code == 200
+            assert set(expected_data) == set(given_data)

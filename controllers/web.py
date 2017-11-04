@@ -358,3 +358,51 @@ def api_products_delete(barcode):
 
     # Render
     return render_template('json.html', json=json.dumps(data)), status_code
+
+@webapp.route('/api/products_delete/<string:barcode>')
+def api_products_delete(barcode):
+    """
+    API method : Deletes an item from the products table.
+    Outputs JSON.
+    Returns the latest version of the grocery list.
+    JSON format :
+    - {"status": ...}
+    Possible return status :
+    - OK (200)
+    - DELETE ERROR (400)
+    """
+    # AJAX Auth check
+    if not ('is_logged' in session and session['is_logged']):
+        return render_template('json.html', json="{}"), 401
+
+    # Output
+    data = {"status": "OK"}
+
+    # Try to delete
+    Database.on()
+    try:
+        models.Products().delete_item(barcode)
+        data['status'] = 'OK'
+        status_code = 200
+    except Exception as trace:
+        data['status'] = 'DELETE ERROR'
+        status_code = 400
+    Database.off()
+
+    # Render
+    return render_template('json.html', json=json.dumps(data)), status_code
+
+@webapp.route('/lang')
+def lang():
+    """
+    Returns JSON of the lang file
+    """
+    # Database access + loads basic info
+    Database.on()
+    lang = utils.Lang(models.Params().lang)
+    lang = lang.__dict__
+    Database.off()
+
+    # Return template
+    return render_template('json.html',
+                           json=json.dumps(lang))
