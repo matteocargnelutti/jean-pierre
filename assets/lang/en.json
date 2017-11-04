@@ -13,5 +13,7 @@
     "config_password": "Please define a password for Jean-Pierre ('admin' by default) : ",
     "config_done": "All set ! Enjoy !",
     "web_groceries_list_error": "Unable to fetch your grocery list : are you logged in ?",
+    "web_groceries_list_process": "Processing ...",
+    "web_groceries_list_edit_ok": "Your grocery list has been edited successfully.",
     "web_products_list_error": "Unable to fetch your products list : are you logged in ?"
 }

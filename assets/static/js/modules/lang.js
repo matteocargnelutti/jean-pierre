@@ -18,14 +18,16 @@ jp.Lang = function() {
 
     /**
      * Fetches lang content in the language the user has defined
+     * @param {function} callback
     */
-    this.fetch_list = function() {
+    this.fetch_list = function(callback) {
         $.ajax({
             url: "/api/lang",
             type: 'GET',
             dataType: 'json',
             success: function(response){
                 self.data = response;
+                callback();
             }
         });
     };
@@ -44,8 +46,4 @@ jp.Lang = function() {
         }
     }
 
-    /**
-     * Automaticaly fetches lang data on init
-    */
-    this.fetch_list();
 };

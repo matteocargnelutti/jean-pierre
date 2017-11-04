@@ -5,18 +5,36 @@
  *
  * main.js - Main event catcher / handler
 */
-/** Global handler  */
 window.jp = {}
 
 jQuery(document).ready( function() {
 //-----------------------------------------------------------------------------
-// Inits LANG content
+// Globally accessible objects
 //-----------------------------------------------------------------------------
-/**
- * Globally accessible objects :
- * - jp.lang = Use jp.lang.get('key') to get a message by its key
- * - jp.status = Use jp.status.say('key') to show a message by its key
-*/
-jp.lang = new jp.Lang()
-jp.status = new jp.Status()
+jp.lang = new jp.Lang(); // Use jp.lang.get('key') for localized messages
+jp.status = new jp.Status(); // Status bar. use jp.status.say('key')
+jp.groceries = new jp.Groceries(); // Groceries page handling
+
+//-----------------------------------------------------------------------------
+// Init
+//-----------------------------------------------------------------------------
+jp.lang.fetch_list( function(){
+
+    // If on groceries page : fetch and show list
+    if( jQuery('body.groceries').length > 0 ) {
+        jp.groceries.fetch_list( function(){
+            jp.groceries.show_list();
+        });
+    }
+
+    // If on products page : show list
+    if( jQuery('body.products').length > 0 ) {
+
+    }
+
+});
+
+//-----------------------------------------------------------------------------
+// Event binding
+//-----------------------------------------------------------------------------
 });
