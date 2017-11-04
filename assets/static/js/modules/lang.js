@@ -13,13 +13,22 @@ jeanpierre.Lang = function() {
     /**
      * Constructor
     */
-    this.data = {}
+    var self = this;
+    this.data = {};
 
     /**
      * Fetches messages in the language set in the Params config table
     */
-    this.message = function() {
-        console.log("Ok")
+    this.fetch = function() {
+        $.ajax({
+            url: "/lang",
+            type: 'GET',
+            dataType: 'json',
+            success: function(response){
+                self.data = response;
+                console.log(response);
+            }
+        })
     };
 
     /**
@@ -28,7 +37,16 @@ jeanpierre.Lang = function() {
      * @return {string}
     */
     this.get = function(key) {
-        return this.data[key]
+        if( self.data[key] ) {
+            return this.data[key];
+        }
+        else {
+            return key;
+        }
     }
 
+    /**
+     * Automaticaly fetches lang data on init
+    */
+    this.fetch();
 };

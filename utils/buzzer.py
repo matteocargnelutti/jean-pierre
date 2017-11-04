@@ -11,8 +11,10 @@ scanner/utils/buzzer.py
 # Imports
 #-----------------------------------------------------------------------------
 import time
+import os
 
-import RPi.GPIO as GPIO
+if not os.environ.get('PC_MODE'):
+    import RPi.GPIO as GPIO
 
 #-----------------------------------------------------------------------------
 # Buzzer class

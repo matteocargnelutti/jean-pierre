@@ -11,9 +11,6 @@
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css"/>
     <meta name="theme-color" content="#DE9440"/>
 
-    <!-- Javascript -->
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
     <!-- Libs & fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand:400,700" rel="stylesheet">
@@ -22,6 +19,13 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modules/lang.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modules/statusbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modules/groceries.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modules/products.js') }}"></script>
 
     <!-- Favicon -->
     <link href="{{ url_for('static', filename='favicon.png') }}" rel="icon" type="image/png"/>

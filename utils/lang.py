@@ -24,7 +24,7 @@ class Lang:
     - lang = Lang('en')
     - lang.message_key
     """
-    LANG_PATH = 'lang/'
+    LANG_PATH = 'assets/lang/'
     """ Defines lang files directory """
 
     def __init__(self, language='en'):

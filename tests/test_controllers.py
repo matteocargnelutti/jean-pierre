@@ -425,7 +425,7 @@ class TestWeb:
             expected_data = utils.Lang('en').__dict__
             given_data = str(response.data, encoding='utf-8')
             given_data = json.loads(given_data)
-            given_data = given_data['items'].keys()
+            given_data = given_data.keys()
 
             assert response.status_code == 200
             assert set(expected_data) == set(given_data)

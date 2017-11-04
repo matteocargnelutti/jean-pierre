@@ -11,10 +11,12 @@ controllers/scanner.py - Barcode scanner
 # Imports
 #-----------------------------------------------------------------------------
 from io import BytesIO
+import os
 
-import picamera
-from pyzbar.pyzbar import decode as pyzbar_decode
-from PIL import Image as pil_image
+if not os.environ.get('PC_MODE'):
+    import picamera
+    from pyzbar.pyzbar import decode as pyzbar_decode
+    from PIL import Image as pil_image
 
 from utils import Database
 import utils

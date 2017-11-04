@@ -49,6 +49,9 @@ Key | Value
 * Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
 * They are stored into the **Params** database.
 
+# Dev : PC Mode
+* Define an environnement variable `PC_MODE` if you wish to work on this project's code on your PC : it deactivates the import of RPi.GPIO and PiCamera
+
 # Software dependencies
 ## OS
 * Raspbian (lite)
