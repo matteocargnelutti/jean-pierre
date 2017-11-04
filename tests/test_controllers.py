@@ -19,8 +19,9 @@ from flask import session
 
 import models
 import controllers
-from utils import Database, Lang
 from controllers import webapp
+from utils import Database, Lang
+import utils
 
 #-----------------------------------------------------------------------------
 # Tests for : controllers.Config
@@ -421,7 +422,7 @@ class TestWeb:
         with webapp.test_client() as app:
             response = app.get('/lang')
             
-            expected_data = models.Lang().__dict__
+            expected_data = utils.Lang('en').__dict__
             given_data = str(response.data, encoding='utf-8')
             given_data = json.loads(given_data)
             given_data = given_data['items'].keys()
