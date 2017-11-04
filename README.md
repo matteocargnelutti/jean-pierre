@@ -27,6 +27,16 @@
 * `python jeanpierre.py --do web` : launches the web app process in debug mode.
 * `gunicorn --bind 0.0.0.0 jeanpierre:webapp` : launches the web app process in production mode.
 
+# Database structure
+* **Jean-Pierre** uses a SQLite3 database, stored as **database.db** at the project's root.
+
+Table | Use
+------| ---
+`Params` | Contains config parameters
+`Products` | Local products database, contains items scanned and found on OpenFoodFacts, as well as user-created items
+`Groceries` | Grocery list, based on the products table
+
+
 # Shared parameters
 Key | Value
 ----| -----

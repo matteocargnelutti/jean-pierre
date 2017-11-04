@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>{{PAGE_TITLE}}</title>
+    <meta name="description" content="{{PAGE_DESCRIPTION}}"/>
+
+    <!-- Style -->
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css"/>
+    <meta name="theme-color" content="#DE9440"/>
+
+    <!-- Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- Libs & fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand:400,700" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicon -->
+    <link href="{{ url_for('static', filename='favicon.png') }}" rel="icon" type="image/png"/>
+
+</head>
+
+<body>

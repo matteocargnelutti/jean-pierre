@@ -1,1 +1,0 @@
-Products images are stored here by utils.FindProduct.
