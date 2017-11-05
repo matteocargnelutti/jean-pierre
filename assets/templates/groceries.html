@@ -13,7 +13,7 @@
         <a href="">raw</a>
     </div>
 
-    <div class="add">
+    <form class="add">
         <select name="add_product">
             <option value="">{{lang.web_groceries_menu_add}}</option>
             {% for barcode,infos in products_list.items() %}
@@ -22,8 +22,8 @@
                 {% endif %}
             {% endfor %}
         </select>
-        <a href="#" title="">OK</a>
-    </div>
+        <button>OK</button>
+    </form>
 </div>
 
 <!-- Items list -->

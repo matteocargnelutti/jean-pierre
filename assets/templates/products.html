@@ -1,0 +1,21 @@
+{% include "_header.html" %}
+
+<h2>{{lang.web_products_title}}</h2>
+
+<!-- Products list menu -->
+<div class="menu">
+
+    <form class="add">
+        <h4>{{lang.web_products_menu_title}}</h4>
+        <input type="text" name="barcode" placeholder="{{lang.ean13}}" maxlength="13" required/>
+        <input type="text" name="name" placeholder="{{lang.product_name}}" maxlength="32" required/>
+        <button>OK</button>
+    </form>
+
+</div>
+
+<!-- Items list -->
+<div class="items">
+</div>
+
+{% include "_footer.html" %}

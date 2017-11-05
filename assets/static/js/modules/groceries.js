@@ -53,7 +53,7 @@ jp.Groceries = function() {
                 html += '<div>';
                     html += '<a href="#item-'+barcode+'" class="plus">+1</a>';
                     html += '<a href="#item-'+barcode+'" class="minus">-1</a>';
-                    html += '<a href="/products#item-'+barcode+'" class="plus">Edit</a>';
+                    html += '<a href="/products#item-'+barcode+'" class="edit">Edit</a>';
                 html += '</div>';
             html += '</div>';
         }
@@ -90,7 +90,7 @@ jp.Groceries = function() {
     */
     this.edit_item = function(barcode, quantity) {
         // Status bar : loading
-        jp.status.say('web_groceries_list_process');
+        jp.status.say('processing');
         
         // Query
         $.ajax({
@@ -101,7 +101,7 @@ jp.Groceries = function() {
                 // Refresh and display new list + display status
                 self.fetch_list(function(){
                     self.show_list();
-                    jp.status.say('web_groceries_list_edit_ok');
+                    jp.status.say('web_groceries_edit_ok');
                 });
             },
             error: function(){
@@ -118,34 +118,35 @@ jp.Groceries = function() {
         //
         // Add an item
         //
-        $('body.groceries .menu .add a').on('click', function(e){
+        $('body.groceries .menu form').on('submit', function(e){
             e.preventDefault();
-            barcode = $('.menu .add select').val();
-            quantity = 1
+            var barcode = $('.menu .add select').val();
+            var quantity = 1
 
             // If the product's already on the list, we increase its quantity
             if( self.list[barcode] ) {
                 quantity = self.list[barcode].quantity + 1
             }
-            jp.groceries.edit_item(barcode, quantity);
+            self.edit_item(barcode, quantity);
         });
 
         //
         // Edit an item
         //
-        $('body.groceries').delegate('.item a.plus, .item a.minus', 'click', function(e){
+        $('body.groceries .items').delegate('.item a.plus, .item a.minus', 'click', function(e){
             e.preventDefault();
-
-            barcode = $(this).parent('div').parent('div').attr('id').replace('item-', '');
+            
+            var barcode = $(this).parent('div').parent('div').attr('id').replace('item-', '');
+            var quantity = self.list[barcode].quantity;
 
             if( $(this).hasClass('plus')) {
-                quantity = jp.groceries.list[barcode].quantity + 1;
+                quantity = quantity + 1;
             }
             else {
-                quantity = jp.groceries.list[barcode].quantity - 1;
+                quantity = quantity - 1;
             }
 
-            jp.groceries.edit_item(barcode, quantity);
+            self.edit_item(barcode, quantity);
         });
     }
 

@@ -3,7 +3,7 @@
 
 **Work in progress**
 
-# Curent version :
+# Current version :
 * v0.1 - "Baguette"
 
 # Hardware used
@@ -48,6 +48,9 @@ Key | Value
 
 * Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
 * They are stored into the **Params** database.
+
+# Products data source :
+* All products data, including pictures, come from the *OpenFoodFacts API* : https://world.openfoodfacts.org/data
 
 # Dev : PC Mode
 * Define an environnement variable `PC_MODE` if you wish to work on this project's code on your PC : it deactivates the import of RPi.GPIO and PiCamera

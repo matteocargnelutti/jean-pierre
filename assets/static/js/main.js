@@ -13,7 +13,6 @@ jQuery(document).ready( function() {
 //-----------------------------------------------------------------------------
 jp.lang = new jp.Lang(); // Use jp.lang.get('key') for localized messages
 jp.status = new jp.Status(); // Status bar. use jp.status.say('key')
-jp.groceries = new jp.Groceries(); // Groceries page handling
 
 //-----------------------------------------------------------------------------
 // Init
@@ -29,15 +28,21 @@ jp.lang.fetch_list( function(){
     // If on groceries page
     if( $('body.groceries').length > 0 ) {
         // Fetch and show list, bind events
-        jp.groceries.fetch_list( function(){
-            jp.groceries.show_list();
-            jp.groceries.bind_events(); 
+        groceries = new jp.Groceries();
+        groceries.fetch_list( function(){
+            groceries.show_list();
+            groceries.bind_events(); 
         });
     }
 
     // If on products page 
     if( $('body.products').length > 0 ) {
-
+        // Fetch and show list, bind events
+        products = new jp.Products();
+        products.fetch_list( function(){
+            products.show_list();
+            products.bind_events(); 
+        });
     }
 
 });

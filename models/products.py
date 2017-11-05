@@ -11,6 +11,7 @@ scanner/models/products.py
 # Imports
 #-----------------------------------------------------------------------------
 from utils import Database
+import models
 
 #-----------------------------------------------------------------------------
 # Products Table class
@@ -121,6 +122,10 @@ class Products:
         params = (barcode,)
         Database.LINK.execute(query, params)
         Database.LINK.commit()
+
+        # Side effect : delete it from the grocery list
+        models.Groceries().delete_item(barcode)
+
         return True
 
     def get_list(self):
