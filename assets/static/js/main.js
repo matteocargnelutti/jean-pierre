@@ -13,6 +13,7 @@ jQuery(document).ready( function() {
 //-----------------------------------------------------------------------------
 jp.lang = new jp.Lang(); // Use jp.lang.get('key') for localized messages
 jp.status = new jp.Status(); // Status bar. use jp.status.say('key')
+jp.ui = new jp.Ui(); // UI Methods
 
 //-----------------------------------------------------------------------------
 // Init
