@@ -23,6 +23,12 @@ jp.Status = function() {
     this.say = function(message_key) {
         self.message = jp.lang.get(message_key)
         console.log(self.message)
+
+        $('footer .status').addClass('flash')
+        $('footer .status').html(self.message)
+        setTimeout( function(){
+            $('footer .status').removeClass('flash')
+        }, 750)
     };
 
 };

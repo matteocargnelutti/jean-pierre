@@ -4,12 +4,11 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>{{PAGE_TITLE}}</title>
-    <meta name="description" content="{{PAGE_DESCRIPTION}}"/>
+    <title>{{page_title}}</title>
 
     <!-- Style -->
-    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css"/>
-    <meta name="theme-color" content="#DE9440"/>
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" type="text/css"/>
+    <!--<meta name="theme-color" content=""/>-->
 
     <!-- Libs & fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -21,15 +20,45 @@
     <![endif]-->
 
     <!-- Javascript -->
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/modules/lang.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/modules/status.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/modules/groceries.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/modules/products.js') }}"></script>
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    <script src="{{url_for('static', filename='js/modules/lang.js')}}"></script>
+    <script src="{{url_for('static', filename='js/modules/status.js')}}"></script>
+    <script src="{{url_for('static', filename='js/modules/groceries.js')}}"></script>
+    <script src="{{url_for('static', filename='js/modules/products.js')}}"></script>
 
     <!-- Favicon -->
-    <link href="{{ url_for('static', filename='favicon.png') }}" rel="icon" type="image/png"/>
+    <link href="{{url_for('static', filename='img/favicon.png')}}" rel="icon" type="image/png"/>
 
 </head>
 
-<body>
+<body class="{{body_class}}">
+
+    <!-- Header -->
+    <header>
+        <figure class="animated-logo">
+            <a href="" title="Jean-Pierre : The grocery list bot">
+                <img src="{{url_for('static', filename='img/jp_logo_top_500x.png')}}" class="top" alt=""/>
+                <img src="{{url_for('static', filename='img/jp_logo_middle_500x.png')}}" class="middle" alt=""/>
+                <img src="{{url_for('static', filename='img/jp_logo_bottom_500x.png')}}" class="bottom" alt=""/>
+            </a>
+        </figure>
+        <h1><i>J</i>ean-<i>P</i>ierre</h1>
+        <h2>- the grocery list bot -</h2>
+    </header>
+
+    <!-- Nav -->
+    <nav>
+        <div class="handle">
+            <img src="img/menu.png" alt="Menu"/>
+        </div>
+        <ul>
+            <li><a href="{{url_for('groceries')}}">Grocery list</a></li>
+            <li><a href="{{url_for('products')}}">Products list</a></li>
+            <li><a href="{{url_for('logout')}}">Log out</a></li>
+            <li><a class="close" href="#">Close menu</a></li>
+        </ul>        
+    </nav>
+    
+
+    <!-- START - Main-container -->
+    <div id="main-container">

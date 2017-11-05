@@ -1,0 +1,33 @@
+{% include "_header.html" %}
+
+<h2>{{lang.web_groceries_title}}</h2>
+
+<!-- Grocery list menu -->
+<div class="menu">
+
+    <div class="share">
+        <strong>{{lang.web_groceries_menu_export}} :</strong>
+        <a href="">print</a>
+        <a href="">e-mail</a>
+        <a href="">sms</a>
+        <a href="">raw</a>
+    </div>
+
+    <div class="add">
+        <select name="add_product">
+            <option value="">{{lang.web_groceries_menu_add}}</option>
+            {% for barcode,infos in products_list.items() %}
+                {% if infos.name != '???' %}
+                <option value="{{barcode}}">{{infos.name}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <a href="#" title="">OK</a>
+    </div>
+</div>
+
+<!-- Items list -->
+<div class="items">
+</div>
+
+{% include "_footer.html" %}

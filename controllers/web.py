@@ -80,16 +80,20 @@ def login():
     lang = utils.Lang(params.lang)
     Database.off()
 
+    # Prepare template data
+    data = {
+        'lang': lang.__dict__,
+        'page_title': lang.web_login_page_title,
+        'body_class': 'login',
+        'error': False
+    }
+
     # If the user is already logged : go to "grocery_list"
     if 'is_logged' in session and session['is_logged']:
         return redirect(url_for('groceries'))
 
-    # If no post data : login form
-    if not request.form:
-        return render_template('login.html', lang=lang)
-
     # Handle post data
-    if 'password' in request.form:
+    if request.form and 'password' in request.form:
         password = request.form['password']
         password = bytearray(password, encoding='utf-8')
         password = hashlib.sha1(password).hexdigest()
@@ -100,7 +104,9 @@ def login():
             return redirect(url_for('groceries'))
         # Wrong password
         else:
-            return render_template('login.html', lang=lang, error=True)
+            data['error'] = True
+
+    return render_template('login.html', **data)
 
 @webapp.route('/logout')
 def logout():
@@ -131,6 +137,7 @@ def groceries():
 
     # Return template
     return render_template('groceries.html',
+                           body_class='groceries',
                            lang=lang,
                            products_list=items)
 
@@ -248,7 +255,7 @@ def products():
     Database.off()
 
     # Return template
-    return render_template('products.html', lang=lang)
+    return render_template('products.html', body_class='products', lang=lang)
 
 @webapp.route('/api/products_list')
 def api_products_list():

@@ -1,4 +1,5 @@
 {
+    "print": "Print",
     "config_intro": "Configuring Jean-Pierre [:{, the grocery-list bot.",
     "config_database_created": "SQlite3 database created if it didn't exist.",
     "config_table_params_set": "Params table created if not already set.",
@@ -12,8 +13,18 @@
     "config_camera_res_y": "Camera resolution, HEIGHT (500 by default) : ",
     "config_password": "Please define a password for Jean-Pierre ('admin' by default) : ",
     "config_done": "All set ! Enjoy !",
+    "web_login_page_title": "Jean-Pierre - the grocery list bot !",
+    "web_login_form_title": "Sign in",
+    "web_login_form_placeholder": "Your password.",
+    "web_login_error": "Password error ...",
+    "web_footer_signature": "An open-source project by",
+    "web_groceries_title": "My grocery list.",
+    "web_groceries_list_empty": "Your list is empty ! Scan items with Jean-Pierre to fill it, or add items from the menu.",
     "web_groceries_list_error": "Unable to fetch your grocery list : are you logged in ?",
     "web_groceries_list_process": "Processing ...",
     "web_groceries_list_edit_ok": "Your grocery list has been edited successfully.",
+    "web_groceries_edit_error": "An error occured while editing your list.",
+    "web_groceries_menu_export": "Export my list",
+    "web_groceries_menu_add": "Add an item to my list.",
     "web_products_list_error": "Unable to fetch your products list : are you logged in ?"
 }
