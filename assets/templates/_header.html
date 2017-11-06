@@ -4,7 +4,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>{{lang.jp}} | {{lang.jp_version}}</title>
+    <title>{{lang.jp}}</title>
+    <meta name="description" content="{{lang.jp_about}} | {{lang.jp_version}}"/>
 
     <!-- Style -->
     <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" type="text/css"/>
@@ -12,7 +13,8 @@
 
     <!-- Libs & fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand:400,700" rel="stylesheet"/>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -37,14 +39,16 @@
     <!-- Header -->
     <header>
         <figure class="animated-logo">
-            <a href="" title="{{lang.jp}} : {{lang.jp_about}}">
+            <a href="#" title="{{lang.jp}} : {{lang.jp_about}}">
                 <img src="{{url_for('static', filename='img/jp_logo_top_500x.png')}}" class="top" alt=""/>
                 <img src="{{url_for('static', filename='img/jp_logo_middle_500x.png')}}" class="middle" alt=""/>
                 <img src="{{url_for('static', filename='img/jp_logo_bottom_500x.png')}}" class="bottom" alt=""/>
             </a>
+            {% if body_class == 'login' %}
+            <h1><i>J</i>ean-<i>P</i>ierre</h1>
+            <h2>- the grocery list bot -</h2>
+            {% endif %}
         </figure>
-        <h1><i>J</i>ean-<i>P</i>ierre</h1>
-        <h2>- the grocery list bot -</h2>
     </header>
 
     {% if body_class != 'login' %}
@@ -57,11 +61,11 @@
             <li><a href="{{url_for('groceries')}}">Grocery list</a></li>
             <li><a href="{{url_for('products')}}">Products list</a></li>
             <li><a href="{{url_for('logout')}}">Log out</a></li>
-            <li><a class="close" href="#">Close menu</a></li>
+            <li class="close"><a href="#">Close menu</a></li>
         </ul>        
     </nav>
     {% endif %}
     
 
     <!-- START - Main-container -->
-    <div id="main-container">
+    <div class="maincontainer">

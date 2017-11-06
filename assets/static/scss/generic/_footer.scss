@@ -1,0 +1,38 @@
+//-----------------------------------------------------------------------------
+// Footer
+//-----------------------------------------------------------------------------
+footer {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    bottom: 0px;
+    padding: 10px;
+    padding-right: 20px;
+    color: white;
+    font-size: 18px;
+    background-color: black;
+    font-family: $font-quicksand;
+    font-size: 18px;
+    @media (max-width: $media-small-pc) {
+        font-size: 14px;
+    }
+
+    a {
+        text-decoration: none;
+        color: $contrast-color;
+    }
+    .status {
+        float: left;
+        transition: color 0.25s ease-in-out;
+    }
+    .github-button {
+        display: none;
+    }
+    iframe {
+        float: right;
+    }
+}
+
+footer.flash .status {
+    color: $notification-color;
+}

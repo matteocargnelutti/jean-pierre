@@ -3,6 +3,8 @@
 
 **Work in progress**
 
+[![Build Status](https://travis-ci.org/matteocargnelutti/jean-pierre.svg?branch=master)](https://travis-ci.org/matteocargnelutti/jean-pierre)
+
 # Current version :
 * v0.1 - "Baguette"
 

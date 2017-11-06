@@ -1,0 +1,74 @@
+//-----------------------------------------------------------------------------
+// Nav (auto slide on side)
+//-----------------------------------------------------------------------------
+nav {
+    overflow: hidden;
+    z-index: 999;
+    height: 2000px; // Retrocompatibility
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    right: -185px;
+    transition: right ease-in-out 0.35s;
+    .handle {
+        display: block;
+        cursor: pointer;
+        float: left;
+        padding: 10px;
+        background-color: white;
+        border-bottom-left-radius: 20px;
+        position: relative;
+        top: 0px;
+        transition: top ease-in-out 0.35s;
+        img {
+            width: 40px;
+        }
+    }
+    ul {
+        display: block;
+        height: 100%;
+        padding: 10px;
+        background-color: white;
+        float: left;
+        list-style-position: inside;
+        list-style-type: none;
+        width: 180px;
+        border-left: 1px solid #999999;
+        li {
+            padding: 5px;
+            border-bottom: 1px solid #999999;
+            transition: background-color ease-in-out 0.35s;
+            a {
+                font-family: $font-quicksand;
+                font-weight: 400;
+                color: black;
+                font-size: 22px;
+                text-decoration: none;
+            }
+        }
+        li:hover {
+            background-color: $background-color;
+        }
+    }
+}
+
+// Toggle
+nav.shown {
+    right: 0px;
+    .handle {
+        top: -200px;
+    }
+}
+
+// Hover toggle : only on pc
+@media (min-width: $media-mobile) {
+    nav:hover {
+        right: 0px;
+        .handle {
+            top: -200px;
+        }
+    }
+    nav .close {
+        display: none;
+    }
+}

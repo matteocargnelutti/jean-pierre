@@ -1,0 +1,19 @@
+//-----------------------------------------------------------------------------
+// Main container
+//-----------------------------------------------------------------------------
+.maincontainer {
+    width: 850px;
+    margin: auto;
+    overflow: hidden;
+    padding-bottom: 60px;
+}
+
+.maincontainer > h2 {
+    font-family: $font-quicksand;
+    color: black;
+    font-weight: 400;
+    font-size: 52px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

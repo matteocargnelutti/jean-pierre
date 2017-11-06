@@ -1,0 +1,46 @@
+//-----------------------------------------------------------------------------
+// Login page
+//-----------------------------------------------------------------------------
+body.login .maincontainer form {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+
+    input {
+        display: block;
+        float: left;
+        width: 90%;
+        padding: 10px;
+        font-family: $font-quicksand;
+        border: none;
+        background-color: white;
+        font-size: 24px;
+        @media (max-width: $media-small-pc) {
+            font-size: 20px;
+            padding: 7px;
+        }
+    }
+    button {
+        display: block;
+        float: left;
+        width: 10%;
+        padding: 10px;
+        font-size: 24px;
+        text-align: center;
+        font-family: $font-quicksand;
+        font-weight: 700;
+        background-color: $sub-color;
+        color: white;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.35s ease-in-out;
+        @media (max-width: $media-small-pc) {
+            font-size: 20px;
+            padding: 7px;
+        }
+    }
+    button:hover {
+        background-color: black;
+    }
+}

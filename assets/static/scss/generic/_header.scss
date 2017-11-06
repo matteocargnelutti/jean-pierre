@@ -1,0 +1,105 @@
+//-----------------------------------------------------------------------------
+// Header : basis
+//-----------------------------------------------------------------------------
+header {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    padding-top: 40px;
+    border-bottom: 20px solid $sub-color;
+    background-color: $main-color;
+    text-align: center;
+
+    figure {
+        a {
+            display: block;
+            text-decoration: none;
+        }
+        img {
+            display: block;
+            width: 250px;
+            max-width: 80%;
+            margin: auto;
+            position: relative;
+        }
+        img.top, img.bottom {
+            animation: bounce-5px 1s ease infinite;
+        }
+        img.middle {
+            animation: bounce-3px 1s ease infinite;
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------
+// Header : login page (with big logo and title)
+//-----------------------------------------------------------------------------
+body.login header {
+    figure {
+        img {
+            width: 500px;
+            @media (max-width: 1600px) {
+                width: 450px;
+            }
+            @media (max-width: 1500px) {
+                width: 400px;
+            }
+            @media (max-width: 1400px) {
+                width: 350px;
+            }
+            @media (max-width: $media-small-pc) {
+                width: 300px;
+            }
+        }
+    }
+    h1 {
+        font-family: $font-pacifico;
+        color: black;
+        font-size: 100px;
+        line-height: 120px;
+        @media (max-width: 1600px) {
+            font-size: 90px;
+            line-height: 110px;
+        }
+        @media (max-width: 1500px) {
+            font-size: 80px;
+            line-height: 95px;
+        }
+        @media (max-width: 1400px) {
+            font-size: 72px;
+            line-height: 85px;
+        }
+        @media (max-width: $media-small-pc) {
+            font-size: 68px;
+            line-height: 80px;
+        }
+        i {
+            font-style: normal;
+            color: white;
+        }
+    }
+    h2 {
+        font-family: $font-quicksand;
+        font-weight: normal;
+        letter-spacing: -2px;
+        color: $contrast-color;
+        font-size: 48px;
+        line-height: 65px;
+        @media (max-width: 1600px) {
+            font-size: 42px;
+            line-height: 58px;
+        }
+        @media (max-width: 1500px) {
+            font-size: 36px;
+            line-height: 50px;
+        }
+        @media (max-width: 1400px) {
+            font-size: 32px;
+            line-height: 42px;
+        }
+        @media (max-width: $media-small-pc) {
+            font-size: 30px;
+            line-height: 38px;
+        }
+    }
+}

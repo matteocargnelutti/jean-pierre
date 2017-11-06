@@ -1,0 +1,18 @@
+//-----------------------------------------------------------------------------
+// Reset
+//-----------------------------------------------------------------------------
+* {
+    padding: 0px;
+    margin: 0px;
+    outline: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: $background-color;
+}
+
+a img {
+    border: none;
+}

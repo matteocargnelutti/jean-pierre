@@ -21,6 +21,10 @@ jp.ui = new jp.Ui(); // UI Methods
 // Once the language info are loaded ...
 jp.lang.fetch_list( function(){
 
+    // Set-up UI events
+    jp.ui.bind_events();
+    
+
     // If on login page and there is an error
     if( $('body.login').length > 0 && $('form.error').length > 0 ) {
         jp.status.say('web_login_error');

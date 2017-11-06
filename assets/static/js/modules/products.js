@@ -33,7 +33,7 @@ jp.Products = function() {
         
         for( var barcode in self.list ) {
             var name = self.list[barcode].name
-            var pic = '/static/img/default.png';
+            var pic = '/static/img/no-pic.png';
             if( self.list[barcode].pic == 1) {
                 pic = '/static/img/'+barcode+'.jpg';
             }
@@ -44,7 +44,7 @@ jp.Products = function() {
                     html += '<input type="text" value="'+barcode+'" name="barcode" placeholder="'+jp.lang.get('ean13')+'" maxlength="13" disabled/>';
                     html += '<input type="text" value="'+name+'" name="name" placeholder="'+jp.lang.get('product_name')+'" maxlength="32" required/>';
                     html += '<button>Ok</button>';
-                    html += '<a href="#" class="delete">'+jp.lang.get('delete')+'</a>';
+                    html += '<button class="delete">'+jp.lang.get('delete')+'</button>';
                 html += '</form>';
             html += '</div>';
         }

@@ -260,7 +260,7 @@ def products():
     # Prepare template data
     data = {
         'lang': lang.__dict__,
-        'body_class': 'groceries'
+        'body_class': 'products'
     }
 
     # Return template

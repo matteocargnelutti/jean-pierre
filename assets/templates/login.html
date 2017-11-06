@@ -1,14 +1,8 @@
 {% include "_header.html" %}
 
-<section name="login" class="main">
-        
-    <h2>{{lang.web_login_form_title}}</h2>
-
-    <form method="post" class="{% if error: %}error{% endif %}">
-        <input type="password" name="password" placeholder="{{lang.web_login_form_placeholder}}"/>
-        <button>OK</button>
-    </form>
-
-</section>
+<form method="post" class="{% if error: %}error{% endif %}">
+    <input type="password" name="password" placeholder="{{lang.web_login_form_placeholder}}"/>
+    <button>OK</button>
+</form>
 
 {% include "_footer.html" %}

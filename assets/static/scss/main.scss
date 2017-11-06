@@ -1,0 +1,23 @@
+//-----------------------------------------------------------------------------
+// Global attributes
+//-----------------------------------------------------------------------------
+@import 'global/variables';
+@import 'global/animations';
+@import 'global/reset';
+
+//-----------------------------------------------------------------------------
+// Generic
+//-----------------------------------------------------------------------------
+@import 'generic/maincontainer';
+@import 'generic/header';
+@import 'generic/nav';
+@import 'generic/menu';
+@import 'generic/items';
+@import 'generic/footer';
+
+//-----------------------------------------------------------------------------
+// Specific
+//-----------------------------------------------------------------------------
+@import 'specific/login';
+@import 'specific/groceries';
+@import 'specific/products';

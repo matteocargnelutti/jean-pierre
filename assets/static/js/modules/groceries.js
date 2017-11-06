@@ -34,7 +34,7 @@ jp.Groceries = function() {
         for( var barcode in self.list ) {
             var name = self.list[barcode].name
             var quantity = self.list[barcode].quantity
-            var pic = '/static/img/default.png';
+            var pic = '/static/img/no-pic.png';
             if( self.list[barcode].pic == 1) {
                 pic = '/static/img/'+barcode+'.jpg';
             }
@@ -51,8 +51,8 @@ jp.Groceries = function() {
                     html += '<span class="quantity">x'+quantity+'</span>';
                 html += '</h3>';
                 html += '<div>';
-                    html += '<a href="#item-'+barcode+'" class="plus">+1</a>';
-                    html += '<a href="#item-'+barcode+'" class="minus">-1</a>';
+                    html += '<button class="plus">+1</button>';
+                    html += '<button class="minus">-1</button>';
                     html += '<a href="/products#item-'+barcode+'" class="edit">Edit</a>';
                 html += '</div>';
             html += '</div>';
@@ -133,7 +133,7 @@ jp.Groceries = function() {
         //
         // Edit an item
         //
-        $('body.groceries .items').delegate('.item a.plus, .item a.minus', 'click', function(e){
+        $('body.groceries .items').delegate('.item .plus, .item .minus', 'click', function(e){
             e.preventDefault();
             
             var barcode = $(this).parent('div').parent('div').attr('id').replace('item-', '');
