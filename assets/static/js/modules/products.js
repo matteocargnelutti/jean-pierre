@@ -40,8 +40,8 @@ jp.Products = function() {
 
             html += '<div class="item" id="item-'+barcode+'">';
                 html += '<img src="'+pic+'" alt="Product\'s pic"/>';
+                html += '<h3>'+barcode+'</h3>';
                 html += '<form>';
-                    html += '<input type="text" value="'+barcode+'" name="barcode" placeholder="'+jp.lang.get('ean13')+'" maxlength="13" disabled/>';
                     html += '<input type="text" value="'+name+'" name="name" placeholder="'+jp.lang.get('product_name')+'" maxlength="32" required/>';
                     html += '<button>Ok</button>';
                     html += '<button class="delete">'+jp.lang.get('delete')+'</button>';
@@ -140,7 +140,7 @@ jp.Products = function() {
         $('body.products .menu form').on('submit', function(e){
             e.preventDefault();
             
-            var form = $(this).parent(form);
+            var form = $(this).parent();
             var barcode = $('input[name="barcode"]', form).val();
             var name = $('input[name="name"]', form).val();
             
@@ -157,8 +157,8 @@ jp.Products = function() {
         $('body.products .items').delegate('.item form', 'submit', function(e){
             e.preventDefault();
 
-            var form = $(this).parent(form);
-            var barcode = $('input[name="barcode"]', form).val();
+            var form = $(this).parent();
+            var barcode = $(this).parent().attr('id').replace('item-', '');
             var name = $('input[name="name"]', form).val();
 
             self.edit_item(barcode, name);
@@ -170,8 +170,8 @@ jp.Products = function() {
         $('body.products .items').delegate('.item .delete', 'click', function(e){
             e.preventDefault();
 
-            var form = $(this).parent(form);
-            var barcode = $('input[name="barcode"]', form).val();
+            var form = $(this).parent();
+            var barcode = $(this).parent().parent().attr('id').replace('item-', '');
             
             if( confirm(jp.lang.get('web_products_delete_prompt')) ) {
                 self.delete_item(barcode);

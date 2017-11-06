@@ -6,6 +6,9 @@
     margin: auto;
     overflow: hidden;
     padding-bottom: 60px;
+    @media (max-width: $media-mobile) {
+        width: 100%;
+    }
 }
 
 .maincontainer > h2 {
@@ -16,4 +19,7 @@
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
+    @media (max-width: $media-mobile) {
+        font-size: 36px;
+    }
 }

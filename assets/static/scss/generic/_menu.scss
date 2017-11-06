@@ -1,0 +1,71 @@
+//-----------------------------------------------------------------------------
+// Pages main menu
+//-----------------------------------------------------------------------------
+.maincontainer > .menu {
+    background-color: $main-color;
+    color: white;
+    padding: 20px;
+    padding-top: 25px;
+    padding-bottom: 30px;
+    border-radius: 15px;
+    border-bottom: 10px solid $sub-color;
+
+    // Form
+    form {
+        border: none;
+        overflow: hidden;
+
+        select, input {
+            display: block;
+            float: left;
+            width: 90%;
+            height: 35px;
+            padding: 5px;
+            font-family: $font-quicksand;
+            font-size: 20px;
+            line-height: 24px;
+            border: none;
+            background-color: white;
+            option {
+                padding: 5px;
+            }
+        }
+        select.half, input.half {
+            width: 45%;
+            border-right: 1px solid black;
+        }
+        button {
+            display: block;
+            float: left;
+            width: 10%;
+            height: 35px;
+            padding: 5px;
+            font-size: 20px;
+            text-align: center;
+            font-family: $font-quicksand;
+            font-weight: 700;
+            background-color: $sub-color;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.35s ease-in-out;
+        }
+        button:hover {
+            background-color: black;
+        }
+    }
+    // Form title
+    h4 {
+        color: white;
+        background-color: black;
+        font-family: $font-quicksand;
+        font-weight: 400;
+        font-size: 20px;
+        display: inline-block;
+        width: auto;
+        padding: 5px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}

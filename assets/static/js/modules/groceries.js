@@ -48,13 +48,13 @@ jp.Groceries = function() {
                     else {
                         html += '<span>'+name+'</span> ';
                     }
-                    html += '<span class="quantity">x'+quantity+'</span>';
+                    html += '<span class="important">x'+quantity+'</span>';
                 html += '</h3>';
-                html += '<div>';
+                html += '<form>';
                     html += '<button class="plus">+1</button>';
                     html += '<button class="minus">-1</button>';
                     html += '<a href="/products#item-'+barcode+'" class="edit">Edit</a>';
-                html += '</div>';
+                html += '</form>';
             html += '</div>';
         }
 
@@ -136,7 +136,7 @@ jp.Groceries = function() {
         $('body.groceries .items').delegate('.item .plus, .item .minus', 'click', function(e){
             e.preventDefault();
             
-            var barcode = $(this).parent('div').parent('div').attr('id').replace('item-', '');
+            var barcode = $(this).parent().parent().attr('id').replace('item-', '');
             var quantity = self.list[barcode].quantity;
 
             if( $(this).hasClass('plus')) {

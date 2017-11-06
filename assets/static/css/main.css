@@ -30,6 +30,9 @@ a img {
   margin: auto;
   overflow: hidden;
   padding-bottom: 60px; }
+  @media (max-width: 1000px) {
+    .maincontainer {
+      width: 100%; } }
 
 .maincontainer > h2 {
   font-family: "Quicksand", sans-serif;
@@ -39,15 +42,18 @@ a img {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 20px; }
+  @media (max-width: 1000px) {
+    .maincontainer > h2 {
+      font-size: 36px; } }
 
 header {
   width: 100%;
   margin: auto;
   padding: 20px;
   padding-top: 40px;
-  border-bottom: 20px solid #a43a3a;
   background-color: #ef3b3b;
-  text-align: center; }
+  text-align: center;
+  border-bottom: 20px solid #a43a3a; }
   header figure a {
     display: block;
     text-decoration: none; }
@@ -165,6 +171,8 @@ nav {
         color: black;
         font-size: 22px;
         text-decoration: none; }
+    nav ul li.sub a {
+      color: #a43a3a; }
     nav ul li:hover {
       background-color: #f1f1f1; }
 
@@ -181,6 +189,118 @@ nav.shown {
 
   nav .close {
     display: none; } }
+.maincontainer > .menu {
+  background-color: #ef3b3b;
+  color: white;
+  padding: 20px;
+  padding-top: 25px;
+  padding-bottom: 30px;
+  border-radius: 15px;
+  border-bottom: 10px solid #a43a3a; }
+  .maincontainer > .menu form {
+    border: none;
+    overflow: hidden; }
+    .maincontainer > .menu form select, .maincontainer > .menu form input {
+      display: block;
+      float: left;
+      width: 90%;
+      height: 35px;
+      padding: 5px;
+      font-family: "Quicksand", sans-serif;
+      font-size: 20px;
+      line-height: 24px;
+      border: none;
+      background-color: white; }
+      .maincontainer > .menu form select option, .maincontainer > .menu form input option {
+        padding: 5px; }
+    .maincontainer > .menu form select.half, .maincontainer > .menu form input.half {
+      width: 45%;
+      border-right: 1px solid black; }
+    .maincontainer > .menu form button {
+      display: block;
+      float: left;
+      width: 10%;
+      height: 35px;
+      padding: 5px;
+      font-size: 20px;
+      text-align: center;
+      font-family: "Quicksand", sans-serif;
+      font-weight: 700;
+      background-color: #a43a3a;
+      color: white;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.35s ease-in-out; }
+    .maincontainer > .menu form button:hover {
+      background-color: black; }
+  .maincontainer > .menu h4 {
+    color: white;
+    background-color: black;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    display: inline-block;
+    width: auto;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px; }
+
+.items .item {
+  padding: 20px;
+  border-bottom: 4px dashed #cccccc;
+  overflow: hidden;
+  position: relative;
+  font-family: "Quicksand", sans-serif; }
+  .items .item img {
+    display: block;
+    width: 100px;
+    float: left;
+    margin-right: 10px; }
+  .items .item h3 {
+    font-size: 22px;
+    color: black; }
+    .items .item h3 span {
+      vertical-align: middle; }
+    .items .item h3 .important {
+      display: inline-block;
+      color: white;
+      background-color: #ef3b3b;
+      font-size: 18px;
+      padding: 5px;
+      padding-left: 7px;
+      padding-right: 7px;
+      border-radius: 50%; }
+  .items .item form {
+    margin-top: 10px;
+    overflow: hidden; }
+    .items .item form input {
+      width: 100%;
+      padding: 10px;
+      padding-left: 0px;
+      font-size: 18px;
+      border: none;
+      display: block;
+      background-color: transparent;
+      border-bottom: 1px solid #999999;
+      margin-bottom: 10px; }
+    .items .item form button, .items .item form a {
+      display: inline-block;
+      min-width: 30px;
+      border: none;
+      padding: 5px;
+      margin-right: 5px;
+      color: white;
+      font-family: "Quicksand", sans-serif;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 5px;
+      background-color: #5339cf;
+      transition: background-color 0.35s ease-in-out; }
+    .items .item form a:hover, .items .item form button:hover {
+      background-color: #3a298b; }
+
 footer {
   position: fixed;
   overflow: hidden;

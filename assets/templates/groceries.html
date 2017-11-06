@@ -5,17 +5,11 @@
 <!-- Grocery list menu -->
 <div class="menu">
 
-    <div class="share">
-        <strong>{{lang.web_groceries_menu_export}} :</strong>
-        <a href="">print</a>
-        <a href="">e-mail</a>
-        <a href="">sms</a>
-        <a href="">raw</a>
-    </div>
+    <h4>{{lang.web_groceries_menu_title}}</h4>
 
     <form class="add">
         <select name="add_product">
-            <option value="">{{lang.web_groceries_menu_add}}</option>
+            <option value="">{{lang.web_groceries_menu_pick}}</option>
             {% for barcode,infos in products_list.items() %}
                 {% if infos.name != '???' %}
                 <option value="{{barcode}}">{{infos.name}}</option>

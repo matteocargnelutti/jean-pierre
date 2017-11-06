@@ -190,6 +190,12 @@ def api_groceries_edit(barcode, quantity):
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
 
+    # Remove unwanted chars
+    to_escape = ['"', "<", ">", "&", "'"]
+    for char in to_escape:
+        barcode = barcode.replace(char, '')
+    quantity = int(quantity)
+
     # Output
     data = {"status": "", "barcode": barcode, "quantity": quantity}
 
@@ -310,6 +316,12 @@ def api_products_edit(barcode, name):
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
 
+    # Remove unwanted chars
+    to_escape = ['"', "<", ">", "&", "'"]
+    for char in to_escape:
+        barcode = barcode.replace(char, '')
+        name = name.replace(char, '')
+
     # Output
     data = {"status": "", "barcode": barcode, "name": name}
 
@@ -357,6 +369,11 @@ def api_products_delete(barcode):
     # AJAX Auth check
     if not ('is_logged' in session and session['is_logged']):
         return render_template('json.html', json="{}"), 401
+
+    # Remove unwanted chars
+    to_escape = ['"', "<", ">", "&", "'"]
+    for char in to_escape:
+        barcode = barcode.replace(char, '')
 
     # Output
     data = {"status": "OK"}

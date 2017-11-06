@@ -46,6 +46,11 @@ nav {
                 text-decoration: none;
             }
         }
+        li.sub {
+            a {
+                color: $sub-color;
+            }
+        }
         li:hover {
             background-color: $background-color;
         }

@@ -1,0 +1,67 @@
+//-----------------------------------------------------------------------------
+// Items (generic listing)
+//-----------------------------------------------------------------------------
+.items .item {
+    padding: 20px;
+    border-bottom: 4px dashed #cccccc;
+    overflow: hidden;
+    position: relative;
+    font-family: $font-quicksand;
+    img {
+        display: block;
+        width: 100px;
+        float: left;
+        margin-right: 10px;
+    }
+    h3 {
+        font-size: 22px;
+        color: black;
+        span {
+            vertical-align: middle;
+        }
+        // Distinct, important par in the h3
+        .important {
+            display: inline-block;
+            color: white;
+            background-color: $main-color;
+            font-size: 18px;
+            padding: 5px;
+            padding-left: 7px;
+            padding-right: 7px;
+            border-radius: 50%;
+        }
+    }
+    form {
+        margin-top: 10px;
+        overflow: hidden;
+        input {
+            width: 100%;
+            padding: 10px;
+            padding-left: 0px;
+            font-size: 18px;
+            border: none;
+            display: block;
+            background-color: transparent;
+            border-bottom: 1px solid #999999;
+            margin-bottom: 10px;
+        }
+        button, a {
+            display: inline-block;
+            min-width: 30px;
+            border: none;
+            padding: 5px;
+            margin-right: 5px;
+            color: white;
+            font-family: $font-quicksand;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: $complementary-color;
+            transition: background-color 0.35s ease-in-out;
+        }
+        a:hover, button:hover {
+            background-color: $complementary-sub-color;
+        }
+    }
+}
