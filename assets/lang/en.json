@@ -1,4 +1,7 @@
 {
+    "jp": "Jean-Pierre",
+    "jp_about": "The grocery list bot",
+    "jp_version": "v0.1 - Baguette",
     "print": "Print",
     "processing": "Processing ...",
     "ean13": "EAN-13 Barcode",

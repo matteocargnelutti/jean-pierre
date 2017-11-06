@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>{{page_title}}</title>
+    <title>{{lang.jp}} | {{lang.jp_version}}</title>
 
     <!-- Style -->
     <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" type="text/css"/>
@@ -37,7 +37,7 @@
     <!-- Header -->
     <header>
         <figure class="animated-logo">
-            <a href="" title="Jean-Pierre : The grocery list bot">
+            <a href="" title="{{lang.jp}} : {{lang.jp_about}}">
                 <img src="{{url_for('static', filename='img/jp_logo_top_500x.png')}}" class="top" alt=""/>
                 <img src="{{url_for('static', filename='img/jp_logo_middle_500x.png')}}" class="middle" alt=""/>
                 <img src="{{url_for('static', filename='img/jp_logo_bottom_500x.png')}}" class="bottom" alt=""/>
@@ -47,6 +47,7 @@
         <h2>- the grocery list bot -</h2>
     </header>
 
+    {% if body_class != 'login' %}
     <!-- Nav -->
     <nav>
         <div class="handle">
@@ -59,6 +60,7 @@
             <li><a class="close" href="#">Close menu</a></li>
         </ul>        
     </nav>
+    {% endif %}
     
 
     <!-- START - Main-container -->

@@ -140,8 +140,9 @@ class FindProduct(Thread):
 
         self.name = name
 
-        # Get and save image in assets/static/products
-        if 'image_thumb_url' in attempt['product']:
+        # Get and save image in assets/static/products,
+        # only if it is not the test database
+        if 'image_thumb_url' in attempt['product'] and not Database.TEST_MODE:
             thumb = attempt['product']['image_thumb_url']
             try:
                 pic = requests.get(thumb, timeout=10, stream=True)

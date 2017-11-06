@@ -83,7 +83,6 @@ def login():
     # Prepare template data
     data = {
         'lang': lang.__dict__,
-        'page_title': lang.web_login_page_title,
         'body_class': 'login',
         'error': False
     }
@@ -135,11 +134,15 @@ def groceries():
     items = models.Products().get_list()
     Database.off()
 
+    # Prepare template data
+    data = {
+        'lang': lang.__dict__,
+        'body_class': 'groceries',
+        'products_list': items
+    }
+
     # Return template
-    return render_template('groceries.html',
-                           body_class='groceries',
-                           lang=lang,
-                           products_list=items)
+    return render_template('groceries.html', **data)
 
 @webapp.route('/api/groceries_list')
 def api_groceries_list():
@@ -254,8 +257,14 @@ def products():
     lang = utils.Lang(models.Params().lang)
     Database.off()
 
+    # Prepare template data
+    data = {
+        'lang': lang.__dict__,
+        'body_class': 'groceries'
+    }
+
     # Return template
-    return render_template('products.html', body_class='products', lang=lang)
+    return render_template('products.html', **data)
 
 @webapp.route('/api/products_list')
 def api_products_list():
@@ -378,5 +387,4 @@ def api_lang():
     Database.off()
 
     # Return template
-    return render_template('json.html',
-                           json=json.dumps(lang))
+    return render_template('json.html', json=json.dumps(lang))
