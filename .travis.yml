@@ -2,6 +2,8 @@ language: python
 python:
   - "3.5"
 install:
-  - pip install -r python_requirements.txt
+  - pip install flask
+  - pip install pytest
+  - pip install requests
 script:
   - pytest

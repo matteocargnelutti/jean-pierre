@@ -69,7 +69,7 @@ Key | Value
 * supervisor
 * libjpeg8-dev
 
-## pip dependencies (see python_requirements.txt)
+## pip dependencies (see requirements.txt)
 * picamera
 * pyzbar
 * pyzbar[scripts]
