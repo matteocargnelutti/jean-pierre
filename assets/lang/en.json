@@ -14,7 +14,7 @@
     "config_table_products_set": "Products table created if not already set.",
     "config_language_set": "Set language (default : en) : ",
     "config_buzzer_on": "Shall we use a buzzer (Y/N) : ",
-    "config_buzzer_port": "On which GPIO port is the buzzer connected : ",
+    "config_buzzer_port": "On which GPIO pin is the buzzer connected : ",
     "config_buzzer_invalid_port": "Invalid GPIO port number : moving on.",
     "config_camera_res_x": "Camera resolution, WIDTH (500 by default) : ",
     "config_camera_res_y": "Camera resolution, HEIGHT (500 by default) : ",
