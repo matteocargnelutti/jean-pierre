@@ -12,9 +12,6 @@
         width: 100px;
         float: left;
         margin-right: 10px;
-        @media (max-width: $media-tipping-point) {
-            width: 50px;
-        }
     }
     h3 {
         font-size: 22px;

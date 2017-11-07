@@ -290,9 +290,6 @@ nav.shown {
     width: 100px;
     float: left;
     margin-right: 10px; }
-    @media (max-width: 1000px) {
-      .items .item img {
-        width: 50px; } }
   .items .item h3 {
     font-size: 22px;
     color: black; }
