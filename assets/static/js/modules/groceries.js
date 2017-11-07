@@ -112,6 +112,23 @@ jp.Groceries = function() {
     }
 
     /**
+     * Outputs the current grocery list as raw text
+    */
+    this.raw_list = function() {
+        // Prepare raw content
+        raw = '-- '+jp.lang.get('web_groceries_title')+'--';
+        raw += '<br/>';
+
+        for( var barcode in self.list ) {
+            raw += self.list[barcode].name;
+            raw += ' ('+self.list[barcode].quantity+') '
+            raw += '<br/>';
+        }
+        // Show it in new window
+        window.open().document.write(raw);
+    }
+
+    /**
      * Events binding
     */
     this.bind_events = function() {
@@ -148,6 +165,7 @@ jp.Groceries = function() {
 
             self.edit_item(barcode, quantity);
         });
+
     }
 
 };

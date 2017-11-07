@@ -83,6 +83,11 @@ jp.Ui = function() {
         // Status bar "flash" status clean-up loop
         setInterval( function() {self.statusbar_cleanup() }, 500);
 
+        // Print
+        $('body > nav .print').on('click', function(e) {
+            print();
+        });
+
     }
 
 };
