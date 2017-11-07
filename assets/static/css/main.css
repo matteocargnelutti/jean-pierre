@@ -288,6 +288,7 @@ nav.shown {
   .items .item img {
     display: block;
     width: 100px;
+    min-height: 100px;
     float: left;
     margin-right: 10px; }
   .items .item h3 {
