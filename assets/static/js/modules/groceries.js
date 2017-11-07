@@ -36,7 +36,7 @@ jp.Groceries = function() {
             var quantity = self.list[barcode].quantity
             var pic = '/static/img/no-pic.png';
             if( self.list[barcode].pic == 1) {
-                pic = '/static/img/'+barcode+'.jpg';
+                pic = '/static/products/'+barcode+'.jpg';
             }
 
             html += '<div class="item" id="item-'+barcode+'">';
