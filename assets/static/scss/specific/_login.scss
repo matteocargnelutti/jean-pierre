@@ -19,6 +19,9 @@ body.login .maincontainer form {
             font-size: 20px;
             padding: 7px;
         }
+        @media (max-width: $media-tipping-point) {
+            width: 80%;
+        }
     }
     button {
         display: block;
@@ -38,6 +41,9 @@ body.login .maincontainer form {
         @media (max-width: $media-small-pc) {
             font-size: 20px;
             padding: 7px;
+        }
+        @media (max-width: $media-tipping-point) {
+            width: 20%;
         }
     }
     button:hover {

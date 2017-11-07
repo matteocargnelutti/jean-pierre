@@ -9,6 +9,10 @@
     padding-bottom: 30px;
     border-radius: 15px;
     border-bottom: 10px solid $sub-color;
+    @media (max-width: $media-tipping-point) {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 
     // Form
     form {
@@ -23,16 +27,24 @@
             padding: 5px;
             font-family: $font-quicksand;
             font-size: 20px;
-            line-height: 24px;
             border: none;
             background-color: white;
             option {
                 padding: 5px;
             }
+            @media (max-width: $media-tipping-point) {
+                width: 80%;
+                font-size: 16px;
+            }
         }
         select.half, input.half {
             width: 45%;
             border-right: 1px solid black;
+            @media (max-width: $media-tipping-point) {
+                width: 100%;
+                border-right: 0px;
+                border-bottom: 1px solid #999999;
+            }
         }
         button {
             display: block;
@@ -50,6 +62,10 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.35s ease-in-out;
+            @media (max-width: $media-tipping-point) {
+                width: 20%;
+                font-size: 16px;
+            }
         }
         button:hover {
             background-color: black;
@@ -67,5 +83,8 @@
         padding: 5px;
         padding-left: 8px;
         padding-right: 8px;
+        @media (max-width: $media-tipping-point) {
+            font-size: 16px;
+        }
     }
 }

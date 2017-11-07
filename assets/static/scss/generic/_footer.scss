@@ -30,6 +30,9 @@ footer {
     }
     iframe {
         float: right;
+        @media (max-width: $media-tipping-point) {
+            display: none;
+        }
     }
 }
 

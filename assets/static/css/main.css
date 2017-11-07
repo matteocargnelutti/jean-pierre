@@ -103,6 +103,10 @@ body.login header h1 {
     body.login header h1 {
       font-size: 68px;
       line-height: 80px; } }
+  @media (max-width: 1000px) {
+    body.login header h1 {
+      font-size: 50px;
+      line-height: 56px; } }
   body.login header h1 i {
     font-style: normal;
     color: white; }
@@ -129,6 +133,10 @@ body.login header h2 {
     body.login header h2 {
       font-size: 30px;
       line-height: 38px; } }
+  @media (max-width: 1000px) {
+    body.login header h2 {
+      font-size: 24px;
+      line-height: 32px; } }
 
 nav {
   overflow: hidden;
@@ -151,6 +159,9 @@ nav {
     transition: top ease-in-out 0.35s; }
     nav .handle img {
       width: 40px; }
+      @media (max-width: 1000px) {
+        nav .handle img {
+          width: 32px; } }
   nav ul {
     display: block;
     height: 100%;
@@ -171,6 +182,9 @@ nav {
         color: black;
         font-size: 22px;
         text-decoration: none; }
+        @media (max-width: 1000px) {
+          nav ul li a {
+            font-size: 20px; } }
     nav ul li.sub a {
       color: #a43a3a; }
     nav ul li:hover {
@@ -197,6 +211,10 @@ nav.shown {
   padding-bottom: 30px;
   border-radius: 15px;
   border-bottom: 10px solid #a43a3a; }
+  @media (max-width: 1000px) {
+    .maincontainer > .menu {
+      margin-left: 10px;
+      margin-right: 10px; } }
   .maincontainer > .menu form {
     border: none;
     overflow: hidden; }
@@ -208,14 +226,22 @@ nav.shown {
       padding: 5px;
       font-family: "Quicksand", sans-serif;
       font-size: 20px;
-      line-height: 24px;
       border: none;
       background-color: white; }
       .maincontainer > .menu form select option, .maincontainer > .menu form input option {
         padding: 5px; }
+      @media (max-width: 1000px) {
+        .maincontainer > .menu form select, .maincontainer > .menu form input {
+          width: 80%;
+          font-size: 16px; } }
     .maincontainer > .menu form select.half, .maincontainer > .menu form input.half {
       width: 45%;
       border-right: 1px solid black; }
+      @media (max-width: 1000px) {
+        .maincontainer > .menu form select.half, .maincontainer > .menu form input.half {
+          width: 100%;
+          border-right: 0px;
+          border-bottom: 1px solid #999999; } }
     .maincontainer > .menu form button {
       display: block;
       float: left;
@@ -232,6 +258,10 @@ nav.shown {
       border: none;
       cursor: pointer;
       transition: background-color 0.35s ease-in-out; }
+      @media (max-width: 1000px) {
+        .maincontainer > .menu form button {
+          width: 20%;
+          font-size: 16px; } }
     .maincontainer > .menu form button:hover {
       background-color: black; }
   .maincontainer > .menu h4 {
@@ -245,6 +275,9 @@ nav.shown {
     padding: 5px;
     padding-left: 8px;
     padding-right: 8px; }
+    @media (max-width: 1000px) {
+      .maincontainer > .menu h4 {
+        font-size: 16px; } }
 
 .items .item {
   padding: 20px;
@@ -257,9 +290,15 @@ nav.shown {
     width: 100px;
     float: left;
     margin-right: 10px; }
+    @media (max-width: 1000px) {
+      .items .item img {
+        width: 50px; } }
   .items .item h3 {
     font-size: 22px;
     color: black; }
+    @media (max-width: 1000px) {
+      .items .item h3 {
+        font-size: 18px; } }
     .items .item h3 span {
       vertical-align: middle; }
     .items .item h3 .important {
@@ -271,6 +310,9 @@ nav.shown {
       padding-left: 7px;
       padding-right: 7px;
       border-radius: 50%; }
+      @media (max-width: 1000px) {
+        .items .item h3 .important {
+          font-size: 16px; } }
   .items .item form {
     margin-top: 10px;
     overflow: hidden; }
@@ -286,6 +328,9 @@ nav.shown {
       background-color: transparent;
       border-bottom: 1px solid #999999;
       margin-bottom: 10px; }
+      @media (max-width: 1000px) {
+        .items .item form input {
+          font-size: 16px; } }
     .items .item form button, .items .item form a {
       display: inline-block;
       min-width: 30px;
@@ -328,6 +373,9 @@ footer {
     display: none; }
   footer iframe {
     float: right; }
+    @media (max-width: 1000px) {
+      footer iframe {
+        display: none; } }
 
 footer.flash .status {
   color: #ffe38e; }
@@ -349,6 +397,9 @@ body.login .maincontainer form {
       body.login .maincontainer form input {
         font-size: 20px;
         padding: 7px; } }
+    @media (max-width: 1000px) {
+      body.login .maincontainer form input {
+        width: 80%; } }
   body.login .maincontainer form button {
     display: block;
     float: left;
@@ -368,6 +419,9 @@ body.login .maincontainer form {
       body.login .maincontainer form button {
         font-size: 20px;
         padding: 7px; } }
+    @media (max-width: 1000px) {
+      body.login .maincontainer form button {
+        width: 20%; } }
   body.login .maincontainer form button:hover {
     background-color: black; }
 

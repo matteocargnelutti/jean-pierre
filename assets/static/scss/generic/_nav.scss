@@ -22,6 +22,9 @@ nav {
         transition: top ease-in-out 0.35s;
         img {
             width: 40px;
+            @media (max-width: $media-tipping-point) {
+                width: 32px;
+            }
         }
     }
     ul {
@@ -44,6 +47,9 @@ nav {
                 color: black;
                 font-size: 22px;
                 text-decoration: none;
+                @media (max-width: $media-tipping-point) {
+                    font-size: 20px;
+                }
             }
         }
         li.sub {
@@ -66,7 +72,7 @@ nav.shown {
 }
 
 // Hover toggle : only on pc
-@media (min-width: $media-mobile) {
+@media (min-width: $media-tipping-point) {
     nav:hover {
         right: 0px;
         .handle {

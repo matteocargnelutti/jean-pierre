@@ -73,6 +73,10 @@ body.login header {
             font-size: 68px;
             line-height: 80px;
         }
+        @media (max-width: $media-tipping-point) {
+            font-size: 50px;
+            line-height: 56px;
+        }
         i {
             font-style: normal;
             color: white;
@@ -100,6 +104,10 @@ body.login header {
         @media (max-width: $media-small-pc) {
             font-size: 30px;
             line-height: 38px;
+        }
+        @media (max-width: $media-tipping-point) {
+            font-size: 24px;
+            line-height: 32px;
         }
     }
 }

@@ -344,7 +344,7 @@ def api_products_edit(barcode, name):
     # If it exists : edit it
     else:
         try:
-            products_db.edit_item(barcode, name, False)
+            products_db.edit_item(barcode, name, exists['pic'])
             data['status'] = 'EDITED'
         except Exception as trace:
             data['status'] = 'EDIT ERROR'

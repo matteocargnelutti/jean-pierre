@@ -35,9 +35,10 @@
     "web_products_title": "Known products.",
     "web_products_menu_title": "Add a new product",
     "web_products_list_error": "Unable to fetch your products list : are you logged in ?",
+    "web_products_list_empty": "There's no known product in your database. Scan items or start adding them manually with the form above.",
     "web_products_edit_ok": "Product edited with success.",
     "web_products_edit_error": "An error occured while editing product.",
-    "web_products_delete_prompt": "Are you sure you want to delete this products ?",
+    "web_products_delete_prompt": "Are you sure you want to delete this product ?",
     "web_products_delete_ok": "Product deleted with success.",
     "web_products_delete_error": "Error while deleting product."
 }
