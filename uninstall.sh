@@ -27,8 +27,8 @@ sudo supervisorctl stop jeanpierre-web;
 sudo supervisorctl stop jeanpierre-scanner;
 sudo rm /etc/supervisor/conf.d/jeanpierre-web.conf;
 sudo rm /etc/supervisor/conf.d/jeanpierre-scanner.conf;
-sudo supervisor reread;
-sudo supervisor update;
+sudo supervisorctl reread;
+sudo supervisorctl update;
 
 #-----------------------------------------------------------------------------
 # Info
