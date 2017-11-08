@@ -44,7 +44,7 @@ clear;
 # Supervisor
 # Please excuse this ugly script :D ...
 #-----------------------------------------------------------------------------
-JEANPIERRE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/;
+
 # For scanner
 TO_WRITE=/etc/supervisor/conf.d/jeanpierre-scanner.conf;
 sudo touch $TO_WRITE;
@@ -71,4 +71,4 @@ sudo supervisorctl update;
 # KTHXBYE
 #-----------------------------------------------------------------------------
 echo "[:{ End of Jean-Pierre's install script. ";
-echo "Please reboot your Pi in ordrer to make Jean-Pierre boot."
+echo "Please reboot your Pi in ordrer to let Jean-Pierre boot."
