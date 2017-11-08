@@ -1,5 +1,5 @@
 ![alt text](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/github-ban.png)
-##A Raspberry Pi robot that helps people make their grocery list.
+# A Raspberry Pi robot that helps people make their grocery list.
 
 **WORK IN PROGRESS, please come back in a bit.**
 
