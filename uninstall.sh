@@ -13,14 +13,6 @@
 JEANPIERRE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/;
 
 #-----------------------------------------------------------------------------
-# Execution rights
-#-----------------------------------------------------------------------------
-sudo chmod a+x jeanpierre.py;
-sudo chmod a+x scanner.sh;
-sudo chmod a+x web.sh;
-sudo chmod a+x sass.sh;
-
-#-----------------------------------------------------------------------------
 # Supervisor
 #-----------------------------------------------------------------------------
 sudo supervisorctl stop jeanpierre-web;

@@ -15,11 +15,11 @@ JEANPIERRE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/;
 #-----------------------------------------------------------------------------
 # Execution rights
 #-----------------------------------------------------------------------------
-sudo chmod a+x jeanpierre.py;
-sudo chmod a+x scanner.sh;
-sudo chmod a+x web.sh;
-sudo chmod a+x sass.sh;
-sudo chmod a+x uninstall.sh;
+chmod a+x jeanpierre.py;
+chmod a+x scanner.sh;
+chmod a+x web.sh;
+chmod a+x sass.sh;
+chmod a+x uninstall.sh;
 
 #-----------------------------------------------------------------------------
 # Dystem dependencies
@@ -44,10 +44,11 @@ clear;
 # Supervisor
 # Please excuse this ugly script :D ...
 #-----------------------------------------------------------------------------
+JEANPIERRE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/;
 # For scanner
 TO_WRITE=/etc/supervisor/conf.d/jeanpierre-scanner.conf;
 sudo touch $TO_WRITE;
-echo "[program:jeanpierre-scanner]" | sudo tee --append $TO_WRITE > /dev/null;
+echo "[program:jeanpierre-scanner]" | sudo tee $TO_WRITE > /dev/null;
 echo "command = ."$JEANPIERRE_DIR"scanner.sh" | sudo tee --append $TO_WRITE > /dev/null;
 echo "user = $USER" | sudo tee --append $TO_WRITE > /dev/null;
 echo "autostart = true" | sudo tee --append $TO_WRITE > /dev/null;
@@ -56,7 +57,7 @@ echo "autorestart = true" | sudo tee --append $TO_WRITE > /dev/null;
 # For Gunicorn
 TO_WRITE=/etc/supervisor/conf.d/jeanpierre-web.conf;
 sudo touch $TO_WRITE;
-echo "[program:jeanpierre-web]" | sudo tee --append $TO_WRITE > /dev/null;
+echo "[program:jeanpierre-web]" | sudo tee $TO_WRITE > /dev/null;
 echo "command = ."$JEANPIERRE_DIR"web.sh" | sudo tee --append $TO_WRITE > /dev/null;
 echo "user = $USER" | sudo tee --append $TO_WRITE > /dev/null;
 echo "autostart = true" | sudo tee --append $TO_WRITE > /dev/null;
