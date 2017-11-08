@@ -4,7 +4,7 @@
 # A Raspberry Pi robot that helps people make their grocery list.
 # Matteo Cargnelutti - github.com/matteocargnelutti
 #
-# daemon-gunicorn.sh - Launches "production" web server as a daemon
+# web.sh - Launches "production" web server through gunicorn
 # [!] This script is meant to be executed by supervisor
 #
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";

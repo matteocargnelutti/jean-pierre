@@ -55,7 +55,7 @@ def main():
         message = "Jean-Pierre understands:\n"
         message += "--do config : launch the configuration assistant"
         message += "--do scanner : launch the scanner process"
-        message += "--do web : launch the web server"
+        message += "--do web : launch the DEBUG web server"
         print(message)
         return
 
@@ -81,7 +81,7 @@ def main():
     elif arguments.do == 'web':
         webapp.run(debug=True, host='0.0.0.0')
         print("Flask launched in DEBUG mode.")
-        print("For production, please use : gunicorn --bind 0.0.0.0 jeanpierre:webapp")
+        print("For production, please use : ./web.sh")
 
 # Execution
 if __name__ == "__main__":
