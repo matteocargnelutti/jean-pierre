@@ -1,5 +1,5 @@
 ![alt text](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/github-ban.png)
-# A Raspberry Pi robot that helps people make their grocery list.
+# Jean-Pierre : A Raspberry Pi robot that helps people make their grocery list.
 
 **WORK IN PROGRESS, please come back in a bit.**
 
@@ -55,8 +55,8 @@ Key | Value
 `camera_res_y` | Camera's resolution : height
 `user_password` | Password for the web interface (cyphered)
 
-* Theses parameters are defined using the config assistant, run : `python assistant.py` directly from the **config** subdirectory.
-* They are stored into the **Params** database.
+* Theses parameters are defined using the config assistant, run : `python jeanpierre.py --do config`.
+* They are stored into the **Params** database table.
 
 # Products data source :
 * All products data, including pictures, come from the *OpenFoodFacts API* : https://world.openfoodfacts.org/data
@@ -71,6 +71,8 @@ Key | Value
 * A random *buzzer* module
 
 You can specify during setup if you want to use a buzzer or not : if you do, you will have to specify on which **GPIO Pin** it is connected.
+
+This project should run on any Raspberry Pi model that can handle the PiCamera module.
 
 # Software dependencies
 ## OS
