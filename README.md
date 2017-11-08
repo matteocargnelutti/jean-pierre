@@ -15,6 +15,7 @@ A Raspberry Pi robot that helps people make their grocery list.
 
 # Setup
 **More details to come on the soon-to-come Jean-Pierre's doc !!**
+* Clone this repository : `git clone https://github.com/matteocargnelutti/jean-pierre.git`
 * Please run *install.sh* : `cd jean-pierre`, then `chmod a+x install.sh` and `./install.sh`
 * During setup, a configuration assistant will prompt, asking for basic configuration information. You can choose if you want to use a **buzzer** or not : if you do, you will have to specify on which **GPIO Pin** it is connected.
 * At the end of the setup script, Jean-Pierre's scanner and web server will be running : the whole process might take a while though.
