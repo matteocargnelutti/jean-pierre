@@ -16,8 +16,7 @@ A Raspberry Pi robot that helps people make their grocery list.
 # Setup
 **More details to come on the soon-to-come Jean-Pierre's doc !!**
 * Please run *install.sh* : `cd jean-pierre`, then `chmod a+x install.sh` and `./install.sh`
-* During setup, a configuration assistant will prompt, asking for basic configuration information.
-* You can specify during setup if you want to use a **buzzer** or not : if you do, you will have to specify on which **GPIO Pin** it is connected.
+* During setup, a configuration assistant will prompt, asking for basic configuration information. You can choose if you want to use a **buzzer** or not : if you do, you will have to specify on which **GPIO Pin** it is connected.
 * At the end of the setup script, Jean-Pierre's scanner and web server will be running : the whole process might take a while though.
 
 # Processes
@@ -29,9 +28,9 @@ A Raspberry Pi robot that helps people make their grocery list.
 ## Manually launch processes
 **Processes are automaticaly handled by both supervisor and the install script. But in case you want to launch it separately :**
 * `python jeanpierre.py --do config` : launches the configuration assistant.
-* `python jeanpierre.py --do scanner` : launches the scanner. Shortcut : `./scanner.sh`
+* `python jeanpierre.py --do scanner` : launches the scanner. *Shortcut :* `./scanner.sh`
 * `python jeanpierre.py --do webdebug` : launches the web app process in DEBUG mode.
-* `gunicorn --bind 0.0.0.0 jeanpierre:webapp` : launches the web app process in production mode. Shortcut : `./web.sh`
+* `gunicorn --bind 0.0.0.0 jeanpierre:webapp` : launches the web app process in production mode. *Shortcut :* `./web.sh`
 
 # Database structure
 * **Jean-Pierre** uses a SQLite3 database, stored as **database.db** at the project's root.

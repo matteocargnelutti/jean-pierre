@@ -17,6 +17,8 @@ JEANPIERRE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/;
 #-----------------------------------------------------------------------------
 sudo supervisorctl stop jeanpierre-web;
 sudo supervisorctl stop jeanpierre-scanner;
+sudo supervisorctl remove jeanpierre-web;
+sudo supervisorctl remove jeanpierre-scanner;
 sudo rm /etc/supervisor/conf.d/jeanpierre-web.conf;
 sudo rm /etc/supervisor/conf.d/jeanpierre-scanner.conf;
 sudo supervisorctl reread;
