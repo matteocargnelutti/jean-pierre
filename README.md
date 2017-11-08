@@ -1,20 +1,22 @@
 # jeanpierre
-**[Prototype]** A Raspberry Pi robot that helps people make their grocery list.
-
-**Work in progress**
+A Raspberry Pi robot that helps people make their grocery list.
+**WORK IN PROGRESS, please come back in a bit.**
 
 [![Build Status](https://travis-ci.org/matteocargnelutti/jean-pierre.svg?branch=master)](https://travis-ci.org/matteocargnelutti/jean-pierre)
+
+# What does it do ?
+**Jean-Pierre** is a bot based on the *Raspberry Pi Zero W* that uses a **camera** to **scan food barcodes** : it then fetches information about the product from the **OpenFoodFacts API** (https://world.openfoodfacts.org/) and add it to the user's **grocery list**.
+
+**Jean-Pierre** also has a web interface the user can access through a **desktop or mobile browser** to manage and export its grocery list.
 
 # Current version :
 * v0.1 - "Baguette"
 
-# Hardware used
-* Raspberry Pi Zero W
-* Raspberry Pi Camera Module V2
-* A random *buzzer* module
-
 # Setup
+**More details to come on Jean-Pierre's doc.**
 * Please run *install.sh* : `cd jean-pierre`, then `chmod a+x install.sh` and `./install.sh`
+* During setup, a configuration assistant will prompt.
+* At the end of the setup script, Jean-Pierre's scanner and web server will be running : the whole process might take a while though.
 
 # Processes
 **Jean-Pierre is made of three separate processes that are meant to run in parallel.**
@@ -56,6 +58,11 @@ Key | Value
 
 # Dev : PC Mode
 * Define an environnement variable `PC_MODE` if you wish to work on this project's code on your PC : it deactivates the import of RPi.GPIO and PiCamera
+
+# Hardware used
+* Raspberry Pi Zero W
+* Raspberry Pi Camera Module V2
+* A random *buzzer* module
 
 # Software dependencies
 ## OS
