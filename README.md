@@ -20,6 +20,9 @@ A Raspberry Pi robot that helps people make their grocery list.
 * During setup, a configuration assistant will prompt, asking for basic configuration information. You can choose if you want to use a **buzzer** or not : if you do, you will have to specify on which **GPIO Pin** it is connected.
 * At the end of the setup script, Jean-Pierre's scanner and web server will be running : please note that, from startup, **Jean-Pierre could take up to 2 minutes to boot on a 2017 Pi Zero W**.
 
+# Manual install / uninstall guide
+- To do
+
 # Processes
 **Jean-Pierre is made of three separate processes that are meant to run in parallel.**
 * **config** : the configuration assistant.

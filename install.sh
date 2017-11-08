@@ -70,4 +70,5 @@ sudo supervisorctl update;
 #-----------------------------------------------------------------------------
 # KTHXBYE
 #-----------------------------------------------------------------------------
-echo "[:{ End of Jean-Pierre's install script.";
+echo "[:{ End of Jean-Pierre's install script. ";
+echo "Please reboot your Pi in ordrer to make Jean-Pierre boot."
