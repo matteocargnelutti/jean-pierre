@@ -24,7 +24,7 @@ sudo chmod a+x sass.sh;
 #-----------------------------------------------------------------------------
 # Dystem dependencies
 #-----------------------------------------------------------------------------
-sudo apt-get install git python3-dev python3-pip python3-picamera virtualenv libzbar0 supervisor libjpeg8-dev;
+sudo apt-get install git python3-dev python3-pip python3-picamera virtualenv libzbar0 supervisor libjpeg8-dev build-essential;
 
 #-----------------------------------------------------------------------------
 # Virtual env
@@ -37,13 +37,14 @@ pip install pyzbar[scripts];
 #-----------------------------------------------------------------------------
 # Jean-Pierre's config
 #-----------------------------------------------------------------------------
+clear;
 ./jeanpierre.py --do config;
 
 #-----------------------------------------------------------------------------
 # Supervisor
 #-----------------------------------------------------------------------------
 # For scanner
-$TO_WRITE = $SUPERVISOR_DIR"jeanpierre-scanner.conf"
+$TO_WRITE=$SUPERVISOR_DIR"jeanpierre-scanner.conf"
 sudo touch $TO_WRITE;
 sudo echo "[program:purbeurre-gunicorn]" >> $TO_WRITE;
 sudo echo "command = ."$JEANPIERRE_DIR"scanner.sh" >> $TO_WRITE;
@@ -67,4 +68,4 @@ sudo supervisorctl update;
 #-----------------------------------------------------------------------------
 # KTHXBYE
 #-----------------------------------------------------------------------------
-echo "[:{ Jean-Pierre is ready !";
+echo "[:{ End of Jean-Pierre's install script. Please check the output !";
