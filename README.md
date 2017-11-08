@@ -14,7 +14,7 @@
 * A random *buzzer* module
 
 # Setup
-* Please run *install.sh* : `chmod a+x install.sh` then `./install.sh`
+* Please run *install.sh* : `cd jean-pierre`, then `chmod a+x install.sh` and `./install.sh`
 
 # Processes
 **Jean-Pierre is made of three separate processes that are meant to run in parallel.**

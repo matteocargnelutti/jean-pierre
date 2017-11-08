@@ -16,10 +16,12 @@ import os
 
 import controllers
 from controllers.web import webapp # Gunicorn hook for Flask
+import utils
+
 #-----------------------------------------------------------------------------
 # Version
 #-----------------------------------------------------------------------------
-JEANPIERRE_VERSION = '[:{ v0.1 - Baguette'
+JEANPIERRE_VERSION = utils.Lang('en')['jp_version'];
 
 #-----------------------------------------------------------------------------
 # Main : routing

@@ -11,7 +11,6 @@
 # Paths
 #-----------------------------------------------------------------------------
 JEANPIERRE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/;
-SUPERVISOR_DIR="/etc/supervisor/conf.d/"
 
 #-----------------------------------------------------------------------------
 # Execution rights
@@ -20,6 +19,7 @@ sudo chmod a+x jeanpierre.py;
 sudo chmod a+x scanner.sh;
 sudo chmod a+x web.sh;
 sudo chmod a+x sass.sh;
+sudo chmod a+x uninstall.sh;
 
 #-----------------------------------------------------------------------------
 # Dystem dependencies
@@ -42,24 +42,25 @@ clear;
 
 #-----------------------------------------------------------------------------
 # Supervisor
+# Please excuse this ugly script :D ...
 #-----------------------------------------------------------------------------
 # For scanner
-$TO_WRITE=$SUPERVISOR_DIR"jeanpierre-scanner.conf"
+TO_WRITE=/etc/supervisor/conf.d/jeanpierre-scanner.conf;
 sudo touch $TO_WRITE;
-sudo echo "[program:purbeurre-gunicorn]" >> $TO_WRITE;
-sudo echo "command = ."$JEANPIERRE_DIR"scanner.sh" >> $TO_WRITE;
-sudo echo "user = $USER" >> $TO_WRITE;
-sudo echo "autostart = true" >> $TO_WRITE;
-sudo echo "autorestart = true" >> $TO_WRITE;
+echo "[program:jeanpierre-scanner]" | sudo tee --append $TO_WRITE > /dev/null;
+echo "command = ."$JEANPIERRE_DIR"scanner.sh" | sudo tee --append $TO_WRITE > /dev/null;
+echo "user = $USER" | sudo tee --append $TO_WRITE > /dev/null;
+echo "autostart = true" | sudo tee --append $TO_WRITE > /dev/null;
+echo "autorestart = true" | sudo tee --append $TO_WRITE > /dev/null;
 
 # For Gunicorn
-$TO_WRITE = $SUPERVISOR_DIR"jeanpierre-gunicorn.conf"
+TO_WRITE=/etc/supervisor/conf.d/jeanpierre-web.conf;
 sudo touch $TO_WRITE;
-sudo echo "[program:purbeurre-gunicorn]" >> $TO_WRITE;
-sudo echo "command = ."$JEANPIERRE_DIR"web.sh" >> $TO_WRITE;
-sudo echo "user = $USER" >> $TO_WRITE;
-sudo echo "autostart = true" >> $TO_WRITE;
-sudo echo "autorestart = true" >> $TO_WRITE;
+echo "[program:jeanpierre-web]" | sudo tee --append $TO_WRITE > /dev/null;
+echo "command = ."$JEANPIERRE_DIR"web.sh" | sudo tee --append $TO_WRITE > /dev/null;
+echo "user = $USER" | sudo tee --append $TO_WRITE > /dev/null;
+echo "autostart = true" | sudo tee --append $TO_WRITE > /dev/null;
+echo "autorestart = true" | sudo tee --append $TO_WRITE > /dev/null;
 
 # Init
 sudo supervisorctl reread;
@@ -68,4 +69,4 @@ sudo supervisorctl update;
 #-----------------------------------------------------------------------------
 # KTHXBYE
 #-----------------------------------------------------------------------------
-echo "[:{ End of Jean-Pierre's install script. Please check the output !";
+echo "[:{ End of Jean-Pierre's install script.";
