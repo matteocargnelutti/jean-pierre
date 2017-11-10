@@ -285,10 +285,12 @@ nav.shown {
   overflow: hidden;
   position: relative;
   font-family: "Quicksand", sans-serif; }
-  .items .item img {
+  .items .item .pic {
     display: block;
     width: 100px;
-    min-height: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: 50% 50%;
     float: left;
     margin-right: 10px; }
   .items .item h3 {

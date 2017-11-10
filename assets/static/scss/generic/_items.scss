@@ -7,10 +7,12 @@
     overflow: hidden;
     position: relative;
     font-family: $font-quicksand;
-    img {
+    .pic {
         display: block;
         width: 100px;
-        min-height: 100px;
+        height: 100px;
+        background-size: cover;
+        background-position: 50% 50%;
         float: left;
         margin-right: 10px;
     }

@@ -40,7 +40,7 @@ jp.Groceries = function() {
             }
 
             html += '<div class="item" id="item-'+barcode+'">';
-                html += '<img src="'+pic+'" alt="Product\'s pic"/>';
+                html += '<div class="pic" style="background-image: url(\''+pic+'\');"></div>';
                 html += '<h3>';
                     if( name === '???' ) {
                         html += '<span>'+name+' ('+barcode+')</span> ';

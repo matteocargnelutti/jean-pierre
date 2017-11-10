@@ -39,7 +39,7 @@ jp.Products = function() {
             }
 
             html += '<div class="item" id="item-'+barcode+'">';
-                html += '<img src="'+pic+'" alt="Product\'s pic"/>';
+                html += '<div class="pic" style="background-image: url(\''+pic+'\');"></div>';
                 html += '<h3>'+barcode+'</h3>';
                 html += '<form>';
                     html += '<input type="text" value="'+name+'" name="name" placeholder="'+jp.lang.get('product_name')+'" maxlength="32" required/>';
