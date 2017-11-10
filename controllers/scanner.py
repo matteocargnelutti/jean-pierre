@@ -79,26 +79,37 @@ class Scanner:
             # Scan image for barcodes
             barcodes = pyzbar_decode(pil_image.open(stream))[::-1]
 
-            # If there is no barcode : clean last scan history every 3 empty scans in a row
+            # Count every empty scan
             if not barcodes:
                 empty_scans += 1
+                # clean last_scan every 3 empty scans in a row
+                # Note : this allows to add an item multiple times
+                # by just leaving it in front of the camera.
                 if empty_scans == 3:
                     last_scan = ''
                     empty_scans = 0
 
-            # If there is a barcode
+            # If something has been scanned
             if barcodes:
-                # Isolate
-                barcode = barcodes[0].data.decode()
+
+                # Get the first readable EAN-13 barcode from the scan
+                barcode = False
+                for seek in barcodes:
+                    if seek.type == 'EAN13':
+                        barcode = seek.data.decode()
+                        break
+
+                if not barcode:
+                    continue
 
                 # Break count of empty scans in a row
                 empty_scans = 0
 
-                # Ignore the next instructions if the item has just been scanned
+                # If the item has just been scanned : ignore this round
                 if barcode == last_scan:
                     continue
 
-                # Add it to history
+                # Add found item to history
                 last_scan = barcode
                 print("Scanned and considered : {}".format(barcode))
 
