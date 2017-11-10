@@ -33,6 +33,9 @@ jp.Products = function() {
         
         for( var barcode in self.list ) {
             var name = self.list[barcode].name
+            if( name == '???' ) {
+                name = barcode;
+            }
             var pic = '/static/img/no-pic.png';
             if( self.list[barcode].pic == 1) {
                 pic = '/static/products/'+barcode+'.jpg';
@@ -40,7 +43,6 @@ jp.Products = function() {
 
             html += '<div class="item" id="item-'+barcode+'">';
                 html += '<div class="pic" style="background-image: url(\''+pic+'\');"></div>';
-                html += '<h3>'+barcode+'</h3>';
                 html += '<form>';
                     html += '<input type="text" value="'+name+'" name="name" placeholder="'+jp.lang.get('product_name')+'" maxlength="32" required/>';
                     html += '<button>Ok</button>';
