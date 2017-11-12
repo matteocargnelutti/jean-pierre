@@ -1,6 +1,6 @@
 ![logo](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/ban.png)
 # Docs : Hardware guide
--- [Back to README](http://github.com/matteocargnelutti/jeanpierre)
+-- [**Back to README**](http://github.com/matteocargnelutti/jeanpierre)
 
 # What do you need ?
 * A **Raspberry Pi Zero W** with a working internet connexion, and [**Raspbian Lite**](https://www.raspberrypi.org/downloads/raspbian/) installed.
@@ -25,7 +25,7 @@ To solve this issue, you **MIGHT** want to change the camera's focus manually by
 This documentation won't provide a tutorial for doing so as it depends on your camera module model, and there's different ways of doing it.
 
 # Will it work with another Raspberry Pi model ?
-There is no reason to think it won't, but it hasn't been tested yet.
+**There is no reason to think it won't, but it hasn't been tested yet.**
 
 Jean-Pierre's software has been conceived for the Raspberry Pi Zero W and its limited powers : it should actually work better on a beefier model.
 
