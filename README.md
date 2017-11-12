@@ -1,4 +1,4 @@
-![logo](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/ban.png)
+![logo](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/logo.png)
 **Current version :** v0.1 - "Baguette"
 
 [![Build Status](https://travis-ci.org/matteocargnelutti/jean-pierre.svg?branch=master)](https://travis-ci.org/matteocargnelutti/jean-pierre)
