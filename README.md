@@ -24,4 +24,6 @@ Jean-Pierre's come with a web interface that allows users to manage their grocer
 ** Links **
 
 # Special thanks
-** To do **
+* My brother nico_hitman and my wife for their help with the soldering, electronics and everything I am way too clumsy to do.
+* Jako35 for being handsome.
+* The authors of all the awesome libs and APIs I used in this project.
