@@ -23,11 +23,10 @@ On this repository, you'll find everything you need to build and configure your 
 ![software](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/software.png)
 
 # Docs 
-* **[Work in progress, please come back in a bit !]**
-* [Hardware](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/HARDWARE.md)
-* [Setup / Config](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/SETUP.md)
-* [User guide](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/USER.md)
-* [Dev guide](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/DEV.mdd)
+* [**Hardware**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/HARDWARE.md)
+* [**Setup / Config**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/SETUP.md)
+* [**User guide**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/USER.md)
+* [**Dev guide**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/DEV.mdd)
 
 # Contribute !
 I would be glad that **Jean-Pierre** continues to improve and evolve : don't hesitate to contribute :) !
