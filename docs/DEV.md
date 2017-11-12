@@ -114,5 +114,13 @@ Key | Value
 
 * Theses parameters are defined using the config assistant : `python jeanpierre.py --do config`.
 
+# PC Mode
+As it is not possible to import picamera or RPi.GPIO Python libraries on PC, you'll have to define the following **environment variable** to let Jean-Pierre know it shouldn't import them.
+
+`PC_MODE=1`
+
+This is usefull for working on the web interface for example, where theses libs are not necessary.
+
+
 # Contributing
 I would be glad that **Jean-Pierre** continues to improve and evolve : don't hesitate to contribute :) !
