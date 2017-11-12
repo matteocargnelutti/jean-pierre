@@ -16,9 +16,7 @@ On this repository, you'll find everything you need to build and configure your 
 ## How does it work ?
 **Just place a product in front of Jean-Pierre's camera** : it will detect the barcode and try to find info about it before adding it to the grocery list.
 
-[**Video demo**](https://youtu.be/WrznMd19K8M)
-
-[![beep](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/beep.jpg)](https://youtu.be/WrznMd19K8M)
+![beep](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/beep.jpg)
 
 ## Web interface
 **Jean-Pierre comes with a web interface** that allows users to manage their grocery list and products database from a computer or smartphone.
