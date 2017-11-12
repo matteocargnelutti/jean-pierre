@@ -68,5 +68,28 @@ This command will stop Jean-Pierre's processes so you can then safely remove its
 
 You might want to make a backup of your database before uninstalling Jean-Pierre : to do so, you can make a copy of **database.db**.
 
+# Depencies
+A non-exhaustive of dependencies used in this project.
+
+## OS
+* Raspbian (lite)
+
+## sudo apt-get install ...
+* python3-dev
+* python3-pip
+* python3-picamera
+* virtualenv
+* libzbar0
+* supervisor
+* libjpeg8-dev
+
+## Python dependencies (see requirements.txt)
+* picamera
+* pyzbar
+* pytest
+* requests
+* RPi.GPIO
+* flask
+* gunicorn
 
 -- [**Back to README**](http://github.com/matteocargnelutti/jeanpierre)
