@@ -1,17 +1,22 @@
-![alt text](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/logo.png)
+![logo](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/logo.png)
 # Jean-Pierre : A Raspberry Pi robot that helps people make their grocery list.
-
-**WORK IN PROGRESS, please come back in a bit.**
-
+* **Current version :** v0.1 - "Baguette"
 [![Build Status](https://travis-ci.org/matteocargnelutti/jean-pierre.svg?branch=master)](https://travis-ci.org/matteocargnelutti/jean-pierre)
 
 # What does it do ?
-**Jean-Pierre** is a bot based on the *Raspberry Pi Zero W* that uses a **camera** to **scan food barcodes** : it then fetches information about the product from the **OpenFoodFacts API** (https://world.openfoodfacts.org/) and adds it to the user's **grocery list**.
+**Jean-Pierre** is a bot based on the *Raspberry Pi Zero W* that uses a **camera** to **scan food barcodes** : it then fetches information about the product from the **OpenFoodFacts API** (https://world.openfoodfacts.org/) and adds it to the user's **grocery list** that the user can manage from a **web interface**.
 
-**Jean-Pierre** also has a web interface the user can access through a **desktop or mobile browser** to manage and export its grocery list.
+# What does it look like ?
+![hardware](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/hardware.jpg)
+For now, it looks like a random Raspberry Pi Zero with a camera, an ugly buzzer on the back, and a glorious mustache.
 
-# Current version :
-* v0.1 - "Baguette"
+# How does it work ?
+![beep](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/beep.jpg)
+Just show Jean-Pierre a product with a barcode and it will try to find it on OpenFoodFacts or on a user-defined database before adding it to the grocery list. 
+
+# And how do I manage my grocery list ?
+![software](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/software.jpg)
+Jean-Pierre comes with a web interface that can be used on desktop and mobile to manage your grocery list and the products database.
 
 # Setup
 **More details to come on the soon-to-come Jean-Pierre's doc !!**
