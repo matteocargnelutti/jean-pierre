@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/github-ban.png)
+![alt text](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/logo.png)
 # Jean-Pierre : A Raspberry Pi robot that helps people make their grocery list.
 
 **WORK IN PROGRESS, please come back in a bit.**
