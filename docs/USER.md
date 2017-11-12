@@ -40,12 +40,14 @@ If it does find an **EAN-13 barcode**, it will ask the [**OpenFoodFacts API**](h
 * Edit products
 * Set a name for unknown products
 
+All these features are accessible, once logged, by using the main menu available on the right side of the screen.
+
 ## How to use it ?
-Once it is launched, access it via your desktop or mobile browser by **typing your Raspberry Pi local IP + the 8000 port as an address**.
+Once it is launched, access it via your **desktop or mobile** browser by **using your Raspberry Pi local IP and the 8000 port as an address**.
 
-Example : `http://192.168.0.10:8000`
+**Example** : `http://192.168.0.10:8000`
 
-** You will then land on this page, asking for your password : **
+**You will then land on this page, asking for your password : **
 ![desktop](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/desktop.png)
 
 ## How does it work ?
@@ -57,3 +59,5 @@ It shares the same database than the scanner process.
 **Please note that this interface is not meant to be accessible from the internet** : you should only run it on your local network, as it doesn't use **HTTPS** and only uses a **single password** to grant access to the web interface.
 
 You might want to consider making it accessible remotely with an **https connexion and a strong password, or through a proxy** : this documentation will not cover theses aspects for now.
+
+-- [**Next : Dev guide**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/DEV.md)
