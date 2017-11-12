@@ -26,4 +26,6 @@ Jean-Pierre's software has been conceived for the Raspberry Pi Zero W and it's l
 
 # About the buzzer module
 You can plug the buzzer module on any compatible GPIO pin you want, as you can specify which one it is when configuring Jean-Pierre.
- 
+
+--
+[Back to README](http://github.com/matteocargnelutti/jeanpierre)
