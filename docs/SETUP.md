@@ -50,7 +50,7 @@ This **configuration assistant** can be called anytime with this command :
 ./jeanpierre.py --do config
 ```
 
-## Reboot
+## Reboot !
 **Once the install script has finished working, you may have to reboot your Raspberry Pi in order to make everything boot.**
 
 Please note that, on startup, it can take up to 2 minutes to have both the scanner and web server working.
@@ -78,4 +78,4 @@ python3-dev, python3-pip, python3-picamera, virtualenv, libzbar0, supervisor, li
 ## pip install
 picamera, pyzbar, pytest, requests, RPi.GPIO, flask, gunicorn
 
--- [**Back to README**](http://github.com/matteocargnelutti/jeanpierre)
+-- [**Next : User guide**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/USER.md)
