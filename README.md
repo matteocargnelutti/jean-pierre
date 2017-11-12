@@ -8,10 +8,12 @@
 
 ## What does it look like ?
 For now, it just looks like a random Raspberry Pi Zero with a camera module, a buzzer and a glorious mustache.
+
 ![hardware](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/hardware.jpg)
 
 ## How does it work ?
 Just place a product in front of Jean-Pierre's camera : it will detect the barcode and try to find infos about it before adding it to the grocery list.
+
 ![beep](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/beep.jpg)
 
 ## Web interface
