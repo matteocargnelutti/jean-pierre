@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/matteocargnelutti/jean-pierre.svg?branch=master)](https://travis-ci.org/matteocargnelutti/jean-pierre)
 
 # A Raspberry Pi robot that helps people make their grocery list.
-**Jean-Pierre** is a little DIY robot based on the **Raspberry Pi Zero W** that uses a **camera** to **scan food barcodes** : it fetches information about the product from the [**OpenFoodFacts API**](https://world.openfoodfacts.org/) and adds it to a **grocery list** that the user can manage from a **web interface**.
+**Jean-Pierre** is a little DIY robot based on the [**Raspberry Pi Zero W**](https://www.raspberrypi.org/products/) that uses a **camera** to **scan food barcodes** : it fetches information about the product from the [**OpenFoodFacts API**](https://world.openfoodfacts.org/) and adds it to a **grocery list** that the user can manage from a **web interface**.
 
 On this repository, you'll find everything you need to build and configure your own **Jean-Pierre**.
 
