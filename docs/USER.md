@@ -47,7 +47,8 @@ Once it is launched, access it via your **desktop or mobile** browser by **using
 
 **Example** : `http://192.168.0.10:8000`
 
-**You will then land on this page, asking for your password : **
+**You will then land on this page, asking for your password :**
+
 ![desktop](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/desktop.png)
 
 ## How does it work ?
