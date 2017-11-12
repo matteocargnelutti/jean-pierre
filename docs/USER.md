@@ -61,6 +61,6 @@ It shares the same database than the scanner process.
 ## A note on security
 **Please note that this interface is not meant to be accessible from the internet** : you should only run it on your local network, as it doesn't use **HTTPS** and only uses a **single password** to grant access to the web interface.
 
-You might want to consider making it accessible remotely with an **https connexion and a strong password, or through a proxy** : this documentation will not cover theses aspects for now.
+You might want to consider making it accessible remotely with a **HTTPS connexion and a strong password, or through a proxy** : this documentation will not cover theses aspects for now.
 
 -- [**Next : Dev guide**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/DEV.md)
