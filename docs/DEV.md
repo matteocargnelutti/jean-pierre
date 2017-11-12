@@ -11,6 +11,8 @@ This document give a bit of info about how Jean-Pierre is made, in order to allo
 * **scanner** : Process that scans the products with the camera.
 * **web** : Flask app that handles the web application, launched through *gunicorn*.
 
+**Theses processes are launched by supervisor, which has been configured by install.sh** : please see **install.sh** for more info.
+
 ## Manually launch processes
 **Processes are automaticaly handled by supervisor. But in case you wanted to launch it separately :**
 * `./jeanpierre.py --do config` : launches the configuration assistant.
