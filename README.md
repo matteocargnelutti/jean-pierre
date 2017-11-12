@@ -1,4 +1,4 @@
-![logo](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/logo.png)
+![logo](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/ban.png)
 # Jean-Pierre : A Raspberry Pi robot that helps people make their grocery list.
 * **Current version :** v0.1 - "Baguette"
 [![Build Status](https://travis-ci.org/matteocargnelutti/jean-pierre.svg?branch=master)](https://travis-ci.org/matteocargnelutti/jean-pierre)
@@ -12,10 +12,10 @@ For now, it looks like a random Raspberry Pi Zero with a camera, an ugly buzzer 
 
 # How does it work ?
 ![beep](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/beep.jpg)
-Just show Jean-Pierre a product with a barcode and it will try to find it on OpenFoodFacts or on a user-defined database before adding it to the grocery list. 
+Just show Jean-Pierre a product with a barcode and it will try to find it on OpenFoodFacts or on a user-defined database, before adding it to the grocery list. 
 
 # And how do I manage my grocery list ?
-![software](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/software.jpg)
+![software](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/software.png)
 Jean-Pierre comes with a web interface that can be used on desktop and mobile to manage your grocery list and the products database.
 
 # Setup
