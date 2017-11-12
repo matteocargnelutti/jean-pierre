@@ -26,7 +26,7 @@ On this repository, you'll find everything you need to build and configure your 
 * [**Hardware**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/HARDWARE.md)
 * [**Setup / Config**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/SETUP.md)
 * [**User guide**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/USER.md)
-* [**Dev guide**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/DEV.mdd)
+* [**Dev guide**](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/DEV.md)
 
 # Contribute !
 I would be glad that **Jean-Pierre** continues to improve and evolve : don't hesitate to contribute :) !
