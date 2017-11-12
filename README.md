@@ -14,7 +14,7 @@ On this repository, you'll find everything you need to build and configure your 
 ![hardware](https://raw.githubusercontent.com/matteocargnelutti/jeanpierre/master/misc/hardware.jpg)
 
 ## How does it work ?
-**Just place a product in front of Jean-Pierre's camera** : it will detect the barcode and try to find infos about it before adding it to the grocery list.
+**Just place a product in front of Jean-Pierre's camera** : it will detect the barcode and try to find info about it before adding it to the grocery list.
 
 [**Video demo**](https://youtu.be/WrznMd19K8M)
 
