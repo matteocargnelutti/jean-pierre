@@ -32,6 +32,5 @@ Jean-Pierre's software has been conceived for the Raspberry Pi Zero W and its li
 # About the buzzer module
 The buzzer module is optional : you can activate it and define on which GPIO pin is it plugged on with **Jean-Pierre's configuration assistant**.
 
--- [Back to README](http://github.com/matteocargnelutti/jeanpierre)
-
+-- [Back to README](http://github.com/matteocargnelutti/jeanpierre) 
 -- [Setup / Config](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/SETUP.md)
