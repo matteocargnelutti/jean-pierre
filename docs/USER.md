@@ -2,7 +2,7 @@
 # Docs : User guide
 -- [**Back to README**](http://github.com/matteocargnelutti/jeanpierre)
 
-**Theses instructions assumes that you have followed the following guides :**
+**These instructions assumes that you have followed the following guides :**
 * [Hardware](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/HARDWARE.md)
 * [Setup / Config](https://github.com/matteocargnelutti/jean-pierre/blob/master/docs/SETUP.md)
 
