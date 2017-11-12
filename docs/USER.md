@@ -42,6 +42,8 @@ If it does find an **EAN-13 barcode**, it will ask the [**OpenFoodFacts API**](h
 
 All these features are accessible, once logged, by using the main menu available on the right side of the screen.
 
+The interface has a status bar on the bottom that gives you information about what happens.
+
 ## How to use it ?
 Once it is launched, access it via your **desktop or mobile** browser by **using your Raspberry Pi local IP and the 8000 port as an address**.
 
