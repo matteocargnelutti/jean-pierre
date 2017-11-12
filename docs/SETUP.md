@@ -42,14 +42,22 @@ The install process will take a while. After a moment, a **configuration assista
 * `Camera resolution` : by default, the camera resolution is set to 500x500, which is a good compromise between performances and range. You can set it to whatever you want, but please note that a higher resolution will have an impact on Jean-Pierre's performances.
 * `Password` : this password is needed to connect to the web interface.
 
-### Change confiugration settings later
+**Note that calling this configuration assistant will not erase your database :** you can hance run it whenever you want to change Jean-Pierre's settings.
+
 This **configuration assistant** can be called anytime with this command :
 
 ```shell
 ./jeanpierre.py --do config
 ```
 
-**Note that calling this configuration assistant will not erase your database :** you can hance run it whenever you want to change Jean-Pierre's settings.
+## Reboot
+**Once the install script has finished working, you may have to reboot your Raspberry Pi in order to make everything boot.**
+
+Please note that, on startup, it can take up to 2 minutes to have both the scanner and web server working.
+
+If you've plugged a buzzer on Jean-Pierre, the scanner will make it ring twice to indicate that it works.
+
+If anything went wrong, please look at the logs, open **install.sh** to see what went wrong by doing things manually **(copy / paste each command line)**.
 
 # Uninstall
 ```shell
@@ -59,3 +67,6 @@ This **configuration assistant** can be called anytime with this command :
 This command will stop Jean-Pierre's processes so you can then safely remove its directory.
 
 You might want to make a backup of your database before uninstalling Jean-Pierre : to do so, you can make a copy of **database.db**.
+
+
+-- [**Back to README**](http://github.com/matteocargnelutti/jeanpierre)

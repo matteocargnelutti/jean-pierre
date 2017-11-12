@@ -37,4 +37,5 @@ I would be glad that **Jean-Pierre** continues to improve and evolve : don't hes
 * **Jako35** for being handsome.
 * The authors of all the **awesome libs and APIs** I used in this project.
 
+# Follow me on Twitter
 [@macargnelutti on Twitter](https://twitter.com/macargnelutti)
