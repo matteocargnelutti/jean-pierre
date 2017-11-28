@@ -53,7 +53,7 @@ jp.Groceries = function() {
                 html += '<form>';
                     html += '<button class="plus">+1</button>';
                     html += '<button class="minus">-1</button>';
-                    html += '<a href="/products#item-'+barcode+'" class="edit">Edit</a>';
+                    html += '<a href="/products#item-'+barcode+'" class="edit">'+jp.lang.get('edit')+'</a>';
                 html += '</form>';
             html += '</div>';
         }
