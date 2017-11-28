@@ -41,6 +41,7 @@ The install process will take a while. After a moment, a **configuration assista
 **The questions are pretty self-explanatory, but take heed of the following :**
 * `Camera resolution` : by default, the camera resolution is set to 500x500, which is a good compromise between performances and range. You can set it to whatever you want, but please note that a higher resolution will have an impact on Jean-Pierre's performances.
 * `Password` : this password is needed to connect to the web interface.
+* `Language` : only **en** and **fr** are available for now.
 
 **Note that calling this configuration assistant will not erase your database :** you can hance run it whenever you want to change Jean-Pierre's settings.
 
