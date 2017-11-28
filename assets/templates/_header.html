@@ -58,13 +58,13 @@
             <img src="{{url_for('static', filename='img/menu.png')}}" alt="Menu"/>
         </div>
         <ul>
-            <li><a href="{{url_for('groceries')}}">Grocery list</a></li>
+            <li><a href="{{url_for('groceries')}}">{{lang.nav_grocery_list}}</a></li>
             <li class="sub">
-                <a href="#" class="raw_list">- Export</a>
+                <a href="#" class="raw_list">- {{lang.nav_export}}</a>
             </li>
-            <li><a href="{{url_for('products')}}">Products list</a></li>
-            <li><a href="{{url_for('logout')}}">Log out</a></li>
-            <li class="close"><a href="#">Close menu</a></li>
+            <li><a href="{{url_for('products')}}">{{lang.nav_products}}</a></li>
+            <li><a href="{{url_for('logout')}}">{{lang.logout}}</a></li>
+            <li class="close"><a href="#">{{lang.close}}</a></li>
         </ul>        
     </nav>
     {% endif %}
