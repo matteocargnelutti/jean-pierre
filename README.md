@@ -35,7 +35,7 @@ I would be glad that **Jean-Pierre** continues to improve and evolve : don't hes
 * My brother **nico_hitman** and **my wife** for their help with the soldering, the electronics and everything I am way too clumsy to do.
 * **Jako35** for being handsome.
 * The authors of all the **awesome libs and APIs** I used in this project.
-* GitHub user filoor (https://github.com/filoor) for the NL language file (12/12/17)
+* GitHub user **filoor** (https://github.com/filoor) for the NL language file *(12/12/17)*
 
 # Follow me on Twitter
 [@macargnelutti on Twitter](https://twitter.com/macargnelutti)
