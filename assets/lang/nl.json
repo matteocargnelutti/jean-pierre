@@ -25,6 +25,7 @@
     "config_camera_res_x": "Cameraresolutie, BREEDTE (500 standaard) : ",
     "config_camera_res_y": "Cameraresolutie, HOOGTE (500 standaard) : ",
     "config_password": "Stel een wachtwoord in voor Jean-Pierre ('admin' standaard) : ",
+    "config_api": "Stel een APi Sleutel in ('fa7369eb-e132-4356-bb3c-29d451310a0f' standaard) : ",
     "config_done": "Helemaal klaar ! Genieten !",
     "web_login_title": "Aanmelden.",
     "web_login_form_placeholder": "Je wachtwoord.",

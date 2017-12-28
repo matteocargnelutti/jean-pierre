@@ -405,3 +405,189 @@ def api_lang():
 
     # Return template
     return render_template('json.html', json=json.dumps(lang))
+
+@webapp.route('/api/groceries_edit_key/<string:api>/<string:barcode>/<int:quantity>')
+def api_groceries_edit_key(api, barcode, quantity):
+    """
+    API method : Add/Edit/Delete items from the grocery list.
+    If the item doesn't exist, it will be created.
+    Outputs JSON.
+    :param barcode: A known product barcode
+    :param quantity: The quantity defines the operation (quantity 0 = delete)
+    JSON format :
+    - {"status": ..., "barcode" ..., "quantity": ...}
+    Possible return status :
+    - PRODUCT NOT FOUND (404)
+    - ADDED (200) / ADD ERROR (400)
+    - EDITED (200) / EDIT ERROR (400)
+    - DELETED (200) / DELETE ERROR (400)
+    """   
+    # AJAX Auth check
+    Database.on()
+    # Load parameters
+    params = models.Params()
+    # Database : end connection
+    # (open it only when needed because this program is meant to be shutdown harshly)
+    Database.off()
+    # Database access
+    api_key  = params.api_key
+    if api_key != api:
+            return render_template('json.html', json="{}"), 401
+
+    # Remove unwanted chars
+    to_escape = ['"', "<", ">", "&", "'"]
+    for char in to_escape:
+        barcode = barcode.replace(char, '')
+    quantity = int(quantity)
+
+    # Output
+    data = {"status": "", "barcode": barcode, "quantity": quantity}
+
+    # Database access
+    Database.on()
+    products_db = models.Products()
+    groceries_db = models.Groceries()
+
+    # Try to get the product associated with the barcode
+    product = products_db.get_item(barcode)
+
+    if not product:
+        data['status'] = 'PRODUCT NOT FOUND'
+        return render_template('json.html',
+                               json=json.dumps(data)), 404
+
+    # Try to get the entry in the grocery list
+    exists = groceries_db.get_item(barcode)
+    status_code = 200
+
+    # If it doesn't exist : add it
+    if not exists:
+        try:
+            if not quantity:
+                quantity = 1
+            groceries_db.add_item(barcode, quantity)
+            data['status'] = 'ADDED'
+        except Exception as trace:
+            data['status'] = 'ADD ERROR'
+            status_code = 400
+    # If it exists :
+    else:
+        # If quantity = 0 : Delete
+        if quantity <= 0:
+            try:
+                groceries_db.delete_item(barcode)
+                data['status'] = 'DELETED'
+            except Exception as trace:
+                data['status'] = 'DELETE ERROR'
+                status_code = 400
+        # If quantity > 0 : Edit quantity
+        else:
+            try:
+                groceries_db.edit_item(barcode, abs(quantity))
+                data['status'] = 'EDITED'
+            except Exception as trace:
+                data['status'] = 'EDIT ERROR'
+                status_code = 400
+
+    # Database : off and outputs data
+    Database.off()
+    return render_template('json.html', json=json.dumps(data)), status_code
+
+
+
+@webapp.route('/api/products_edit_key/<string:api>/<string:barcode>/<string:name>')
+def api_products_editt_key(api, barcode, name):
+    """
+    API method : Add/Edit/Delete items from the products database.
+    If an item doesn't exist, it will be created.
+    Outputs JSON.
+    :param barcode: An unknown product barcode
+    :param name: The new product's name
+    JSON format :
+    - {"status": ..., "barcode" ..., "name": ...}
+    Possible return status :
+    - ADDED (200) / ADD ERROR (400)
+    - EDITED (200) / EDIT ERROR (400)
+    """
+    # AJAX Auth check  
+    Database.on()
+    # Load parameters
+    params = models.Params()
+    # Database : end connection
+    # (open it only when needed because this program is meant to be shutdown harshly)
+    Database.off()
+    # Database access
+    api_key  = params.api_key
+    if api_key == api:
+            session['is_logged'] = True
+         #   return redirect(url_for('groceries'))
+    # Remove unwanted chars
+    to_escape = ['"', "<", ">", "&", "'"]
+    for char in to_escape:
+        barcode = barcode.replace(char, '')
+        name = name.replace(char, '')
+
+    # Output
+    data = {"status": "", "barcode": barcode, "name": name}
+
+    # Database access
+    Database.on()
+    products_db = models.Products()
+
+    # Try to get the entry in the grocery list
+    exists = products_db.get_item(barcode)
+    status_code = 200
+
+    # If it doesn't exist : add it
+    if not exists:
+        try:
+            products_db.add_item(barcode, name, False)
+            data['status'] = 'ADDED'
+        except Exception as trace:
+            data['status'] = 'ADD ERROR'
+            status_code = 400
+    # If it exists : edit it
+    else:
+        try:
+            products_db.edit_item(barcode, name, exists['pic'])
+            data['status'] = 'EDITED'
+        except Exception as trace:
+            data['status'] = 'EDIT ERROR'
+            status_code = 400
+
+    # Database : off and outputs data
+    Database.off()
+    return render_template('json.html', json=json.dumps(data)), status_code
+
+
+@webapp.route('/api/<string:api>/products_list')
+def api_products_list_key(api):
+    """
+    API method : Gets all items from the products table.
+    Outputs JSON.
+    Returns the latest version of the grocery list.
+    JSON format :
+    - {"status": ..., "items" ...}
+    Possible return status :
+    - OK (200)
+    """
+    # AJAX Auth check
+    Database.on()
+    # Load parameters
+    params = models.Params()
+    # Database : end connection
+    # (open it only when needed because this program is meant to be shutdown harshly)
+    Database.off()
+    # Database access
+    api_key  = params.api_key
+    if api_key != api:
+            return render_template('json.html', json="{}"), 401
+    # Output
+    data = {"status": "OK", "items": []}
+
+    # Get info
+    Database.on()
+    data['items'] = models.Products().get_list()
+    Database.off()
+    # Render
+    return render_template('json.html', json=json.dumps(data))

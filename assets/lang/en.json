@@ -25,6 +25,7 @@
     "config_camera_res_x": "Camera resolution, WIDTH (500 by default) : ",
     "config_camera_res_y": "Camera resolution, HEIGHT (500 by default) : ",
     "config_password": "Please define a password for Jean-Pierre ('admin' by default) : ",
+    "config_api": "Please define a API-Key for Jean-Pierre ('fa7369eb-e132-4356-bb3c-29d451310a0f' default) : ",
     "config_done": "All set ! Enjoy !",
     "web_login_title": "Sign in.",
     "web_login_form_placeholder": "Your password.",
