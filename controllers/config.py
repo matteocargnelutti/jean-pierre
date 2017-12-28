@@ -44,6 +44,7 @@ class Config:
         - camera_res_y
         - user_password
         - lang
+        - api_key
         """
         # Language file
         lang = Lang(language)
@@ -123,6 +124,13 @@ class Config:
         user_password = bytearray(user_password, encoding='utf-8')
         user_password = hashlib.sha1(user_password).hexdigest()
         params.add_item('user_password', user_password)
+
+        # Ask for : api key
+        params.delete_item('api_key')
+        api_key = getpass.getpass(lang.config_api)
+        if not api_key:
+            api_key = 'fa7369eb-e132-4356-bb3c-29d451310a0f'
+        params.add_item('api_key', api_key)
 
         # Close connection to the database
         Database.off()

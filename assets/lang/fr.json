@@ -25,6 +25,7 @@
     "config_camera_res_x": "Résolution de la caméra, LARGEUR (500 par defaut) : ",
     "config_camera_res_y": "Résolution de la caméra, HAUTEUR (500 par defaut) : ",
     "config_password": "Mot de passe du menu d'administration ('admin' par defaut) : ",
+    "config_api": "D�finir une cl� APi ('fa7369eb-e132-4356-bb3c-29d451310a0f' defaut) : ",
     "config_done": "Tout est ok !",
     "web_login_title": "Se connecter.",
     "web_login_form_placeholder": "Mot de passe.",
